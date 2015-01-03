@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <meta itemprop="wordCount" content="{{ content | number_of_words }}">
+  <link itemprop="url" href="{{ site.url }}{{ page.url }}">
+  <meta itemprop="description" content="{{ page.excerpt | strip_html }}">
+  <meta itemprop="author" content="{{ site.author }}">
+  <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+  <div class="content" itemprop="articleBody">
+    {{ content }}
+  </div>
+</article>

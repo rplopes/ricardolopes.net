@@ -1,0 +1,44 @@
+$color-main: #F91111;
+$color-weak: #A19797;
+$color-text: #564A4A;
+$body-font: 'Open Sans', Arial;
+$heading-font: 'Raleway', Arial;
+$font-size: 19px;
+$font-size-sub: 16px;
+$line-height: 1.6;
+$normal-weight: 400;
+$bold-weight: 600;
+
+body {
+  font-family: $body-font;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color-text;
+  font-weight: $normal-weight;
+}
+
+a {
+  color: $color-main;
+  text-decoration: none;
+
+  &:hover {
+    color: lighten($color-main, 15%);
+    text-decoration: underline;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font;
+  font-weight: $bold-weight;
+}
+
+.subtext {
+  font-size: $font-size-sub;
+  color: $color-weak;
+}
+
+@include on-phone {
+  .btn-description {
+    display: none;
+  }
+}

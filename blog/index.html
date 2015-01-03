@@ -1,0 +1,9 @@
+---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  {% include post_in_list.html %}
+{% endfor %}
+
+{% include paginator.html %}

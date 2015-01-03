@@ -1,0 +1,14 @@
+<div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <meta itemprop="wordCount" content="{{ post.content | number_of_words }}">
+  <time itemprop="datePublished" datetime="{{ post.date | date: "%Y-%m-%d" }}">
+  <link itemprop="url" href="{{ site.url }}{{ post.url }}">
+  <h2>
+    <a href="{{ post.url }}">
+      <span itemprop="headline">{{ post.title }}</span>
+    </a>
+  </h2>
+  {% include category_and_date.html post=post %}
+  <div class="content" itemprop="description">
+    {{ post.excerpt | markdownify }}
+  </div>
+</div>

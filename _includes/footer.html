@@ -1,0 +1,60 @@
+<div class="footer">
+  <div class="wrapper">
+
+    <div class="footer-col footer-col-1">
+      <img class="avatar" alt="{{ site.author }}" src="/img/avatar.jpg">
+    </div>
+
+    <div class="footer-col footer-col-2">
+      <strong>{{ site.name }}</strong>
+      <p class="subtext">{{ site.description }}<p>
+      <ul class="pages">
+        <li><a href="{{ site.url }}">Website</a></li>
+        <li><a href="{{ site.blog }}">Blog</a></li>
+        <li><a href="{{ site.blog }}about">About</a></li>
+        <li><a href="{{ site.feed }}">RSS</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col footer-col-3">
+      <ul class="social-media">
+        {% if site.twitter %}
+          <li aria-label="Twitter">
+            <a target="_blank" href="https://twitter.com/{{ site.twitter }}">
+              <span class="twitter icon" aria-hidden="true"></span>
+              {{ site.twitter }}
+            </a>
+          </li>
+        {% endif %}
+        {% if site.github %}
+          <li aria-label="Github">
+            <a target="_blank" href="https://github.com/{{ site.github }}">
+              <span class="github icon" aria-hidden="true"></span>
+              {{ site.github }}
+            </a>
+          </li>
+        {% endif %}
+        {% if site.linkedin %}
+          <li aria-label="LinkedIn">
+            <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin }}">
+              <span class="linkedin icon" aria-hidden="true"></span>
+              {{ site.linkedin }}
+            </a>
+          </li>
+        {% endif %}
+        {% if site.email %}
+          <li aria-label="Email">
+            <a href="mailto:{{ site.email }}">
+              <span class="email icon" aria-hidden="true"></span>
+              {{ site.email }}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+  </div>
+  <div class="wrapper">
+    <p class="copyright">© {{ site.time | date: '%Y' }} {{ site.author }}</p>
+  </div>
+</div>

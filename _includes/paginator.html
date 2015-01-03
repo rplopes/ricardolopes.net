@@ -1,0 +1,22 @@
+{% if paginator.next_page or paginator.previous_page %}
+<div class="paginator">
+  <div class="paginator-older">
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}">Older</a>
+    {% else %}
+      Older
+    {% endif %}
+  </div>
+  <div class="paginator-newer">
+    {% if paginator.previous_page %}
+      {% if paginator.previous_page == 1 %}
+        <a href="/">Newer</a>
+      {% else %}
+        <a href="{{ paginator.previous_page_path }}">Newer</a>
+      {% endif %}
+    {% else %}
+      Newer
+    {% endif %}
+  </div>
+</div>
+{% endif %}

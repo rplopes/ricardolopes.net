@@ -1,0 +1,32 @@
+.icon:before {
+  display: inline-block;
+  content: "";
+  background-size: $font-size-sub $font-size-sub;
+  width: $font-size-sub;
+  height: $font-size-sub;
+  margin-bottom: -2px;
+}
+.icon.rss:before {
+  background-image: url('/img/svg/rss.svg');
+}
+.icon.calendar:before {
+  background-image: url('/img/svg/calendar.svg');
+}
+.icon.category:before {
+  background-image: url('/img/svg/category.svg');
+}
+.icon.reading:before {
+  background-image: url('/img/svg/reading.svg');
+}
+.icon.twitter:before {
+  background-image: url('/img/svg/twitter.svg');
+}
+.icon.github:before {
+  background-image: url('/img/svg/github.svg');
+}
+.icon.linkedin:before {
+  background-image: url('/img/svg/linkedin.svg');
+}
+.icon.email:before {
+  background-image: url('/img/svg/email.svg');
+}

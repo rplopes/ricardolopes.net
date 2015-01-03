@@ -1,0 +1,95 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+
+    <style>
+      html {
+        height: 100%;
+        position: relative;
+      }
+      body {
+        height: 100%;
+      }
+      #landing {
+        background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url('img/cover_1920.jpg');
+        width: 100%;
+        min-height: 100%;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position-x: center;
+        background-repeat: no-repeat;
+      }
+      @media screen and (max-width: 570px) {
+        #landing {
+          background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url('img/cover_570.jpg');
+        }
+      }
+      @media screen and (max-width: 770px) and (min-width: 571px) {
+        #landing {
+          background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url('img/cover_770.jpg');
+        }
+      }
+      @media screen and (max-width: 1280px) and (min-width: 771px) {
+        #landing {
+          background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), url('img/cover_1280.jpg');
+        }
+      }
+      #landing .wrapper:first-child {
+        padding-top: 15%;
+      }
+      #landing .wrapper:last-child {
+        padding-bottom: 5%;
+      }
+      #landing h1 {
+        font-size: 250%;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        float: left;
+        color: white;
+        margin-bottom: 10px;
+      }
+      #landing h4 {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        float: left;
+        color: white;
+        margin-bottom: 10px;
+      }
+      #landing a.header-btn {
+        margin-right: 15px;
+      }
+      .landing-buttons {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="landing" itemscope itemtype="http://schema.org/Person">
+
+      <div class="wrapper">
+        <h1 itemprop="name">{{ site.name }}</h1>
+        <h4>{{ site.description }}</h4>
+        <h4 itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="addressLocality">London</span>,
+          <span itemprop="addressRegion">UK</span>
+        </h4>
+        <meta itemprop="jobTitle" content="Software Developer">
+      </div>
+
+      <div class="wrapper landing-buttons">
+        <link itemprop="url" href="{{ site.url }}">
+        <a class="header-btn" href="{{ site.blog }}">Personal blog</a>
+        <a class="header-btn" href="{{ site.blog }}about">About me</a>
+        <a class="header-btn" target="_blank" href="https://twitter.com/{{ site.twitter }}">Twitter</a>
+        <a class="header-btn" target="_blank" href="https://github.com/{{ site.github }}">Github</a>
+        <a class="header-btn" target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin }}">LinkedIn</a>
+      </div>
+
+    </div>
+
+  </body>
+</html>

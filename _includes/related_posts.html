@@ -1,0 +1,13 @@
+{% if site.related_posts.size > 0 %}
+<div class="related-posts">
+  <h3>Related posts:</h3>
+  <ul class="posts">
+    {% for post in site.related_posts limit:3 %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      &nbsp;{% include category_and_date.html post=post %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

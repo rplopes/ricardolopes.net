@@ -1,0 +1,11 @@
+<div class="header">
+  <div class="wrapper">
+    <h1><a href="{{ site.blog }}">{{ site.name }}</a></h1>
+    {% if site.feed %}
+      <a class="header-btn" href="{{ site.feed }}">
+        <span class="rss icon" aria-hidden="true"></span>
+        <span class="btn-description">Subscribe</span>
+      </a>
+    {% endif %}
+  </div>
+</div>

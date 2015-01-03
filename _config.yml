@@ -1,0 +1,20 @@
+name: "Ricardo Lopes"
+author: "Ricardo Lopes"
+description: "Hacker, tech enthusiast, learner, judo black belt and occasional blogger"
+
+url: "http://ricardolopes.net"
+blog: "http://ricardolopes.net/blog/"
+feed: "http://ricardolopes.net/blog/feed.xml"
+
+email: "mail@ricardolopes.net"
+twitter: ricardoplopes
+github: rplopes
+linkedin: ricardopintolopes
+
+paginate: 10
+paginate_path: "/blog/:num/"
+
+permalink: "/blog/:title"
+
+highlighter: pygments
+markdown: kramdown

@@ -1,0 +1,27 @@
+.post {
+  padding: #{$spacing-unit / 2} 0;
+}
+
+h1.post-title {
+  margin-bottom: $spacing-unit;
+}
+
+ul.post-meta {
+  list-style: none;
+  margin: 0;
+  display: inline-block;
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    @extend .subtext;
+  }
+}
+
+.content {
+  margin: #{$spacing-unit / 2} 0 $spacing-unit 0;
+
+  img {
+    max-width: 100%;
+  }
+}

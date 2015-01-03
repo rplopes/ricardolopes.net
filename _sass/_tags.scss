@@ -1,0 +1,17 @@
+ul.tags {
+  list-style: none;
+  margin-left: 0;
+
+  li {
+    display: inline-block;
+    font-size: $font-size-sub;
+    margin-right: 6px;
+    margin-bottom: 12px;
+
+    a {
+      &:before {
+        content: "#";
+      }
+    }
+  }
+}
