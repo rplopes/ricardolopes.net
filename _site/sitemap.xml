@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://ricardolopes.net/blog/my-personal-blog-2-0</loc>
+        <lastmod>2015-01-03T02:02:22+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/blog/feed.xml</loc>
+        <lastmod>2015-01-03T16:20:16+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/blog/</loc>
+        <lastmod>2015-01-01T16:48:00+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/</loc>
+        <lastmod>2015-01-03T01:02:07+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/blog/about/</loc>
+        <lastmod>2015-01-03T09:45:06+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/css/main.css</loc>
+        <lastmod>2015-01-03T16:19:06+00:00</lastmod>
+    </url>
+</urlset>
