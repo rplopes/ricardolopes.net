@@ -7,12 +7,45 @@
     <atom:link href="http://ricardolopes.net/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>A postmortem of my WordPress blog</title>
+        <description>&lt;p&gt;I have to say that, for a software developer and tech enthusiast, I’m kind of disappointed with myself. For around 4 years I’ve been maintaining my personal blog, a self-hosted WordPress install, where I would share projects, tips and rants, like the usual developer’s blog. However, for some reason I was finding less and less topics to talk about. Either I was too busy or exhausted to take the time to write meaningful posts, or the inspiration wasn’t simply there.&lt;/p&gt;
+
+&lt;p&gt;At least as far as software developer’s standards go, I actually enjoy writing and documenting. I believe it helps sorting out the thoughts in your head, and definitely are a great tool for sharing knowledge. So it was actually bothering more than it should the fact that new blog posts would come too infrequently. This lead to long periods of time without visiting my own blog or taking a look at its visitors stats.&lt;/p&gt;
+
+&lt;p&gt;After some very intense weeks with almost no free time and no Internet at home, I casually visited my blog to see how things were going, and what I saw left me completely off-guard at first, and irritated after that. The blog was completely broken, and all I could see was the message &lt;code&gt;Error establishing a database connection&lt;/code&gt;. The same message would appear if I tried to access the admin section. So it was as good as dead, with nothing I could do about it, and without a single warning.&lt;/p&gt;
+
+&lt;p&gt;But how did that happen? Since when was my blog down? And how come did nothing trigger an alert during all that time?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2015-01-10-ga.png&quot; alt=&quot;Google Analytics investigation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After checking what Google Analytics had to tell me, I realised that the blog must have been down since the 29th of October. Which means that it remained dead for almost a month (I found this in late November). A further look into the statistics showed that now most of my traffic was for my landing page (makes sense, since it’s unrelated to the WordPress install and didn’t suffer the same tragic fate). But there was also some traffic for some other pages. After more investigation I found out that some posts were still active, after all. This must have been because of the heavy caching that I was doing, which allowed cached pages to be displayed instead of hitting a failing CMS. I saved what I could, used my RSS feed to save some others, and the rest just got lost.&lt;/p&gt;
+
+&lt;p&gt;My lack of participation was obviously resulting in a low number of visitors. Still enough to be able to easily tell when the database issue started just by looking at the graphs, but clearly not enough to form an audience that would alert me of these kind of issues. The fact that some of the most popular posts were still cached, and were typically accessed through Google searches, not by browsing within the blog, also contributed to this situation remaining undetected.&lt;/p&gt;
+
+&lt;p&gt;About how it happened… I still have no clue. I hear how WordPress might be insecure if not always up-to-date or if you installed the wrong plugin, so I decided I should just assume the worst and go ahead and delete the whole installation and think of &lt;a href=&quot;/blog/my-personal-blog-2-0&quot;&gt;what to do next&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So that’s my story: I maintained my personal blog for around 4 years, although it wasn’t really getting the love it deserved, and at some point it just died without me noticing it for almost a month. Now with this second one I’m expecting things to get more manageable and new content to show up more frequently. Time will tell.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Jan 2015 00:00:00 +0000</pubDate>
+        <link>http://ricardolopes.net/blog/a-postmortem-of-my-wordpress-blog</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/a-postmortem-of-my-wordpress-blog</guid>
+        
+        <category>Wordpress</category>
+        
+        <category>blogging</category>
+        
+        
+        <category>meta</category>
+        
+      </item>
+    
+      <item>
         <title>My personal blog 2.0</title>
         <description>&lt;p&gt;For around 4 years I’ve been maintaining my own personal blog, a self-hosted WordPress install, where I usually talked about things I was working with, cool tricks that I learned and wanted to share the knowledge, and so on. The typical dev blog. However, sometimes it faced some periods of inactivity, either by lack of time, energy or inspiration. And then the worst happened.&lt;/p&gt;
 
 &lt;p&gt;After some weeks of very limited Internet access and close to no free time, I decided to take a look at my blog, and what I saw was a completely broken site. There was a problem in the database connection, an that completely killed all its pages, including the admin section. So my blog was as good as dead and I didn’t even know about it before casually trying to visit it.&lt;/p&gt;
 
-&lt;p&gt;I’ll leave the details for a later post. Long story short, I lost the work of these 4 years because of some unknown problem and had to shut down my Wordpress blog.&lt;/p&gt;
+&lt;p&gt;I’ll leave the details for a later post (update: it’s &lt;a href=&quot;/blog/a-postmortem-of-my-wordpress-blog&quot;&gt;here&lt;/a&gt;!). Long story short, I lost the work of these 4 years because of some unknown problem and had to shut down my Wordpress blog.&lt;/p&gt;
 
 &lt;p&gt;This post is, then, a new start. After that experience, this time I dropped Wordpress and PHP and went for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; and Ruby. One of the main reasons is that Jekyll pre-generates static pages, instead of keeping a server running to access a database and render dynamic pages. So I’m not expecting to have these kind of issues from now on. More details about Jekyll, its advantages and cool tricks I learned will come in future posts.&lt;/p&gt;
 
@@ -33,6 +66,8 @@
         <category>PHP</category>
         
         <category>Ruby</category>
+        
+        <category>blogging</category>
         
         
         <category>meta</category>
