@@ -419,6 +419,8 @@ ul.social-share {
 
 .related-posts {
   margin-top: 50px; }
+  .related-posts a.related-post {
+    display: block; }
 
 #disqus_thread {
   margin-top: 50px; }
