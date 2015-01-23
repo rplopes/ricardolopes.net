@@ -365,7 +365,14 @@ ul.post-meta {
 .content {
   margin: 25px 0 50px 0; }
   .content img {
-    max-width: 100%; }
+    max-width: 100%;
+    display: block;
+    margin: auto; }
+  .content blockquote {
+    margin-left: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-left: 2px solid #a19797; }
 
 .paginator {
   text-align: center;
