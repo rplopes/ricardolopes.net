@@ -9,7 +9,7 @@
   {% endif %}
   <li aria-label="Publication date">
     <span class="calendar icon" aria-hidden="true"></span>
-    <time itemprop="datePublished" datetime="{{ page.date | date: "%Y-%m-%d" }}">
+    <time itemprop="datePublished" datetime="{{ include.post.date | date: "%Y-%m-%d" }}">
       {{ include.post.date | date_to_string }}
     </time>
   </li>
