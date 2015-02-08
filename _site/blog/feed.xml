@@ -7,7 +7,150 @@
     <atom:link href="http://ricardolopes.net/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Setting up a hacker&#39;s blog with Jekyll</title>
+        <title>Developing for the Semantic Web with Ruby on Rails, the 2012 guide</title>
+        <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This blog post was first published on the 30th of January of 2012. This means that most of its content might no longer be up-to-date. This was published in my previous blog, which has &lt;a href=&quot;/blog/a-postmortem-of-my-wordpress-blog&quot;&gt;met an unfortunate end&lt;/a&gt;, and is being reposted now as an attempt to resurface some of the most popular posts that have been lost.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The Semantic Web, an Internet of of connected knowledge, meaningful data and machine-readable information, is seen as many as the future of the Internet. Envisioned by Tim Berners-Lee, its purpose is to transition from a web of unstructured documents into a “web of data”, in which we could browse and search for data not only based on syntactic  keywords, but also based on semantic meaning. However, it’s awkward to realise that most of the work around the Semantic Web is done in Java, and many technologies with great future potential, such as Ruby on Rails, are seemingly forgotten.&lt;/p&gt;
+
+&lt;p&gt;Having developed a Semantic Web project using that Ruby framework, I found very scattered information and tiny bits of contributions, many already obsolete. It’s almost shocking to see so few and old information around such a modern framework with such a vibrant and participating community developing for it. As such, having collected many of those bits of information, I believe it’s time to put them together and finally create an updated guide to the development for the Semantic Web with Ruby on Rails.&lt;/p&gt;
+
+&lt;p&gt;Disclaimer: This is not a step-by-step tutorial, so don’t expect to know how to develop a Semantic Web application in Ruby on Rails as soon as you finish reading this. The main goal of this article is to save hours of research and show the best and updated tools available. Also, the code examples aren’t necessarily complete or 100% correct, as their goal is to explain something, and not simply being copy+pasted to a tutorial application.&lt;/p&gt;
+
+&lt;h2 id=&quot;building-the-ontology-and-fetching-relevant-data&quot;&gt;Building the ontology and fetching relevant data&lt;/h2&gt;
+
+&lt;p&gt;If you’re going to develop a website using the concept of the Semantic Web, one of the first things you’ll need is an ontology. You may find many useful ontologies capable of describing the data your web application is going to use (the &lt;a href=&quot;http://swoogle.umbc.edu/&quot;&gt;Swoogle&lt;/a&gt; project might be a good place to start your search), but you might as well have to develop your own. If you’re building your own ontology, I recommend using &lt;a href=&quot;http://protege.stanford.edu/&quot;&gt;Protégé&lt;/a&gt; for it.&lt;/p&gt;
+
+&lt;p&gt;The development of the ontology is out of the scope of this article, as it has no relation to the platform used to develop the web application itself, so if you don’t know how to start I’d recommend reading some simpler guides first (here’s a short &lt;a href=&quot;http://protege.stanford.edu/publications/ontology_development/ontology101.pdf&quot;&gt;collection&lt;/a&gt; &lt;a href=&quot;http://www.w3.org/TR/rdf-primer/&quot;&gt;of&lt;/a&gt; &lt;a href=&quot;http://www.w3.org/RDF/FAQ&quot;&gt;links&lt;/a&gt; &lt;a href=&quot;http://webcache.googleusercontent.com/search?q=cache:5-Tx99Kz6aEJ:pubs.cs.uct.ac.za/archive/00000257/01/technical_report.pdf&quot;&gt;that&lt;/a&gt; &lt;a href=&quot;http://www.slideshare.net/fadirra/semantic-web-intro-040411&quot;&gt;might&lt;/a&gt; help you with that).&lt;/p&gt;
+
+&lt;p&gt;After you have the right ontology to power your web application, it’s time to to fetch the data. Unless you’re aiming for a very limited and controled set of elements, you’ll probably want to develop a screen scraper or use an external API. Using the Ruby gem &lt;a href=&quot;http://nokogiri.org/&quot;&gt;Nokogiri&lt;/a&gt;, you can easily browse and fetch the information you want from any useful website. Here is a simple example of a screen scraper for your application:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Nokogiri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;HTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;website_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;doc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;.item&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;at_css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;.info h4 a&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:href&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;item_doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Nokogiri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;HTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item_doc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;at_css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;h2#title a&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item_doc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;at_css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;p.description&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;name&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;description&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you see, this little example simply iterates through all the elements of the website of the class &lt;code&gt;item&lt;/code&gt;, browses to their specific page and then extracts the name and description. This technique may have its flaws, like being vulnerable to major website redesigns, but it’s also a very simple and rapid way of extracting large quantities of information.&lt;/p&gt;
+
+&lt;p&gt;Ideally, you’ll want to save your new information in XML files or in a database, so you can use them later without having to run the fetcher again. This, of course, is just a temporary location, ready to change as soon as the Semantic Web enters the game.&lt;/p&gt;
+
+&lt;h2 id=&quot;putting-the-semantic-web-in-ruby-on-rails&quot;&gt;Putting the Semantic Web in Ruby on Rails&lt;/h2&gt;
+
+&lt;p&gt;It’s easy enough to develop for the Semantic Web in Java, as you can easily find a large set of tools to help you in every stage of the development. In Ruby it’s not that easy at all. After some research you’ll probably come across two Ruby gems that handle the semantic graph: &lt;a href=&quot;http://activerdf.org/&quot;&gt;ActiveRDF&lt;/a&gt; and &lt;a href=&quot;https://rubygems.org/gems/rdf&quot;&gt;RDF.rb&lt;/a&gt;. However, ActiveRDF is now outdated and it doesn’t seem to work as it should in Rails 3. So RDF.rb it is, then.&lt;/p&gt;
+
+&lt;p&gt;Now that we have the tool to manage the semantic data, we should save our raw data in a semantic graph. We’ll use the N-Triples format for that. First you’ll need to define all the semantic relations of your data:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RDF&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RDF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Vocabulary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://ricardolopes.net/myont.owl#&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RDF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Graph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;uri&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RDF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;uri&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This example assumes that you have an ontology with the URI &lt;code&gt;http://ricardolopes.net/myont.owl&lt;/code&gt;, which has at least a class &lt;code&gt;Item&lt;/code&gt; and a property &lt;code&gt;hasName&lt;/code&gt;. This example, as all others in this guide, is far from complete, as it is just used for quick demonstrations. One thing it doesn’t show is how to create the unique URI for each item. That is up to you to decide, as every project is different. However, when you have a unique identifier for every item, you probably should do something like &lt;code&gt;item[&quot;uri&quot;] = MyOnt[unique_identifier]&lt;/code&gt;. Beware, though, that if you use &lt;code&gt;MyOnt&lt;/code&gt; to store individuals, you’ll no longer have an empty ontology serving only as a schema. You’ll probably find it more useful to use an URI for the ontology schema and another for the individuals (&lt;code&gt;MyOnt&lt;/code&gt; and &lt;code&gt;Data&lt;/code&gt;, for instance).&lt;/p&gt;
+
+&lt;p&gt;After that step, you’ll then need to store the information of the semantic graph you created in an N-Triples file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;RDF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;data/graph.nt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each_statement&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stmt&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is it. you should now have a complete N-Triples file with all your semantic information. Now that you have the semantic data, you may start using its full potential.&lt;/p&gt;
+
+&lt;h2 id=&quot;querying-the-graph&quot;&gt;Querying the graph&lt;/h2&gt;
+
+&lt;p&gt;If you’re not new to the Semantic Web development you’re probably used to SPARQL when it comes to querying for information. In Ruby on Rails you’ll find it possible to do such queries using pure Ruby, thanks to the RDF.rb gem. Imagine you have the following information:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-erb&quot; data-lang=&quot;erb&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2011/01/10/ricardolopes&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/myont.owl#Developer&amp;gt; .&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2011/01/10/ricardolopes&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/myont.owl#hasName&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;quot;Ricardo Lopes&amp;quot; .&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2012/01/30/semanticwebarticle&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/myont.owl#Article&amp;gt; .&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2012/01/30/semanticwebarticle&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/myont.owl#hasName&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;quot;Semantic Web article&amp;quot; .&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2011/01/10/ricardolopes&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/myont.owl#isAuthorOf&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;http://ricardolopes.net/data/2011/01/30/semanticwebarticle&amp;gt; .&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This means that we have an individual of the class &lt;code&gt;Developer&lt;/code&gt; that has the name “Ricardo Lopes”, and an individual of the class &lt;code&gt;Article&lt;/code&gt; that has the name “Semantic Web article”. We also have a relation that states that the &lt;code&gt;Developer&lt;/code&gt; “Ricardo Lopes” is the author of the &lt;code&gt;Article&lt;/code&gt; “Semantic Web article”.&lt;/p&gt;
+
+&lt;p&gt;Imagine now that you’re showing the article “Semantic Web article” and want to show the name of its author. Using the RDF.rb gem, you could do it simply using Ruby:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;article_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Semantic Web article&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;article_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmt1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# stmt1.subject now holds the URI of the article&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isAuthorOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stmt1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmt2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# stmt2.subject now holds the URI of the author&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;graph&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmt2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MyOnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stmt3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# stmt3.object now holds the name of the author&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;author_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stmt3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inspect&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you still prefer to use SPARQL instead of pure Ruby, there’s a gem for that: &lt;a href=&quot;https://github.com/gkellogg/sparql-grammar&quot;&gt;SPARQL-Grammar&lt;/a&gt;. Beware, though, that, as I’ve said before, the Semantic Web in Ruby has still a long road to run to catch up with languages such as Java. The work to bring SPARQL to Ruby is still very incomplete and there are many things you can’t do (sometimes I couldn’t even define prefixes, which resulted in some very ugly queries).&lt;/p&gt;
+
+&lt;p&gt;You now have the tools you need to make full use of the semantic information of your application. With many Semantic Web applications, this is all you need to know. However, there’s more we can do. If you’re developing in Ruby on Rails, chances are you’re intending to put your web application on the cloud. And there’s also a good possibility that you may want to change some of your data in the future. That’s when a simple file is no longer an option to store your data and you must upgrade it to a Triple Store.&lt;/p&gt;
+
+&lt;h2 id=&quot;leveling-up-to-a-triple-store&quot;&gt;Leveling up to a Triple Store&lt;/h2&gt;
+
+&lt;p&gt;A Triple Store stands for an N-Triples file as a database stands for an XML file (sort of). So if you’ll ever need to update the semantic information of your web application, that’s what you should use.&lt;/p&gt;
+
+&lt;p&gt;There are plenty of Triple Stores in Java for you to run locally or in your server, like &lt;a href=&quot;http://incubator.apache.org/jena/&quot;&gt;Jena&lt;/a&gt;, &lt;a href=&quot;http://www.franz.com/agraph/allegrograph/&quot;&gt;AllegroGraph&lt;/a&gt;, &lt;a href=&quot;http://www.aduna-software.com/technology/sesame&quot;&gt;Sesame&lt;/a&gt; and many more. There are interfaces that let your Ruby application interact with those Java Triple Stores, so if your server supports Java or localhost is as far as you’ll get, them one of those might be the right solution for you.&lt;/p&gt;
+
+&lt;p&gt;However, if you’re developing the webapp in Ruby on Rails, chances are you want it online, and your infrastructure might not make it simple to support many languages and configurations. If that’s the case, then you need to develop an interface that creates an abstraction in your server’s database so it acts as a Triple Store. Such an abstraction would probably use a single 3-column table (for subject, predicate and object) and would return a set of triples for every query received. The hardest step should be converting from SPARQL or pure-Ruby RDF.rb queries into the proper SQL query.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, if you use PostgreSQL and/or SQLite, there’s an amazing work done that integrates those databases with RDF.rb data. It’s the Ruby gem &lt;a href=&quot;https://github.com/ruby-rdf/rdf-do&quot;&gt;RDF-do&lt;/a&gt;, and it may save you days of work and many frustrations.&lt;/p&gt;
+
+&lt;h2 id=&quot;to-sum-up&quot;&gt;To sum up&lt;/h2&gt;
+
+&lt;p&gt;Once one grasps the power of the Semantic Web, it’s not easy to ignore its advantages and future potential. However, as you can now see, the work around it in Ruby feels scattered and incomplete. Because it was so difficult to come across these scattered pieces of great work and because of what can be achieved when they are all connected, there was a great need of putting all this knowledge together. Yes, there are other similar guides online, but many are so outdated that may put you on the wrong track.&lt;/p&gt;
+
+&lt;p&gt;As I’ve pointed out before, this wasn’t intended to be a step-by-step tutorial for you to copy+paste all the code you needed to develop a basic application. If this article is so long as it is, imagine how it would be with all that information. It’s more like an updated guide you can use to save hours of research and frustration.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
+        <link>http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide</guid>
+        
+        <category>Semantic Web</category>
+        
+        <category>Ruby</category>
+        
+        <category>Ruby on Rails</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Setting up a hacker's blog with Jekyll</title>
         <description>&lt;p&gt;If you’re looking for a blogging platform or framework to start sharing your thoughts with the rest of the world, there’s no shortage of options to consider. My previous blog was a self-hosted Wordpress install, a pretty popular option, which &lt;a href=&quot;/blog/a-postmortem-of-my-wordpress-blog&quot;&gt;turned out to be a disaster for me&lt;/a&gt;. Other popular options include regular &lt;a href=&quot;https://wordpress.com/&quot;&gt;Wordpress&lt;/a&gt;, &lt;a href=&quot;https://medium.com/&quot;&gt;Medium&lt;/a&gt; or even &lt;a href=&quot;https://www.tumblr.com/&quot;&gt;Tumblr&lt;/a&gt;. However, if you want your blog to exercise your hacking skills, then &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is the way to go.&lt;/p&gt;
 
 &lt;p&gt;Jekyll is a static websites and blogs generator that is run from the command line. What this means is that instead of setting up a database of posts, comments, etc. and a webapp that connects to that database to generate dynamic webpages, it simply generates all the necessary pages upfront. This means that you don’t have to worry about databases, caching, running live server code, and so on: it’s as simple and practical as it can get.&lt;/p&gt;
