@@ -24,7 +24,11 @@
         <loc>
             http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide
         </loc>
-        <lastmod>2015-02-08T12:04:31+00:00</lastmod>
+        <lastmod>2015-02-15T22:16:55+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://ricardolopes.net/blog/more-semantic-web-for-ruby-mastering-your-data</loc>
+        <lastmod>2015-02-15T22:13:41+00:00</lastmod>
     </url>
     <url>
         <loc>http://ricardolopes.net/blog/feed.xml</loc>
@@ -36,7 +40,7 @@
     </url>
     <url>
         <loc>http://ricardolopes.net/</loc>
-        <lastmod>2015-02-08T12:04:31+00:00</lastmod>
+        <lastmod>2015-02-15T22:16:55+00:00</lastmod>
     </url>
     <url>
         <loc>http://ricardolopes.net/blog/about/</loc>

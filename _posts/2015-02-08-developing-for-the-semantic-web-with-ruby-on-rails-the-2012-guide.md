@@ -144,3 +144,5 @@ Fortunately, if you use PostgreSQL and/or SQLite, there’s an amazing work done
 Once one grasps the power of the Semantic Web, it’s not easy to ignore its advantages and future potential. However, as you can now see, the work around it in Ruby feels scattered and incomplete. Because it was so difficult to come across these scattered pieces of great work and because of what can be achieved when they are all connected, there was a great need of putting all this knowledge together. Yes, there are other similar guides online, but many are so outdated that may put you on the wrong track.
 
 As I’ve pointed out before, this wasn’t intended to be a step-by-step tutorial for you to copy+paste all the code you needed to develop a basic application. If this article is so long as it is, imagine how it would be with all that information. It’s more like an updated guide you can use to save hours of research and frustration.
+
+A follow-up tutorial is now available, describing how to import and export semantic data into/from Ruby: [More Semantic Web for Ruby: mastering your data]({% post_url 2015-02-15-more-semantic-web-for-ruby-mastering-your-data %}).
