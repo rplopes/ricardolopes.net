@@ -6,7 +6,7 @@ tags:
  - Semantic Web
  - Ruby
  - Ruby on Rails
-excerpt: In a [previous post]({% post_url 2015-02-08-developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide %}) I shared some important tips and resources for anyone who plans on developing for the Semantic Web in Ruby (like in a Ruby on Rails webapp). If you haven’t checked it yet, I strongly recommend you to do so. This new post goes a step further and shows you how to convert data from the Semantic Web to your app’s data model and also the other way around.
+excerpt: In a [previous post](/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide) I shared some important tips and resources for anyone who plans on developing for the Semantic Web in Ruby (like in a Ruby on Rails webapp). If you haven’t checked it yet, I strongly recommend you to do so. This new post goes a step further and shows you how to convert data from the Semantic Web to your app’s data model and also the other way around.
 ---
 
 _**Disclaimer:** This blog post was first published on the 14th of October of 2013. This means that most of its content might no longer be up-to-date. This was published in my previous blog, which has [met an unfortunate end]({% post_url 2015-01-11-a-postmortem-of-my-wordpress-blog %}), and is being reposted now as an attempt to resurface some of the most popular posts that have been lost._
