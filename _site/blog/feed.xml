@@ -7,6 +7,245 @@
     <atom:link href="http://ricardolopes.net/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Setting up a hacker&#39;s blog with Jekyll, part 2</title>
+        <description>&lt;p&gt;Feeling like building your new bog from scratch with tools that empower you to develop it the way you want? You’ve come to the right place. If you’re just starting, make sure you read &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll&quot;&gt;part 1&lt;/a&gt; of this tutorial, where you can learn the advantages of using Jekyll over other options and how to use it to create a basic blog from scratch. In this second part we’ll be working with the same blog example code to extend it and make it more interesting. However, if you’re just looking for a particular solution to a problem you might have with your existing blog, these examples should be self-contained enough.&lt;/p&gt;
+
+&lt;p&gt;Just to recap from the previous tutorial: we’re using the gem &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; to generate our blog’s static pages. We do that by running &lt;code&gt;jekyll serve&lt;/code&gt;, which also allows us to test it in our browser locally. Our blog code structure is currently looking like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;_config.yml
+_layouts
+    default.html
+    post.html
+_posts
+    2015-02-01-hello-world.md
+_site
+_index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now without further ado let’s get hacking.&lt;/p&gt;
+
+&lt;h2 id=&quot;better-urls&quot;&gt;Better URLs&lt;/h2&gt;
+
+&lt;p&gt;Jekyll defaults URLs to the format &lt;code&gt;/:year/:month/:day/:title.html&lt;/code&gt;. So our Hello World post has the URL &lt;code&gt;/2015/02/01/hello-world.html&lt;/code&gt;. However, this isn’t the best structure: it’s long and exposes a file extension and the full date. We can change this by setting a value to &lt;code&gt;permalink&lt;/code&gt; in &lt;code&gt;_config.yml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you’re ok with showing the full date on the URL (some blogs do this to give a temporal context and to make it easier to have multiple posts with the same slug), then you can set the value of &lt;code&gt;permalink&lt;/code&gt; to &lt;code&gt;pretty&lt;/code&gt;, which hides the HTML extension:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: pretty&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I typically prefer to remove the date from the URL, because I want my posts to be generally timeless, and because if they got an update, that URL would suddenly be misleading. You can do that setting &lt;code&gt;permalink&lt;/code&gt; to &lt;code&gt;none&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, that still exposes the HMTL file extension, which I also don’t want. Jekyll doesn’t provide a direct value for these requirements, but fortunately it lets you build your own custom URLs. So if you want URLs that simply display the post slug you need to change your &lt;code&gt;_config.yml&lt;/code&gt; to:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: &amp;quot;/:title&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can adapt that to your needs: prefer having the categories and the publication year included? Change it to &lt;code&gt;/:categories/:year/:title&lt;/code&gt;. And so on.&lt;/p&gt;
+
+&lt;h2 id=&quot;paginating-our-list-of-posts&quot;&gt;Paginating our list of posts&lt;/h2&gt;
+
+&lt;p&gt;Right now we’re displaying every single blog post in our index page, which is far from ideal. Since we have just one blog post so far we still don’t see a problem with it, but if we get to hundreds, we really shouldn’t be showing them all in one page.&lt;/p&gt;
+
+&lt;p&gt;For the sake of experimentation, let’s create two new blog posts. Our posts directory should now look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;_posts
+    2015-02-01-hello-world.md
+    2015-03-01-my-second-post.md
+    2015-04-01-aprils-fools-post.md&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that we have 3 different posts, we can paginate our blog to show only 2 posts per page. Ideally you might want more posts per page, but for now this should be good enough to test what we want.&lt;/p&gt;
+
+&lt;p&gt;Pagination is done by setting the number of posts per page in the config attribute &lt;code&gt;paginate&lt;/code&gt; and, if you want a particular URL for those pages, setting its format like the one described for permalinks in the config attribute &lt;code&gt;paginate_path&lt;/code&gt;. So to test for 2 posts per page, our &lt;code&gt;_config.yml&lt;/code&gt; would change to something like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: &amp;quot;/:title&amp;quot;
+
+paginate: 2
+paginate_path: &amp;quot;/:num&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, if you visit your blog now you’ll notice that it’s still not paginating. That’s because we’ve configured pagination, but we’re still not using it. Let’s look back at &lt;code&gt;index.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
+layout: default
+---
+
+{% for post in site.posts %}
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ post.url }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  {{ post.excerpt }}
+{% endfor %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’re iterating over the full list of the website’s posts. We want to iterate over the posts that belong to a particular page of our pagination. To do that, we have to fetch &lt;code&gt;posts&lt;/code&gt; not from &lt;code&gt;site&lt;/code&gt;, but from &lt;code&gt;paginator&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ post.url }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  {{ post.excerpt }}
+{% endfor %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Great, now we should just see the latest two posts. And if we browse &lt;code&gt;/2&lt;/code&gt; we should see the second page, with the oldest post there. Still, there’s no paginator to browse different pages easily.&lt;/p&gt;
+
+&lt;p&gt;We can add that to the end of &lt;code&gt;index.html&lt;/code&gt;, so that it shows after the list of posts. we only want to show it if there’s any need for it, i.e. only if there’s a previous page or a next page:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;...
+
+{% if paginator.next_page or paginator.previous_page %}
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- paginator code here --&amp;gt;&lt;/span&gt;
+{% endif %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With this interface you can do the fanciest paginator you can think of. Here’s a suggestion for how &lt;code&gt;index.html&lt;/code&gt; might look like with one of the simplest paginators that can be done:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ post.url }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  {{ post.excerpt }}
+{% endfor %}
+
+{% if paginator.next_page or paginator.previous_page %}
+  {% if paginator.previous_page %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ paginator.previous_page_path }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Previous page&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  {% else %}
+    Previous page
+  {% endif %}
+  |
+  {% if paginator.next_page %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ paginator.next_page_path }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Next page&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  {% else %}
+    Next page
+  {% endif %}
+{% endif %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Great, we now have pagination working with proper navigation. Our &lt;code&gt;index.html&lt;/code&gt; is starting to look crowded, though, and if we ever want to reuse the paginator code, there’s a lot there to copy and to maintain. It’s time to look at includes.&lt;/p&gt;
+
+&lt;h2 id=&quot;includes&quot;&gt;Includes&lt;/h2&gt;
+
+&lt;p&gt;Jekyll has this nice thing called includes, which are basically partials that you can reuse on multiple pages. So if you’ve just built your perfect paginator and you want to use it in different lists of posts, you can just put it in its own include and then just call it from those pages. Includes, unlike regular layouts, go inside their own directory: &lt;code&gt;_includes&lt;/code&gt;. If you want to isolate the paginator code into one, then you’ll need to create a &lt;code&gt;_includes/paginator.html&lt;/code&gt;. Using the same code as above, that file would be something like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;{% if paginator.next_page or paginator.previous_page %}
+  {% if paginator.previous_page %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ paginator.previous_page_path }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Previous page&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  {% else %}
+    Previous page
+  {% endif %}
+  |
+  {% if paginator.next_page %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ paginator.next_page_path }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Next page&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  {% else %}
+    Next page
+  {% endif %}
+{% endif %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, there’s no need to add a front matter for includes. Having this new file, we could then change our &lt;code&gt;index.html&lt;/code&gt; to be simply:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;{{ post.url }}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{{ post.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+  {{ post.excerpt }}
+{% endfor %}
+
+{% include paginator.html %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the beginning, it might seem that using includes is an overkill that just scatters the code all over your code. However, as the code gets more complex, some parts start to repeat, or files start to get too big. Right now this paginator is only used for one page (the blog index), but is ready to be reused by other future pages, like tags or categories pages. Another good use for includes is using them to isolate external blocks, like share links or comments. Speaking of comments…&lt;/p&gt;
+
+&lt;h2 id=&quot;comments-with-disqus&quot;&gt;Comments with Disqus&lt;/h2&gt;
+
+&lt;p&gt;Because these blogs are nothing but a group of static pages, it’s impossible to serve comments as you would with Wordpress or something similar: when a reader wants to post a comment, there’s no database for it to go to. So the solution is to use a third-party tool to serve comments.&lt;/p&gt;
+
+&lt;p&gt;There are plenty of solutions out there that can be used. The most popular one, which is also the one I’m using for my blog, must probably be &lt;a href=&quot;https://disqus.com/&quot;&gt;Disqus&lt;/a&gt;. It’s usually a good option because it allows users to post using their favourite social network accounts, lets the same account post on multiple blogs, instead of having to create a new one per blog, and gives blog authors a good set of tools to moderate and manage inbound comments.&lt;/p&gt;
+
+&lt;p&gt;There are other platforms for blog comments, like Facebook’s, Google’s and more. You should really pick the one that you think makes more sense for the type of blog you’re creating. So if you’re building an awesome new hacker’s blog, there probably won’t be a big audience that prefers to use their personal Facebook accounts to engage in the discussions.&lt;/p&gt;
+
+&lt;p&gt;Because Disqus is usually seen as a good generic option and because that’s what I experimented with when I built my blog, that’s the one I’m showing how to use. If you want to use another, you might still benefit from some of the tips below.&lt;/p&gt;
+
+&lt;p&gt;To get started with Disqus go to &lt;a href=&quot;https://disqus.com/&quot;&gt;their website&lt;/a&gt;, register and follow their instructions. You should be given a code snippet to paste into your blog. That code snippet should be asking for important information like your username, the post’s identifier and the post’s URL. This is a great example of code that we can put in its own include. So let’s create a &lt;code&gt;_includes/disqus.html&lt;/code&gt; and drop the code there, using the right tags to fill the requested information:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;disqus_thread&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_shortname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;your_disqus_shortname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{{ page.url }}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{{ site.url }}{{ page.url }}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/* * * DON&amp;#39;T EDIT BELOW THIS LINE * * */&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;script&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;text/javascript&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;//&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_shortname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;.disqus.com/embed.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;head&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dsq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Please remember that, because this is a third-party tool, it might have changed since this post was written. Make sure that you get the most up-to-date code instead of just copying this example.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that we have a new include, we just need to add it wherever we prefer. Because it’s comments, it makes sense to add it to the blog post layout. So &lt;code&gt;_layouts/post.html&lt;/code&gt; should be updated to:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;---
+layout: default
+---
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;{{ page.title }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;{{ page.date | date_to_string }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+{{ content }}
+
+{% include disqus.html %}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That should be enough to have comments on your blog. Disqus will also give you moderator options through their website. Other providers should probably give you similar tools. If at some point you want to switch commenting providers, you can work on the new one’s code on its own include while still keeping the old one, and when you’re happy to do the switch you just need to change in the post layout the include to be used.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
+
+&lt;p&gt;After having improved our blog in this second tutorial, we should now have a structure like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;_config.yml
+_layouts
+    default.html
+    post.html
+_includes
+    disqus.html
+    paginator.html
+_posts
+    2015-02-01-hello-world.md
+    2015-03-01-my-second-post.md
+    2015-04-01-aprils-fools-post.md
+_site
+_index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In this second tutorial we covered some more material to get to an awesome hacker’s blog. However, there’s still a lot more that we can add, and it wouldn’t fit in a single blog post. So there will be a third post where I’ll try to cover RSS, categories, tags and some theming. If you think that there’s something else worth mentioning, do shout.&lt;/p&gt;
+
+&lt;p&gt;Don’t forget to &lt;a href=&quot;http://feeds.feedburner.com/ricardolopes/blog&quot;&gt;subscribe&lt;/a&gt; to get the latest updates as soon as they’re published. Alternatively, you can &lt;a href=&quot;https://twitter.com/ricardoplopes&quot;&gt;follow me on Twitter&lt;/a&gt;, where I plan to post the links to those updates. And, like I mentioned the last time, my blog’s source code is open, so you can learn from it and get some ideas through its &lt;a href=&quot;https://github.com/rplopes/ricardolopes.net&quot;&gt;Github project&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 13 Mar 2015 00:00:00 +0000</pubDate>
+        <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2</guid>
+        
+        <category>Jekyll</category>
+        
+        <category>Ruby</category>
+        
+        <category>blogging</category>
+        
+        <category>HTML</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
         <title>What if we found life on Mars?</title>
         <description>&lt;p&gt;&lt;em&gt;A week ago I gave a lightning talk at &lt;a href=&quot;http://www.futurelearn.com&quot;&gt;FutureLearn&lt;/a&gt; called “What if we found life on Mars?”. It’s a highly speculative theme, outside of my usual discussions around tech and software development, but one that I find particularly fascinating. So I thought that it would be a good idea to bring that talk’s ideas into a blog post format.&lt;/em&gt;&lt;/p&gt;
 
