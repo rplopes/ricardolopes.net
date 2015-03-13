@@ -202,3 +202,5 @@ _index.html
 However, there's a lot more hacking that can be done. Some examples are building an RSS feed, paginating the index page, getting better URLs, better theming and adding categories and tags. Also, although you can go ahead and upload the generated files to your personal server to get your blog online, it's still worth to discuss some alternatives to ease that process.
 
 Unfortunately, it all starts to be too much for a single blog post. So expect to see all those examples explained in future tutorials, and don't forget to [subscribe]({{ site.feed }}) to get them as soon as they're published. In the meantime, my blog's source code is open, so you can learn from it and get some ideas through its [Github project]({{ site.code_repo }}).
+
+**Update:** [Part 2]({% post_url 2015-03-13-setting-up-a-hackers-blog-with-jekyll-part-2 %}) now available.

@@ -913,6 +913,8 @@ _index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;However, there’s a lot more hacking that can be done. Some examples are building an RSS feed, paginating the index page, getting better URLs, better theming and adding categories and tags. Also, although you can go ahead and upload the generated files to your personal server to get your blog online, it’s still worth to discuss some alternatives to ease that process.&lt;/p&gt;
 
 &lt;p&gt;Unfortunately, it all starts to be too much for a single blog post. So expect to see all those examples explained in future tutorials, and don’t forget to &lt;a href=&quot;http://feeds.feedburner.com/ricardolopes/blog&quot;&gt;subscribe&lt;/a&gt; to get them as soon as they’re published. In the meantime, my blog’s source code is open, so you can learn from it and get some ideas through its &lt;a href=&quot;https://github.com/rplopes/ricardolopes.net&quot;&gt;Github project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-2&quot;&gt;Part 2&lt;/a&gt; now available.&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
         <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll</link>
