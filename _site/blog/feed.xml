@@ -7,6 +7,91 @@
     <atom:link href="http://ricardolopes.net/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>A layman&#39;s guide to good passwords online</title>
+        <description>&lt;p&gt;We have a problem with passwords: they suck. They’re hard to memorise, easy to steal and sometimes have to fit to very specific and silly rules. Online security, nowadays, is just too complicated. So most people tend to end up ignoring security practises, making them vulnerable to cyberattacks. You know you should be doing better, but you don’t know exactly how or why, and your patience and energy are better focused somewhere else, right? If so, then this guide is for you.&lt;/p&gt;
+
+&lt;p&gt;Let’s start debunking some myths and exploring easy and secure practises you can start implementing today. By the end of this guide, dealing with your passwords should actually be simpler and need less of your energy than before.&lt;/p&gt;
+
+&lt;h2 id=&quot;use-long-not-cryptic-passwords&quot;&gt;Use long, not cryptic passwords&lt;/h2&gt;
+
+&lt;p&gt;You’ve probably heard that the strongest passwords are the ones that have letters (lowercase and uppercase), numbers, special symbols like # or ! and that aren’t common words. So something like &lt;code&gt;b@2Y&amp;amp;s&lt;/code&gt; would be great. But that’s too hard to remember, so you go for something simpler, or decide to note that down somewhere.&lt;/p&gt;
+
+&lt;p&gt;I have some good news for you: that example password I just showed you is actually terrible, and you shouldn’t torture yourself trying to memorise something like that. Why is it terrible?&lt;/p&gt;
+
+&lt;p&gt;A typical attack tries to guess your password by trying every single possible combination of characters until it finds the right one. So it could start trying for &lt;code&gt;a&lt;/code&gt;, then &lt;code&gt;b&lt;/code&gt;, then &lt;code&gt;c&lt;/code&gt;, at some point going through &lt;code&gt;Y&lt;/code&gt;, &lt;code&gt;Z&lt;/code&gt;, &lt;code&gt;aa&lt;/code&gt;, &lt;code&gt;ab&lt;/code&gt;, and so on. For 1-character long passwords with letters and numbers, that means that such an attack tries 62 different possibilities (26 lowercase letters, 26 uppercase letters and 10 numbers, from 0 to 9). For 2-characters long passwords, the number of different possibilities rises to 3,906. And so on. For a 6-characters long password that’s around 57 billion different combinations.&lt;/p&gt;
+
+&lt;p&gt;But &lt;code&gt;b@2Y&amp;amp;s&lt;/code&gt; includes special symbols like @ and +. Let’s say that means that there are now 38 more symbols to consider, making it a total of 100 (26 lowercase letters, 26 uppercase letters, 10 numbers and 38 special symbols). Now, the number of different possibilities to consider to break your 6-characters long password increases to 1 trillion. That’s why adding those symbols is good: it’s more combinations that attackers have to try.&lt;/p&gt;
+
+&lt;p&gt;However, if, instead of adding those symbols, we just increase the password size from 6 to 8 characters, the number of different combinations rises to 222 trillion. So a password like &lt;code&gt;2Bananas&lt;/code&gt; is 222 times harder to break than a password like &lt;code&gt;b@2Y&amp;amp;s&lt;/code&gt;! If you add numbers and special symbols it gets even better, of course. But that doesn’t mean having to come up with impossible to remember passwords. Something like &lt;code&gt;2Bananas!!&lt;/code&gt; would need 101,010,101 trillion combinations (also because it increases in size).&lt;/p&gt;
+
+&lt;p&gt;Why is this important? Those numbers of different combinations might all seem too big to be a problem. However, computers are getting increasingly fast. If a computer can try a billion combinations per second, for instance, then breaking &lt;code&gt;b@2Y&amp;amp;s&lt;/code&gt; takes less than 17 minutes. Breaking &lt;code&gt;2Bananas&lt;/code&gt; would take around 2.5 hours. Breaking &lt;code&gt;2Bananas!!&lt;/code&gt; would take 3,200 years.&lt;/p&gt;
+
+&lt;p&gt;So if there’s one thing you should be remembering from this post is this: longer passwords are &lt;em&gt;way&lt;/em&gt; better than shorter passwords, even if you don’t use special characters. They’re also way easier to remember. So go ahead and change them now. The biggest example I showed was still small (just 10-characters long), so that the numbers wouldn’t be too high to understand. But in practise it’s better to use even longer passwords.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://xkcd.com/936/&quot;&gt;Here’s a great comic&lt;/a&gt; on this topic.&lt;/p&gt;
+
+&lt;h2 id=&quot;dont-use-common-passwords&quot;&gt;Don’t use common passwords&lt;/h2&gt;
+
+&lt;p&gt;Just because you were just freed from using cryptic passwords like &lt;code&gt;Rs*F2Q9kn%[L&lt;/code&gt;, it doesn’t mean that you can use &lt;em&gt;any&lt;/em&gt; word for a password. You’ve just learned how to protect against a brute-force attack, but there are other kinds of attacks.&lt;/p&gt;
+
+&lt;p&gt;Attackers know that brute-force attacks can be extremely inefficient against long passwords. Wait 3,200 years to break a password? Good luck with that. So they like shortcuts. If a lot of people use &lt;code&gt;password&lt;/code&gt;, &lt;code&gt;qwerty&lt;/code&gt;, &lt;code&gt;1234567890&lt;/code&gt; or others, then there’s no need to wait for all possible combinations: they can just try those ones first. Here’s a list of the 10 most common passwords, as of 2014:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;123456&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;password&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;12345&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;12345678&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;qwerty&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;1234567890&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;1234&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;baseball&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;dragon&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;football&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A lot of accounts are currently using one of those passwords. This means that if an attacker doesn’t want to wait to get access to logged in accounts, they just need to try these. So if you use any of these passwords for any of your online accounts, change it &lt;em&gt;right now&lt;/em&gt;, because it takes any serious attacker a fraction of a second to break it, even if you’re not specifically the only target! In fact, take a look at the &lt;a href=&quot;http://www.prweb.com/releases/2015/01/prweb12456779.htm&quot;&gt;original, longer list&lt;/a&gt; and make sure it’s not in there also.&lt;/p&gt;
+
+&lt;p&gt;Using your email address, full name, name of the website you’re visiting or anything like that isn’t also going to be a lot safer. Those are all things that an attacker will know. So it’s important that you choose uncommon or illogical words or phrases, because those will be nearly impossible to guess (once again, refer to the comic in the previous section).&lt;/p&gt;
+
+&lt;p&gt;So, one last time, please remember: &lt;em&gt;never&lt;/em&gt; use any of those most popular passwords as a password to any kind of account you might have. Having one of those is almost as safe as having nothing at all.&lt;/p&gt;
+
+&lt;h2 id=&quot;dont-repeat-passwords&quot;&gt;Don’t repeat passwords&lt;/h2&gt;
+
+&lt;p&gt;You’ve probably heard this one before. You should have different passwords for every account. But it’s so hard to remember any password, how could anyone possibly remember that many? And why should you even do it, exactly?&lt;/p&gt;
+
+&lt;p&gt;If a website you’re using doesn’t properly protect login details and gets hacked, a list with your email and password gets leaked for every attacker to use. So if you’re using the same combination in different websites, no matter how secure they might be, your account there will still be compromised. Sometimes you don’t even need to have a website get hacked: you just need someone to get physical access to your PC, or to &lt;a href=&quot;http://arstechnica.com/security/2015/04/hacked-french-network-exposed-its-own-passwords-during-tv-interview/&quot;&gt;glance at your post-it with a complicated password written down&lt;/a&gt;, among other possibilities. Getting passwords is easy. So you don’t want people entering your bank account because somebody watched you type your Facebook password.&lt;/p&gt;
+
+&lt;p&gt;So how can anyone remember so many different passwords? I hope that if you read the previous sections, this one gets easier. We’ve discussed how cryptic, impossible to memorise passwords aren’t that good, and how memorable phrases are actually much more secure. If that still sounds too difficult to do for every single account you have online, then make sure that you do it at least for the most important ones (like your bank account, or your email account where you keep important confidential notes).&lt;/p&gt;
+
+&lt;p&gt;Since you should now be using phrases as passwords, you might want to make some rules that let you have different passwords for different accounts without having too much to memorise. For instance, you could include the main colour of the website. So for Facebook you could use &lt;code&gt;2BlueBananas&lt;/code&gt;, and for GMail &lt;code&gt;2RedBananas&lt;/code&gt;. This isn’t perfect, and you shouldn’t be too obvious (like just adding the website name), but it’s better than nothing.&lt;/p&gt;
+
+&lt;p&gt;A better approach to have great passwords that never repeat for different websites is to use a password manager. A password manager is an application that you can have in your devices that will generate strong passwords for your and store them securely. This way, passwords can be long and cryptic, because you don’t need to remember them, and you can have one of those per account. Comparing different password managers and explaining how to use them goes out of scope of this guide, but it might be a good topic for a future one. If you’re curious, I invite you to investigate more and start using one. It will be the best you’ll do for your security online.&lt;/p&gt;
+
+&lt;h3 id=&quot;im-lost-summary-please&quot;&gt;I’m lost, summary please&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Use long passwords. For every character that you add, breaking your password gets incredibly more difficult. It’s ok if it’s 20, 30 characters long.&lt;/li&gt;
+  &lt;li&gt;Don’t use cryptic passwords. There’s no point in trying to memorise &lt;code&gt;b@2Y&amp;amp;s&lt;/code&gt; (or noting it down somewhere insecure) if longer, more memorable passwords like &lt;code&gt;2Bananas!!&lt;/code&gt; are way more secure.&lt;/li&gt;
+  &lt;li&gt;Don’t use common passwords. Those are the absolute worst. Really. Never use anything from &lt;a href=&quot;http://www.prweb.com/releases/2015/01/prweb12456779.htm&quot;&gt;this list&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Use different passwords for different accounts. At least for important accounts, like your bank.&lt;/li&gt;
+  &lt;li&gt;Coming up with some rules (like adding the colour of the website) is not perfect, but better than doing nothing.&lt;/li&gt;
+  &lt;li&gt;Better yet, you could start using a password manager that will pick great passwords for you and store them securely, so that you can have one per account and will never need to memorise them again.&lt;/li&gt;
+  &lt;li&gt;Watch this &lt;a href=&quot;https://www.youtube.com/watch?v=yzGzB-yYKcc&quot;&gt;short interview with Edward Snowden&lt;/a&gt;, who knows a lot more about this than I do.&lt;/li&gt;
+  &lt;li&gt;Share this post with your friends. Seriously, they’re probably vulnerable to cyberattacks right now, and you can help them improve their security online.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 01 May 2015 00:00:00 +0100</pubDate>
+        <link>http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online</guid>
+        
+        <category>cybersecurity</category>
+        
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
         <title>Setting up a hacker&#39;s blog with Jekyll, part 2</title>
         <description>&lt;p&gt;Feeling like building your new bog from scratch with tools that empower you to develop it the way you want? You’ve come to the right place. If you’re just starting, make sure you read &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll&quot;&gt;part 1&lt;/a&gt; of this tutorial, where you can learn the advantages of using Jekyll over other options and how to use it to create a basic blog from scratch. In this second part we’ll be working with the same blog example code to extend it and make it more interesting. However, if you’re just looking for a particular solution to a problem you might have with your existing blog, these examples should be self-contained enough.&lt;/p&gt;
 
@@ -1157,41 +1242,6 @@ _index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         <guid isPermaLink="true">http://ricardolopes.net/blog/a-postmortem-of-my-wordpress-blog</guid>
         
         <category>Wordpress</category>
-        
-        <category>blogging</category>
-        
-        
-        <category>meta</category>
-        
-      </item>
-    
-      <item>
-        <title>My personal blog 2.0</title>
-        <description>&lt;p&gt;For around 4 years I’ve been maintaining my own personal blog, a self-hosted WordPress install, where I usually talked about things I was working with, cool tricks that I learned and wanted to share the knowledge, and so on. The typical dev blog. However, sometimes it faced some periods of inactivity, either by lack of time, energy or inspiration. And then the worst happened.&lt;/p&gt;
-
-&lt;p&gt;After some weeks of very limited Internet access and close to no free time, I decided to take a look at my blog, and what I saw was a completely broken site. There was a problem in the database connection, an that completely killed all its pages, including the admin section. So my blog was as good as dead and I didn’t even know about it before casually trying to visit it.&lt;/p&gt;
-
-&lt;p&gt;I’ll leave the details for a later post (update: it’s &lt;a href=&quot;/blog/a-postmortem-of-my-wordpress-blog&quot;&gt;here&lt;/a&gt;!). Long story short, I lost the work of these 4 years because of some unknown problem and had to shut down my Wordpress blog.&lt;/p&gt;
-
-&lt;p&gt;This post is, then, a new start. After that experience, this time I dropped Wordpress and PHP and went for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; and Ruby. One of the main reasons is that Jekyll pre-generates static pages, instead of keeping a server running to access a database and render dynamic pages. So I’m not expecting to have these kind of issues from now on. More details about Jekyll, its advantages and cool tricks I learned will come in future posts.&lt;/p&gt;
-
-&lt;p&gt;This new start allowed me to change how some things worked in my blog, now that I could break compatibility with the past. I also used this opportunity to merge my website and blog into one project and give them a new custom-built theme.&lt;/p&gt;
-
-&lt;p&gt;I recovered some of the old posts through the RSS feed and Google cache and will repost the most popular ones, so that their useful information doesn’t get lost with the rest of the old blog. And, of course, brand new content is also waiting to be published.&lt;/p&gt;
-
-&lt;p&gt;So… welcome again to my personal blog, second edition.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 03 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://ricardolopes.net/blog/my-personal-blog-2-0</link>
-        <guid isPermaLink="true">http://ricardolopes.net/blog/my-personal-blog-2-0</guid>
-        
-        <category>Wordpress</category>
-        
-        <category>Jekyll</category>
-        
-        <category>PHP</category>
-        
-        <category>Ruby</category>
         
         <category>blogging</category>
         
