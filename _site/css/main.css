@@ -240,7 +240,6 @@ pre {
   padding: 75px 0 20px 0;
   margin-bottom: 100px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("/img/bg_1920.jpg");
-  background-attachment: fixed;
   background-position-x: center;
   background-repeat: no-repeat; }
   @media screen and (max-width: 770px) and (min-width: 571px) {
