@@ -10,5 +10,10 @@
   {% include category_and_date.html post=post content=post.content %}
   <div class="content" itemprop="description">
     {{ post.excerpt | markdownify }}
+    <p>
+      <a href="{{ post.url }}">
+        Read more...
+      </a>
+    </p>
   </div>
 </div>
