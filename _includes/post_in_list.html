@@ -7,7 +7,7 @@
       <span itemprop="headline">{{ post.title }}</span>
     </a>
   </h2>
-  {% include category_and_date.html post=post %}
+  {% include category_and_date.html post=post content=post.content %}
   <div class="content" itemprop="description">
     {{ post.excerpt | markdownify }}
   </div>

@@ -5,7 +5,7 @@
     {% for post in site.related_posts limit:3 %}
     <li>
       <a href="{{ post.url }}" class="related-post">{{ post.title }}</a>
-      {% include category_and_date.html post=post %}
+      {% include category_and_date.html post=post content=post.content %}
     </li>
     {% endfor %}
   </ul>

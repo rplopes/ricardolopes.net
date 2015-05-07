@@ -8,7 +8,7 @@ layout: default
   <meta itemprop="description" content="{{ page.excerpt | strip_html }}">
   <meta itemprop="author" content="{{ site.author }}">
   <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
-  {% include category_and_date.html post=page %}
+  {% include category_and_date.html post=page content=content %}
   <div class="content" itemprop="articleBody">
     {{ content }}
   </div>
