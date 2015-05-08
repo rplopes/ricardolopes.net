@@ -67,7 +67,7 @@ module Jekyll
 
     # Config defaults
     SITEMAP_FILE_NAME = "/sitemap.xml"
-    EXCLUDE = ["/atom.xml", "/feed.xml", "/feed/index.xml"]
+    EXCLUDE = ["/atom.xml", "/feed.xml", "/feed/index.xml", "/404.shtml"]
     INCLUDE_POSTS = ["/index.html"] 
     CHANGE_FREQUENCY_NAME = "change_frequency"
     PRIORITY_NAME = "priority"

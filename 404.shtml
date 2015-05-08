@@ -1,1 +1,14 @@
-404 Not Found while trying to access <!--#echo var="REQUEST_URI" -->
+---
+layout: default
+---
+
+<h1 class="post-title">404 Page Not Found</h1>
+<div class="content" itemprop="articleBody">
+  <p>The page at <!--#echo var="REQUEST_URI" --> could not be found. Sorry about that.</p>
+  <p>Here are some pages you could try instead:</p>
+  <ul>
+    <li><a href="{{ site.url }}">My humble homepage</a></li>
+    <li><a href="{{ site.blog }}">My blog's front page</a></li>
+    <li><a href="{{ site.blog }}about">A bit about me</a></li>
+  </ul>
+</div>
