@@ -196,7 +196,7 @@ _layouts
 _posts
     2015-02-01-hello-world.md
 _site
-_index.html
+index.html
 {% endhighlight %}
 
 However, there's a lot more hacking that can be done. Some examples are building an RSS feed, paginating the index page, getting better URLs, better theming and adding categories and tags. Also, although you can go ahead and upload the generated files to your personal server to get your blog online, it's still worth to discuss some alternatives to ease that process.

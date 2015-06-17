@@ -21,7 +21,7 @@ _layouts
 _posts
     2015-02-01-hello-world.md
 _site
-_index.html
+index.html
 {% endhighlight %}
 
 Now without further ado let's get hacking.
@@ -250,7 +250,7 @@ _posts
     2015-03-01-my-second-post.md
     2015-04-01-aprils-fools-post.md
 _site
-_index.html
+index.html
 {% endhighlight %}
 
 In this second tutorial we covered some more material to get to an awesome hacker's blog. However, there's still a lot more that we can add, and it wouldn't fit in a single blog post. So there will be a third post where I'll try to cover RSS, categories, tags and some theming. If you think that there's something else worth mentioning, do shout.
