@@ -256,3 +256,5 @@ index.html
 In this second tutorial we covered some more material to get to an awesome hacker's blog. However, there's still a lot more that we can add, and it wouldn't fit in a single blog post. So there will be a third post where I'll try to cover RSS, categories, tags and some theming. If you think that there's something else worth mentioning, do shout.
 
 Don't forget to [subscribe]({{ site.feed }}) to get the latest updates as soon as they're published. Alternatively, you can [follow me on Twitter](https://twitter.com/{{ site.twitter }}), where I plan to post the links to those updates. And, like I mentioned the last time, my blog's source code is open, so you can learn from it and get some ideas through its [Github project]({{ site.code_repo }}).
+
+**Update:** [Part 3]({% post_url 2015-06-19-setting-up-a-hackers-blog-with-jekyll-part-3 %}) now available.

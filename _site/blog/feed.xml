@@ -787,6 +787,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In this second tutorial we covered some more material to get to an awesome hacker’s blog. However, there’s still a lot more that we can add, and it wouldn’t fit in a single blog post. So there will be a third post where I’ll try to cover RSS, categories, tags and some theming. If you think that there’s something else worth mentioning, do shout.&lt;/p&gt;
 
 &lt;p&gt;Don’t forget to &lt;a href=&quot;http://feeds.feedburner.com/ricardolopes/blog&quot;&gt;subscribe&lt;/a&gt; to get the latest updates as soon as they’re published. Alternatively, you can &lt;a href=&quot;https://twitter.com/ricardoplopes&quot;&gt;follow me on Twitter&lt;/a&gt;, where I plan to post the links to those updates. And, like I mentioned the last time, my blog’s source code is open, so you can learn from it and get some ideas through its &lt;a href=&quot;https://github.com/rplopes/ricardolopes.net&quot;&gt;Github project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-3&quot;&gt;Part 3&lt;/a&gt; now available.&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Mar 2015 00:00:00 +0000</pubDate>
         <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2</link>
@@ -1474,7 +1476,7 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Unfortunately, it all starts to be too much for a single blog post. So expect to see all those examples explained in future tutorials, and don’t forget to &lt;a href=&quot;http://feeds.feedburner.com/ricardolopes/blog&quot;&gt;subscribe&lt;/a&gt; to get them as soon as they’re published. In the meantime, my blog’s source code is open, so you can learn from it and get some ideas through its &lt;a href=&quot;https://github.com/rplopes/ricardolopes.net&quot;&gt;Github project&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-2&quot;&gt;Part 2&lt;/a&gt; now available.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-2&quot;&gt;Part 2&lt;/a&gt; and &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-3&quot;&gt;Part 3&lt;/a&gt; now available.&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
         <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll</link>
