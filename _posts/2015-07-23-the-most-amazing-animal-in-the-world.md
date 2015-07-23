@@ -12,7 +12,7 @@ _Is it the cat? The dog? The velociraptor? Or something completely different? Th
 
 There is an animal out there that is far more amazing than anything else we might have known before. An animal that has been found in the heights of the Himalayas, the warmth of Japanese hot springs, the high pressures of the bottom of the ocean, the freezing cold of Antarctica, among other places. An animal that you've probably never seen before, as it's no longer than 1.5 mm. An animal that has been on this planet far longer than we have, and that will probably remain after we're all long gone. That animal is the water bear, also known as tardigrade, and this post will explain why it is, by far, the most amazing animal in the world.
 
-![A tardigrade](/assets/2015-07-23-tardigrade.jpg)
+![A tardigrade]({{ site.url }}/assets/2015-07-23-tardigrade.jpg)
 
 Tardigrades have been on this planet for the last 500 million years. In comparison, humanity started 2 million years ago. Even the earliest dinosaurs (227 million years ago) are closer in time to us than to the first tardigrades. This means that the tardigrades have survived the natural disaster that pushed dinosaurs to extinction. In fact, they've survived all 5 mass extinctions of this planet. But how did they manage to do that?
 
@@ -22,7 +22,7 @@ Tardigrades are incredibly resistant to extreme heat. How extreme is that, exact
 
 Most heat-tolerant organisms support up to 122 ºC. These organisms are typically simple bacteria, as more complex ones would more easily have a weak spot. Tardigrades, however, can do even better: in one experiment, they were able to support some impressive [151 ºC](http://link.springer.com/chapter/10.1007%2F978-94-007-1896-8_12)!
 
-![Kill it with fire! (Good luck with that)](/assets/2015-07-23-fire.png)
+![Kill it with fire! (Good luck with that)]({{ site.url }}/assets/2015-07-23-fire.png)
 
 ## Cold
 
@@ -34,7 +34,7 @@ Near absolute zero, crystals start forming inside animals' bodies. These crystal
 
 Tardigrades have a superpower called the tun state. They can get into a state where they get rid of all the water in their bodies and their metabolism slows down to near 0%. This is like hibernation, improved. Because they replaced the water in their bodies, they can survive near absolute zero temperatures without great risk of crystals forming inside them. They can also survive in this state for [many years](http://onlinelibrary.wiley.com/doi/10.1017/S095283690200078X/abstract;jsessionid=D097CFC6DB91E86A2F94F324BC8D2B99.f04t04, http://www.annualreviews.org/doi/abs/10.1146/annurev.physiol.60.1.73), without the need to eat or drink.
 
-![A tardigrade in its tun state](/assets/2015-07-23-tun.png)
+![A tardigrade in its tun state]({{ site.url }}/assets/2015-07-23-tun.png)
 
 After getting into this protective state, tardigrades only need to get in contact with water to return to their normal state and get back to business.
 
@@ -44,7 +44,7 @@ Pressure, apparently, is measured with megapascals (MPa). I don't know what 1 MP
 
 Most systems stop metabolising and start failing at around 30 MPa. The deepest part of the sea, the Challenger Deep in the Mariana Trench (around 11 km deep), can get pressure up to 100 MPa. So that's the strongest any living organism on Earth would need to support. The strongest bacteria, however, can manage up to 300 MPa before dying. And tardigrades? Those can support [up to 600 MPa](http://www.nature.com/nature/journal/v395/n6705/full/395853a0.html). That's twice as much as the strongest bacteria, and 6x more than the strongest pressure on this planet!
 
-![It's there in my CV: I work well under pressure](/assets/2015-07-23-pressure.png)
+![It's there in my CV: I work well under pressure]({{ site.url }}/assets/2015-07-23-pressure.png)
 
 ## Radiation
 
