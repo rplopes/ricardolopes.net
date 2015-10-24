@@ -64,6 +64,25 @@ layout: compress
       .landing-buttons {
         margin-top: 15px;
       }
+      .social-buttons {
+        margin-top: 80px;
+        text-align: center;
+      }
+      .social-buttons .icon {
+        margin: 15px 10px 10px 10px;
+        width: 28px;
+        height: 28px;
+      }
+      .social-buttons .icon:before {
+        background-size: 28px;
+        width: 28px;
+        height: 28px;
+      }
+      #curriculum h1 {
+        margin: 15% auto 10% auto;
+        text-align: center;
+        text-transform: uppercase;
+      }
     </style>
   </head>
   <body>
@@ -73,10 +92,6 @@ layout: compress
       <div class="wrapper">
         <h1 itemprop="name">{{ site.name }}</h1>
         <h4>{{ site.description }}</h4>
-        <h4 itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-          <span itemprop="addressLocality">London</span>,
-          <span itemprop="addressRegion">UK</span>
-        </h4>
         <meta itemprop="jobTitle" content="Software Developer">
       </div>
 
@@ -84,12 +99,138 @@ layout: compress
         <link itemprop="url" href="{{ site.url }}">
         <a class="header-btn" href="{{ site.blog }}">Personal blog</a>
         <a class="header-btn" href="{{ site.blog }}about">About me</a>
-        <a class="header-btn" target="_blank" href="https://twitter.com/{{ site.twitter }}">Twitter</a>
-        <a class="header-btn" target="_blank" href="https://github.com/{{ site.github }}">Github</a>
-        <a class="header-btn" target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin }}">LinkedIn</a>
+        <a class="header-btn" href="#curriculum">Curriculum</a>
+      </div>
+
+      <div class="wrapper social-buttons">
+        <a target="_blank" href="https://twitter.com/{{ site.twitter }}"><span class="twitter-white icon" aria-hidden="true"></span></a>
+        <a target="_blank" href="https://github.com/{{ site.github }}"><span class="github-white icon" aria-hidden="true"></span></a>
+        <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin }}"><span class="linkedin-white icon" aria-hidden="true"></span></a>
       </div>
 
     </div>
 
+    <div id="curriculum">
+      <div class="wrapper">
+        <h1>Curriculum</h1>
+
+        <h2>Professional experience</h2>
+        {% for job in site.data.jobs %}
+          <div class="post">
+            <h3>{{ job.title }} at {{ job.company }}</h3>
+            <ul class="post-meta">
+              <li>{{ job.location }}</li>
+              <li>
+                <span class="calendar icon" aria-hidden="true"></span>
+                {{ job.start_date }} - {{ job.end_date }}
+              </li>
+            </ul>
+            <div class="content">
+              <ul>
+                {% for fact in job.facts %}
+                  <li>{{ fact }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <ul class="tags">
+              {% for tag in job.tags %}
+                <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+
+        <h2>Education</h2>
+        <div class="post">
+          <h3>Computer Science Master's degree</h3>
+          <ul class="post-meta">
+            <li>University of Coimbra</li>
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              2013
+            </li>
+          </ul>
+          <div class="content">
+            <p>Computer Science Master's degree graded "Excellent" (18 out of 20).</p>
+            <p>Thesis research in the fields of Information Systems and Semantic Web, graded "Excellent" (19 out of 20). Open sourced its <a target="_blank" href="https://github.com/rplopes/lss-usdl">ontology</a> and <a target="_blank" href="https://github.com/rplopes/lss-usdl_editor">editor</a>.</p>
+          </div>
+        </div>
+        <div class="post">
+          <h3>MOOCs</h3>
+          <ul class="post-meta">
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              2012 - Present
+            </li>
+          </ul>
+          <div class="content">
+            <ul>
+              {% for mooc in site.data.moocs %}
+                <li>{{ mooc.title }} ({{ mooc.university }}). Grade: {{ mooc.grade }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <h2>Publications</h2>
+        <div class="post">
+          <h3>Service Systems: Concepts, Modeling, and Programming</h3>
+          <ul class="post-meta">
+            <li>Springer Briefs</li>
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              September 2014
+            </li>
+          </ul>
+          <div class="content">
+            J. Cardoso, R. Lopes and G. Poels, "Service Systems: Concepts, Modeling, and Programming". <a target="_blank" href="http://link.springer.com/book/10.1007%2F978-3-319-10813-1">Link to the book's sales page</a>.
+          </div>
+        </div>
+        <div class="post">
+          <h3>inTime: A Crowd-sourced Approach to Urban Mobility Through Time Predictions</h3>
+          <ul class="post-meta">
+            <li>EPIA</li>
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              September 2013
+            </li>
+          </ul>
+          <div class="content">
+            R. Chicória, R. Lopes, J. Claro, J. Duro and C. Bento, "inTime: A Crowd-sourced Approach to Urban Mobility Through Time Predictions". <a target="_blank" href="https://docs.google.com/file/d/0BxpR56bd9PfJZEI4NWVoZFpVVGs">Link to conference proceedings</a> (paper in pages 68-72).
+          </div>
+        </div>
+
+        <h2>Volunteer work</h2>
+        <div class="post">
+          <h3>Promundo official website</h3>
+          <ul class="post-meta">
+            <li>Promundo</li>
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              2012 - 2013
+            </li>
+          </ul>
+          <div class="content">
+            Designed and developed from scratch the website for Promundo, an associatino for social causes focused on education and international cooperation.
+          </div>
+        </div>
+        <div class="post">
+          <h3>International volunteer in Krakow, Poland</h3>
+          <ul class="post-meta">
+            <li>Towarszystwo Przyjaciół Dzieci</li>
+            <li>
+              <span class="calendar icon" aria-hidden="true"></span>
+              July 2012 - Auguest 2012
+            </li>
+          </ul>
+          <div class="content">
+            Worked for 6 weeks with children from pathological families and orphans, taught them English and elaborated workshops and cultural presentations.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% include footer.html %}
   </body>
 </html>

@@ -1,0 +1,110 @@
+- title: Ruby developer
+  company: FutureLearn
+  location: London, UK
+  start_date: November 2014
+  end_date: Present
+  facts:
+    - Helped the product grow from 600k users to 2.5M in a year
+    - Built AWS instances with Chef scripts (tested with Serverspec) and assigned them to load balancers to quickly scale the infrastructure
+    - Greatly improved the performance of many pages by optimising DB queries
+    - Collaborated closely with the marketing team to deliver tracking pixels, Facebook login, SEO improvements, A/B tests, etc.
+    - Worked in cross-functional teams in an agile environment with fast feedback cycles, regular retros, pair programming, TDD and CI
+    - Mentored other developers and participated in regular learning workshops
+  tags:
+    - AWS
+    - Chef
+    - HAML
+    - Javascript
+    - MySQL
+    - Redis
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+    - SASS
+    - SQL
+
+- title: Analyst developer
+  company: Voxbone
+  location: Brussels, Belgium
+  start_date: February 2014
+  end_date: October 2014
+  facts:
+    - Worked on the product’s API, batches and website
+    - Launched new modules of the new API (v3), both in REST and SOAP
+    - Played a key role in refactoring an extremely problematic legacy codebase by migrating old code and setting up proper unit and integration tests
+    - Worked in an agile environment, following Scrum, Kanban and TDD
+  tags:
+    - CSS
+    - HTML
+    - Java
+    - Javascript
+    - JSF
+    - MySQL
+    - RESTful APIs
+    - SOAP APIs
+    - Spring
+    - SQL
+
+- title: Software developer
+  company: Valipat
+  location: Brussels, Belgium
+  start_date: November 2013
+  end_date: February 2014
+  facts:
+    - Created Ruby gems and Git hooks interacting with RESTful APIs (Gitlab and Redmine) to improve internal development tools
+    - Collaborated with different business teams to improve their products
+    - Participated in the major refactor of a problematic legacy monolithic Rails app
+  tags:
+    - CSS
+    - Docker
+    - HTML
+    - Javascript
+    - MySQL
+    - Packer
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+    - SQL
+    - Vagrant
+
+- title: Intern developer
+  company: Shuffler.fm
+  location: Amsterdam, Netherlands and remote
+  start_date: January 2013
+  end_date: July 2013
+  facts:
+    - Built applications for Spotify, Deezer and Sonos, using their APIs
+    - Interacted with RESTful and SOAP APIs (e.g. Facebook, Last.fm, etc.)
+    - Designed and launched the new RESTful API, its documentation and demo project
+    - Deployed to AWS and solved issues on the servers
+  tags:
+    - AWS
+    - Backbone.js
+    - Coffeescript
+    - CSS
+    - HTML
+    - MySQL
+    - Python
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+    - SOAP APIs
+    - SQL
+
+- title: Grant holder
+  company: Pedro Nunes Institute
+  location: Coimbra, Portugal
+  start_date: September 2011
+  end_date: March 2012
+  facts:
+    - Improved the information systems of the R&D institute and its startups incubator
+    - Collaborated with different R&D departments to work from requirements elicitation to deployment
+  tags:
+    - Apache Struts
+    - CSS
+    - HTML
+    - Java
+    - Javascript
+    - JSTL
+    - MySQL
+    - SQL
