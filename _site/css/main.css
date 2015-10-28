@@ -339,8 +339,7 @@ a.header-btn {
   .footer ul.social-media {
     list-style: none;
     margin-left: 0;
-    float: right;
-    fill: #A19797; }
+    float: right; }
     @media screen and (max-width: 570px) {
       .footer ul.social-media {
         float: left; } }

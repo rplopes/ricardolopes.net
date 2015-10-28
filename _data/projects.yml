@@ -1,0 +1,292 @@
+- title: My personal website and blog
+  stakeholder: Pet project
+  release_date: 2015
+  images:
+    - ricardolopes/1.jpg
+    - ricardolopes/2.jpg
+  description:
+    "<p>
+      The website you're visiting, at
+      <a href='http://ricardolopes.net'>ricardolopes.net</a>, and its
+      <a href='http://ricardolopes.net/blog'>blog</a>.
+    </p>
+    <p>
+      After a bad experience with Wordpress, I've decided to redo my website and
+      blog from scratch using Jekyll. This gives me more control over the
+      project, and no longer depends on a database.
+    </p>"
+  source_code: https://github.com/rplopes/ricardolopes.net
+  tags:
+    - HTML
+    - Jekyll
+    - Ruby
+    - SASS
+
+- title: LSS-USDL Editor
+  stakeholder: University of Coimbra
+  release_date: 2013
+  images:
+    - lss_usdl_editor/1.png
+    - lss_usdl_editor/2.png
+    - lss_usdl_editor/3.png
+  description:
+    "<p>
+      As part of my <a href='http://ricardolopes.net/#masters-degree'>Master's thesis</a>,
+      I've created an
+      <a target='_blank' href='https://github.com/rplopes/lss-usdl'>RDF ontology</a>
+      called LSS-USDL, to map service systems.
+    </p>
+    <p>
+      This editor was created as part of that work, so that mapping those
+      systems could be done not only by editing RDF code, but also using a
+      graphical tool.
+    </p>
+    <p>
+      This ontology and editor and the rest of the research done for my thesis
+      later resulted in the publication of a
+      <a href='http://ricardolopes.net#service-systems-book'>book</a>.
+    </p>"
+  source_code: https://github.com/rplopes/lss-usdl_editor
+  tags:
+    - CSS
+    - HTML
+    - Javascript
+    - PostgreSQL
+    - RDF
+    - Ruby
+    - Ruby on Rails
+
+- title: OND?
+  stakeholder: University of Coimbra
+  release_date: 2013
+  images:
+    - ond/1.jpg
+    - ond/2.jpg
+  description:
+    "<p>
+      A webapp for browsing points of interest (POI) of Portuguese cities that
+      collects data from different sources and uses crowdsourcing to improve its
+      catalogue.
+    </p>
+    <p>
+      This webapp was developed in the scope of a programming challenge for the
+      platform One.Stop.Transport.
+    </p>
+    <p>
+      Designed the webapp and worked in frontend and backend. Also developed
+      crawling scripts to fetch information from data sources.
+    </p>"
+  source_code: https://github.com/rchicoria/pois_enrichment_app
+  tags:
+    - Coffeescript
+    - CSS
+    - HTML
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+
+- title: Narcis
+  stakeholder: Shuffler.fm
+  release_date: 2013
+  images:
+    - narcis/1.jpg
+    - narcis/2.jpg
+  description:
+    "<p>
+      A demo webapp that serves as an example for developers to use the
+      <a target='_blank' href='http://developers.shuffler.fm/'>Shuffler.fm API v2</a>.
+    </p>
+    <p>
+      Worked mainly in the backend's interaction with the API.
+    </p>"
+  source_code: https://github.com/shuffler/narcis
+  tags:
+    - CSS
+    - HTML
+    - RESTful APIs
+    - Ruby
+    - Sinatra
+
+- title: Promundo
+  stakeholder: Promundo
+  release_date: 2013
+  images:
+    - promundo/1.jpg
+    - promundo/2.jpg
+  description:
+    "<p>
+      The official website of Promundo, a Portuguese association for social
+      causes focused on education and international cooperation.
+    </p>
+    <p>
+      This website was fully developed as an unpaid voluntary work for Promundo.
+    </p>
+    <p>
+      Did the full website development (including theme) by scratch with some
+      collaborations from other Promundo volunteers.
+    </p>"
+  tags:
+    - CSS
+    - HTML
+    - Javascript
+    - PHP
+    - Wordpress
+
+- title: Facebook Decrapifier
+  stakeholder: Pet project
+  release_date: 2012
+  video:
+    thumbnail: fb_decrapifier/video.jpg
+    url: https://vimeo.com/53781394
+  description:
+    "<p>
+      The result of a 48h hackathlon. A Google Chrome extension to hide
+      uninteresting posts in your Facebook news feed and also to protect against
+      some Facebook jacking attempts.
+    </p>
+    <p>
+      Worked mainly in the frontend, interaction with Facebook and in the video
+      for the presentation.
+    </p>"
+  tags:
+    - CSS
+    - HTML
+    - Javascript
+
+- title: inTime
+  stakeholder: University of Coimbra
+  release_date: 2012
+  images:
+    - intime/1.jpg
+    - intime/2.jpg
+    - intime/3.jpg
+    - intime/4.jpg
+  description:
+    "<p>
+      Android app with a web-based administration that uses the power of
+      crowdsourcing and machine learning to learn the actual schedules of
+      public transports.
+    </p>
+    <p>
+      This later resulted in the publication of a
+      <a href='http://ricardolopes.net#intime-paper'>research paper</a>.
+    </p>
+    <p>
+      Worked in web-based administration, Android app and machine learning
+      algorithms.
+    </p>"
+  source_code: https://github.com/rchicoria/intime_server
+  tags:
+    - Android
+    - CSS
+    - HTML
+    - Java
+    - Javascript
+    - PostgreSQL
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+
+- title: klinkr
+  stakeholder: University of Coimbra
+  release_date: 2012
+  images:
+    - klinkr/1.jpg
+    - klinkr/2.jpg
+    - klinkr/3.jpg
+    - klinkr/4.jpg
+  description:
+    "<p>
+      Online service based on user-submited photos of traveling destinations
+      that uses embedded GPS metadata to locate them and build a catalogue of
+      interesting places to travel to.
+    </p>
+    <p>
+      Worked in webapp frontend and backend following a user-centered design
+      approach.
+    </p>"
+  source_code: https://github.com/rplopes/klinkr
+  tags:
+    - CSS
+    - HTML
+    - Javascript
+    - PostgreSQL
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+
+- title: ShowsRDF
+  stakeholder: University of Coimbra
+  release_date: 2011
+  video:
+    thumbnail: showsrdf/video.jpg
+    url: https://vimeo.com/34788986
+  images:
+    - showsrdf/1.jpg
+  description:
+    "<p>
+      News website for movies and TV shows based on Semantic Web technologies.
+      It crawls movies and TV shows metadata and news and builds semantic graphs
+      between them for smarter searches and suggestions.
+    </p>
+    <p>
+      Designed the website, built the RDF ontology and worked in frontend and
+      backend.
+    </p>"
+  source_code: https://github.com/rplopes/WS
+  tags:
+    - CSS
+    - HTML
+    - PostgreSQL
+    - RDF
+    - RESTful APIs
+    - Ruby
+    - Ruby on Rails
+    - SPARQL
+
+- title: Incident Management System
+  stakeholder: University of Coimbra
+  release_date: 2011
+  images:
+    - ims/1.jpg
+    - ims/2.jpg
+    - ims/3.jpg
+    - ims/4.jpg
+  description:
+    "<p>
+      Web-based Incident Management System (from ITIL) that can be automatically
+      built based on an existing database schema (SQL file) and BPMN file.
+    </p>
+    <p>
+      Developed the database schema parser and converter to running webapp and
+      worked in the webapp frontend and backend.
+    </p>"
+  source_code: https://github.com/rplopes/BPMN-to-Ruby-on-Rails-generator
+  tags:
+    - HTML
+    - PostgreSQL
+    - Ruby
+    - Ruby on Rails
+    - SQL
+    - XML
+
+- title: OpenGL First Person Shooter for Linux
+  stakeholder: University of Coimbra
+  release_date: 2011
+  images:
+    - opengl/1.jpg
+    - opengl/2.jpg
+    - opengl/3.jpg
+  description:
+    "<p>
+      A First Person Shooter for Linux using OpenGL featuring interactive
+      scenario elements such as targets that can be knocked down, glass that
+      can be broken and dynamic lights.
+    </p>
+    <p>
+      Did a bit of everything.
+    </p>"
+  source_code: https://github.com/rchicoria/open-gl-fps
+  tags:
+    - C++
+    - OpenGL

@@ -78,10 +78,20 @@ layout: compress
         width: 28px;
         height: 28px;
       }
-      #curriculum h1 {
+      #curriculum h1, #portfolio h1 {
         margin: 15% auto 10% auto;
         text-align: center;
         text-transform: uppercase;
+      }
+      .project-images {
+        margin-top: 10px;
+        width: 100%;
+        overflow: auto;
+        white-space: nowrap;
+      }
+      .project-images img {
+        margin: 10px 5px 0 5px;
+        box-shadow: 0px 1px 3px #bdc3c7;
       }
     </style>
   </head>
@@ -100,6 +110,7 @@ layout: compress
         <a class="header-btn" href="{{ site.blog }}">Personal blog</a>
         <a class="header-btn" href="{{ site.blog }}about">About me</a>
         <a class="header-btn" href="#curriculum">Curriculum</a>
+        <a class="header-btn" href="#portfolio">Portfolio</a>
       </div>
 
       <div class="wrapper social-buttons">
@@ -141,7 +152,7 @@ layout: compress
         {% endfor %}
 
         <h2>Education</h2>
-        <div class="post">
+        <div class="post" id="masters-degree">
           <h3>Computer Science Master's degree</h3>
           <ul class="post-meta">
             <li>University of Coimbra</li>
@@ -173,7 +184,7 @@ layout: compress
         </div>
 
         <h2>Publications</h2>
-        <div class="post">
+        <div class="post" id="service-systems-book">
           <h3>Service Systems: Concepts, Modeling, and Programming</h3>
           <ul class="post-meta">
             <li>Springer Briefs</li>
@@ -186,7 +197,7 @@ layout: compress
             J. Cardoso, R. Lopes and G. Poels, "Service Systems: Concepts, Modeling, and Programming". <a target="_blank" href="http://link.springer.com/book/10.1007%2F978-3-319-10813-1">Link to the book's sales page</a>.
           </div>
         </div>
-        <div class="post">
+        <div class="post" id="intime-paper">
           <h3>inTime: A Crowd-sourced Approach to Urban Mobility Through Time Predictions</h3>
           <ul class="post-meta">
             <li>EPIA</li>
@@ -228,6 +239,51 @@ layout: compress
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <hr />
+
+    <div id="portfolio">
+      <div class="wrapper">
+        <h1>Portfolio</h1>
+        {% for project in site.data.projects %}
+          <div class="post">
+            <h3>{{ project.title }}</h3>
+            <ul class="post-meta">
+              <li>{{ project.stakeholder }}</li>
+              <li>
+                <span class="calendar icon" aria-hidden="true"></span>
+                {{ project.release_date }}
+              </li>
+            </ul>
+            <div class="project-images">
+              {% if project.video %}
+                <a target="_blank" href="{{ project.video.url }}">
+                  <img src="img/portfolio/{{ project.video.thumbnail }}" />
+                </a>
+              {% endif %}
+              {% for image in project.images %}
+                <img src="img/portfolio/{{ image }}" />
+              {% endfor %}
+            </div>
+            <div class="content">
+              {{ project.description }}
+              {% if project.source_code %}
+                <p>
+                  <a target="_blank" href="{{ project.source_code }}">
+                    Link to source code
+                  </a>
+                </p>
+              {% endif %}
+            </div>
+            <ul class="tags">
+              {% for tag in project.tags %}
+                <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
       </div>
     </div>
 
