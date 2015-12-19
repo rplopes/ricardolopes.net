@@ -1,8 +1,24 @@
+- title: Platform developer
+  company: Uphold
+  location: Braga, Portugal
+  start_date: November 2015
+  end_date: Present
+  facts:
+    - Developing the API used by the official webapp and third-party clients
+  tags:
+    - Docker
+    - Javascript
+    - Node.js
+    - PostgreSQL
+    - Redis
+    - RESTful APIs
+    - SQL
+
 - title: Ruby developer
   company: FutureLearn
   location: London, UK
   start_date: November 2014
-  end_date: Present
+  end_date: November 2015
   facts:
     - Helped the product grow from 600k users to 2.5M in a year
     - Built AWS instances with Chef scripts (tested with Serverspec) and assigned them to load balancers to quickly scale the infrastructure
