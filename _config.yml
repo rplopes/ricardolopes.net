@@ -19,3 +19,11 @@ permalink: "/blog/:title"
 
 highlighter: pygments
 markdown: kramdown
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+gems:
+  - jekyll-paginate
+  - jekyll-sitemap
