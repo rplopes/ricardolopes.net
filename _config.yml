@@ -15,7 +15,7 @@ linkedin: ricardopintolopes
 paginate: 10
 paginate_path: "/blog/:num/"
 
-permalink: "/blog/:title"
+permalink: "/blog/:title/"
 
 highlighter: pygments
 markdown: kramdown
