@@ -1,184 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://ricardolopes.net/blog/the-most-amazing-animal-in-the-world/</loc>
-    <lastmod>2015-07-23T00:00:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</loc>
-    <lastmod>2015-06-19T00:00:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online/</loc>
-    <lastmod>2015-05-01T00:00:00+01:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</loc>
-    <lastmod>2015-03-13T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/what-if-we-found-life-on-mars/</loc>
-    <lastmod>2015-02-28T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/avoiding-the-think-outside-the-box-trap/</loc>
-    <lastmod>2015-02-22T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/more-semantic-web-for-ruby-mastering-your-data/</loc>
-    <lastmod>2015-02-15T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</loc>
-    <lastmod>2015-02-08T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll/</loc>
-    <lastmod>2015-02-01T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/what-windows-8-could-have-been/</loc>
-    <lastmod>2015-01-23T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/my-experience-on-free-web-hosts/</loc>
-    <lastmod>2015-01-18T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/a-postmortem-of-my-wordpress-blog/</loc>
-    <lastmod>2015-01-11T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/my-personal-blog-2-0/</loc>
-    <lastmod>2015-01-03T00:00:00+00:00</lastmod>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/about/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/categories/meta/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/categories/experience/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/categories/rant/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/categories/tutorial/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/categories/talk/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/wordpress/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/jekyll/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/php/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/ruby/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/blogging/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/mysql/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/web-host/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/windows/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/microsoft/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/ux/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/html/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/semantic-web/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/ruby-on-rails/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/entrepreneurship/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/future/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/universe/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/cybersecurity/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/rss/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/sass/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/animals/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/tags/trivia/</loc>
-  </url>
-  <url>
-    <loc>http://ricardolopes.net/blog/2/</loc>
-  </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/my-personal-blog-2-0/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/a-postmortem-of-my-wordpress-blog/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/my-experience-on-free-web-hosts/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/what-windows-8-could-have-been/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/more-semantic-web-for-ruby-mastering-your-data/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/avoiding-the-think-outside-the-box-trap/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/what-if-we-found-life-on-mars/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</loc>
-    </url>
-    <url>
-      <loc>http://ricardolopes.net/blog/the-most-amazing-animal-in-the-world/</loc>
-    </url>
+<url>
+<loc>http://localhost:4000/blog/my-personal-blog-2-0/</loc>
+<lastmod>2015-01-03T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/a-postmortem-of-my-wordpress-blog/</loc>
+<lastmod>2015-01-11T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/my-experience-on-free-web-hosts/</loc>
+<lastmod>2015-01-18T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/what-windows-8-could-have-been/</loc>
+<lastmod>2015-01-23T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll/</loc>
+<lastmod>2015-02-01T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</loc>
+<lastmod>2015-02-08T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/more-semantic-web-for-ruby-mastering-your-data/</loc>
+<lastmod>2015-02-15T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/avoiding-the-think-outside-the-box-trap/</loc>
+<lastmod>2015-02-22T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/what-if-we-found-life-on-mars/</loc>
+<lastmod>2015-02-28T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</loc>
+<lastmod>2015-03-13T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/a-laymans-guide-to-good-passwords-online/</loc>
+<lastmod>2015-05-01T00:00:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</loc>
+<lastmod>2015-06-19T00:00:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/the-most-amazing-animal-in-the-world/</loc>
+<lastmod>2015-07-23T00:00:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/blog/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/meta/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/experience/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/rant/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/tutorial/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/categories/talk/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/wordpress/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/jekyll/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/php/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/ruby/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/blogging/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/mysql/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/web-host/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/windows/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/microsoft/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/ux/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/html/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/semantic-web/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/ruby-on-rails/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/entrepreneurship/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/future/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/universe/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/cybersecurity/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/rss/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/sass/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/animals/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/tags/trivia/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/2/</loc>
+</url>
 </urlset>
