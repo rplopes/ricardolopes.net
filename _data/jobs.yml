@@ -4,14 +4,17 @@
   start_date: November 2015
   end_date: Present
   facts:
-    - Developing the API used by the official webapp and third-party clients
+    - Developing the RESTful API used by the official webapp and third-party clients
+    - Working with Bitcoin and other cryptocurrency blockchains
+    - Implementing security practises to secure customers funds
+    - Conducting thorough code reviews and testing on every Pull Request to avoid any possible vulnerability
   tags:
     - Docker
     - Javascript
-    - Node.js
+    - NodeJS
     - PostgreSQL
     - Redis
-    - RESTful APIs
+    - REST
     - SQL
 
 - title: Ruby developer
@@ -33,7 +36,7 @@
     - Javascript
     - MySQL
     - Redis
-    - RESTful APIs
+    - REST
     - Ruby
     - Ruby on Rails
     - SASS
@@ -56,8 +59,8 @@
     - Javascript
     - JSF
     - MySQL
-    - RESTful APIs
-    - SOAP APIs
+    - REST
+    - SOAP
     - Spring
     - SQL
 
@@ -77,7 +80,7 @@
     - Javascript
     - MySQL
     - Packer
-    - RESTful APIs
+    - REST
     - Ruby
     - Ruby on Rails
     - SQL
@@ -101,7 +104,7 @@
     - HTML
     - MySQL
     - Python
-    - RESTful APIs
+    - REST
     - Ruby
     - Ruby on Rails
     - SOAP APIs
