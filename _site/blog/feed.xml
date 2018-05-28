@@ -3,8 +3,8 @@
   <channel>
     <title>Ricardo Lopes</title>
     <description>Hacker, tech enthusiast, learner, judo black belt and occasional blogger</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://ricardolopes.net</link>
+    <atom:link href="http://ricardolopes.net/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>The most amazing animal in the world</title>
@@ -12,7 +12,7 @@
 
 &lt;p&gt;There is an animal out there that is far more amazing than anything else we might have known before. An animal that has been found in the heights of the Himalayas, the warmth of Japanese hot springs, the high pressures of the bottom of the ocean, the freezing cold of Antarctica, among other places. An animal that you’ve probably never seen before, as it’s no longer than 1.5 mm. An animal that has been on this planet far longer than we have, and that will probably remain after we’re all long gone. That animal is the water bear, also known as tardigrade, and this post will explain why it is, by far, the most amazing animal in the world.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/2015-07-23-tardigrade.jpg&quot; alt=&quot;A tardigrade&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ricardolopes.net/assets/2015-07-23-tardigrade.jpg&quot; alt=&quot;A tardigrade&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tardigrades have been on this planet for the last 500 million years. In comparison, humanity started 2 million years ago. Even the earliest dinosaurs (227 million years ago) are closer in time to us than to the first tardigrades. This means that the tardigrades have survived the natural disaster that pushed dinosaurs to extinction. In fact, they’ve survived all 5 mass extinctions of this planet. But how did they manage to do that?&lt;/p&gt;
 
@@ -22,7 +22,7 @@
 
 &lt;p&gt;Most heat-tolerant organisms support up to 122 ºC. These organisms are typically simple bacteria, as more complex ones would more easily have a weak spot. Tardigrades, however, can do even better: in one experiment, they were able to support some impressive &lt;a href=&quot;http://link.springer.com/chapter/10.1007%2F978-94-007-1896-8_12&quot;&gt;151 ºC&lt;/a&gt;!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/2015-07-23-fire.png&quot; alt=&quot;Kill it with fire! (Good luck with that)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ricardolopes.net/assets/2015-07-23-fire.png&quot; alt=&quot;Kill it with fire! (Good luck with that)&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;cold&quot;&gt;Cold&lt;/h2&gt;
 
@@ -34,7 +34,7 @@
 
 &lt;p&gt;Tardigrades have a superpower called the tun state. They can get into a state where they get rid of all the water in their bodies and their metabolism slows down to near 0%. This is like hibernation, improved. Because they replaced the water in their bodies, they can survive near absolute zero temperatures without great risk of crystals forming inside them. They can also survive in this state for &lt;a href=&quot;http://onlinelibrary.wiley.com/doi/10.1017/S095283690200078X/abstract;jsessionid=D097CFC6DB91E86A2F94F324BC8D2B99.f04t04, http://www.annualreviews.org/doi/abs/10.1146/annurev.physiol.60.1.73&quot;&gt;many years&lt;/a&gt;, without the need to eat or drink.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/2015-07-23-tun.png&quot; alt=&quot;A tardigrade in its tun state&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ricardolopes.net/assets/2015-07-23-tun.png&quot; alt=&quot;A tardigrade in its tun state&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After getting into this protective state, tardigrades only need to get in contact with water to return to their normal state and get back to business.&lt;/p&gt;
 
@@ -44,7 +44,7 @@
 
 &lt;p&gt;Most systems stop metabolising and start failing at around 30 MPa. The deepest part of the sea, the Challenger Deep in the Mariana Trench (around 11 km deep), can get pressure up to 100 MPa. So that’s the strongest any living organism on Earth would need to support. The strongest bacteria, however, can manage up to 300 MPa before dying. And tardigrades? Those can support &lt;a href=&quot;http://www.nature.com/nature/journal/v395/n6705/full/395853a0.html&quot;&gt;up to 600 MPa&lt;/a&gt;. That’s twice as much as the strongest bacteria, and 6x more than the strongest pressure on this planet!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/2015-07-23-pressure.png&quot; alt=&quot;It's there in my CV: I work well under pressure&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ricardolopes.net/assets/2015-07-23-pressure.png&quot; alt=&quot;It's there in my CV: I work well under pressure&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;radiation&quot;&gt;Radiation&lt;/h2&gt;
 
@@ -85,8 +85,8 @@
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 23 Jul 2015 00:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/the-most-amazing-animal-in-the-world/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/the-most-amazing-animal-in-the-world/</guid>
+        <link>http://ricardolopes.net/blog/the-most-amazing-animal-in-the-world/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/the-most-amazing-animal-in-the-world/</guid>
         
         <category>animals</category>
         
@@ -552,8 +552,8 @@ feed.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;We now have a fully functional blog with categories, tags, proper styling, a feed to subscribe to and all the other features shown in the previous parts of this tutorial, like comments and pagination. There is, of course, a lot more that we can do. If you’ve followed through, I’d recommend you to take a look at the official documentation, where you can find more detailed information about each thing. You can also take a look at my own blog’s &lt;a href=&quot;https://github.com/rplopes/ricardolopes.net&quot;&gt;source code&lt;/a&gt;, which is open source and available on Github.&lt;/p&gt;
 </description>
         <pubDate>Fri, 19 Jun 2015 00:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</guid>
+        <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-3/</guid>
         
         <category>Jekyll</category>
         
@@ -647,8 +647,8 @@ feed.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Fri, 01 May 2015 00:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/a-laymans-guide-to-good-passwords-online/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/a-laymans-guide-to-good-passwords-online/</guid>
+        <link>http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/a-laymans-guide-to-good-passwords-online/</guid>
         
         <category>cybersecurity</category>
         
@@ -882,8 +882,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-3/&quot;&gt;Part 3&lt;/a&gt; now available.&lt;/p&gt;
 </description>
         <pubDate>Fri, 13 Mar 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</guid>
+        <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/</guid>
         
         <category>Jekyll</category>
         
@@ -985,8 +985,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sat, 28 Feb 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/what-if-we-found-life-on-mars/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/what-if-we-found-life-on-mars/</guid>
+        <link>http://ricardolopes.net/blog/what-if-we-found-life-on-mars/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/what-if-we-found-life-on-mars/</guid>
         
         <category>future</category>
         
@@ -1022,8 +1022,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;If you dodge that trap, there is a whole world of new adventures waiting for you. A scary world, way different from your usual assumptions and mostly unknown  And still, powerful enough to amaze you and to give you new insights and tools for critical thinking, problem solving and self-fulfilment.&lt;/p&gt;
 </description>
         <pubDate>Sun, 22 Feb 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/avoiding-the-think-outside-the-box-trap/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/avoiding-the-think-outside-the-box-trap/</guid>
+        <link>http://ricardolopes.net/blog/avoiding-the-think-outside-the-box-trap/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/avoiding-the-think-outside-the-box-trap/</guid>
         
         <category>entrepreneurship</category>
         
@@ -1230,8 +1230,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;As I’ve concluded in early 2012, Ruby tools for development with the Semantic Web are still not as good as tools that we can find for other languages, such as Java. Still, it’s good to see that it is in fact possible to import and export data seamlessly using pure Ruby, so if this is the main Semantic Web related feature your application is supposed to have, the good news is that it shouldn’t be too hard to develop it in Ruby on Rails, Sinatra or any other Ruby framework.&lt;/p&gt;
 </description>
         <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/more-semantic-web-for-ruby-mastering-your-data/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/more-semantic-web-for-ruby-mastering-your-data/</guid>
+        <link>http://ricardolopes.net/blog/more-semantic-web-for-ruby-mastering-your-data/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/more-semantic-web-for-ruby-mastering-your-data/</guid>
         
         <category>Semantic Web</category>
         
@@ -1375,8 +1375,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;A follow-up tutorial is now available, describing how to import and export semantic data into/from Ruby: &lt;a href=&quot;/blog/more-semantic-web-for-ruby-mastering-your-data/&quot;&gt;More Semantic Web for Ruby: mastering your data&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</guid>
+        <link>http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/developing-for-the-semantic-web-with-ruby-on-rails-the-2012-guide/</guid>
         
         <category>Semantic Web</category>
         
@@ -1568,8 +1568,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-2/&quot;&gt;Part 2&lt;/a&gt; and &lt;a href=&quot;/blog/setting-up-a-hackers-blog-with-jekyll-part-3/&quot;&gt;Part 3&lt;/a&gt; now available.&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Feb 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/setting-up-a-hackers-blog-with-jekyll/</guid>
+        <link>http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll/</guid>
         
         <category>Jekyll</category>
         
@@ -1655,8 +1655,8 @@ index.html&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;All in all, this could have been a new revolution in the way we use our computers. As it stands, it’s nothing but a glimpse of what that revolution might look like. Maybe they’ll get it right in an hypothetical Windows 9. After all, Microsoft is known for releasing great versions of Windows after disappointing ones, and disappointing versions after great ones (and so far, this pattern seems unchanged). Or maybe Apple will get it right first.&lt;/p&gt;
 </description>
         <pubDate>Fri, 23 Jan 2015 00:00:00 +0000</pubDate>
-        <link>http://localhost:4000/blog/what-windows-8-could-have-been/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/what-windows-8-could-have-been/</guid>
+        <link>http://ricardolopes.net/blog/what-windows-8-could-have-been/</link>
+        <guid isPermaLink="true">http://ricardolopes.net/blog/what-windows-8-could-have-been/</guid>
         
         <category>Windows</category>
         
