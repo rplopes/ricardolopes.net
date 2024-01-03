@@ -1,0 +1,59 @@
+html {
+  font-size: 1.3rem;
+  font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+  line-height: 1.5rem;
+}
+
+section {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+a {
+  color: #e00000;
+}
+
+a:visited {
+  color: #c60000;
+}
+
+a:hover {
+  color: #ff0000;
+}
+
+#content {
+  margin: 0 auto;
+}
+
+#main {
+  width: 100%;
+  margin: 0;
+  padding: 5rem;
+}
+
+#main section {
+  margin-top: 5rem;
+}
+
+section#title {
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  padding-bottom: 5rem;
+}
+
+footer {
+  margin: 5rem auto;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #eeeeee;
+    background: #111111;
+  }
+}
