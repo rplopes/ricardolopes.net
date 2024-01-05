@@ -12,11 +12,13 @@ section {
 h1 {
   font-size: 3rem;
   font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
+  line-height: 3rem;
 }
 
 h2 {
   font-size: 2rem;
   font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
+  line-height: 2rem;
 }
 
 a {
@@ -38,7 +40,7 @@ a:hover {
 #main {
   width: 100%;
   margin: 0;
-  padding: 5rem;
+  padding: 1rem;
 }
 
 #main section {
@@ -48,7 +50,7 @@ a:hover {
 section#title {
   font-size: 1.3rem;
   line-height: 1.8rem;
-  padding-bottom: 5rem;
+  padding: 5rem 1rem;
 }
 
 footer {
