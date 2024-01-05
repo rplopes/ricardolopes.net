@@ -1,6 +1,6 @@
 html {
   font-size: 1.3rem;
-  font-family: Lucida Grande, Helvetica, Arial, sans-serif;
+  font-family: Lucida Grande, Helvetica, Arial;
   line-height: 1.5rem;
 }
 
@@ -10,7 +10,13 @@ section {
 }
 
 h1 {
+  font-size: 3rem;
+  font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
+}
+
+h2 {
   font-size: 2rem;
+  font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
 }
 
 a {
@@ -56,4 +62,6 @@ footer {
     color: #eeeeee;
     background: #111111;
   }
+}
+
 }
