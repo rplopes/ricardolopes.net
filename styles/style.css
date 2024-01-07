@@ -1,7 +1,7 @@
 html {
   font-size: 1.3rem;
   font-family: Lucida Grande, Helvetica, Arial;
-  line-height: 1.5rem;
+  line-height: 1.6rem;
 }
 
 section {
@@ -31,6 +31,10 @@ a:visited {
 
 a:hover {
   color: #ff0000;
+}
+
+li {
+  margin: 0.2rem 0 0.4rem 0;
 }
 
 #content {
