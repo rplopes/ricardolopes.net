@@ -2,11 +2,16 @@ html {
   font-size: 1.3rem;
   font-family: Lucida Grande, Helvetica, Arial;
   line-height: 1.6rem;
+
+  @media (prefers-color-scheme: dark) {
+    color: #eeeeee;
+    background: #111111;
+  }
 }
 
 section {
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 5rem auto 0;
 }
 
 h1 {
@@ -47,48 +52,8 @@ li {
   padding: 1rem;
 }
 
-#main section {
-  margin-top: 5rem;
-}
-
-#title-avatar {
-  margin: 3rem 0 0 0;
-  text-align: center;
-
-  img {
-    width: 10rem;
-  }
-
-  @media (min-width: 830px) {
-    float: left;
-    margin: 3rem 1rem 1rem 0;
-  }
-}
-
-#title-text {
-  line-height: 1.8rem;
-  text-align: center;
-  padding-bottom: 2rem;
-
-  @media (min-width: 830px) {
-    padding-top: 1rem;
-    text-align: left;
-  }
-}
-
-section#title {
-  font-size: 1.3rem;
-}
-
 footer {
   margin: 5rem auto;
   font-size: 1rem;
   text-align: center;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #eeeeee;
-    background: #111111;
-  }
 }
