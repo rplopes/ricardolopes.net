@@ -4,10 +4,34 @@
     <meta charset="UTF-8" />
     <title>Ricardo Lopes</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="" />
+    <meta
+      name="description"
+      content="Tech lead and backend engineer focused on architecting and building secure and scalable services"
+    />
+    <meta name="author" content="Ricardo Lopes" />
     <link href="styles/modern-normalize.min.css" rel="stylesheet" />
     <link href="styles/style.css" rel="stylesheet" />
     <link rel="icon" href="favicon.ico" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ricardoplopes" />
+    <meta name="twitter:title" content="Ricardo Lopes" />
+    <meta
+      name="twitter:description"
+      content="Tech lead and backend engineer focused on architecting and building secure and scalable services"
+    />
+    <meta name="twitter:image" content="https://ricardolopes.net/pfp.png" />
+
+    <meta property="og:site_name" content="Ricardo Lopes" />
+    <meta property="og:title" content="Ricardo Lopes" />
+    <meta
+      name="twitter:description"
+      content="Tech lead and backend engineer focused on architecting and building secure and scalable services"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ricardolopes.net/" />
+    <meta property="og:image" content="https://ricardolopes.net/pfp.png" />
+
     <style>
       #title-avatar {
         margin: 3rem 0 0 0;
@@ -37,16 +61,20 @@
   <body>
     <div id="content">
       <div id="main">
-        <section>
+        <section itemscope itemtype="http://schema.org/Person">
           <div id="title-avatar">
-            <img src="pfp.png" />
+            <img itemprop="image" src="pfp.png" />
           </div>
           <div id="title-text">
-            <h1>Ricardo Lopes</h1>
-            <p>
+            <h1 itemprop="name">Ricardo Lopes</h1>
+            <p itemprop="description">
               Tech lead and backend engineer focused on architecting and
               building secure and scalable services
             </p>
+            <meta
+              itemprop="jobTitle"
+              content="Tech lead and backend engineer"
+            />
           </div>
         </section>
         <section>
