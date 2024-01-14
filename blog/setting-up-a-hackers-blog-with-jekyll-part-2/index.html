@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      Setting up a hacker's blog with Jekyll, part 2 | Ricardo Lopes
+    </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="author" content="Ricardo Lopes" />
+    <link href="../../styles/modern-normalize.min.css" rel="stylesheet" />
+    <link href="../../styles/style.css" rel="stylesheet" />
+    <link rel="icon" href="../../favicon.ico" />
+    <link
+      rel="canonical"
+      href="https://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/"
+    />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ricardoplopes" />
+    <meta
+      name="twitter:title"
+      content="Setting up a hacker's blog with Jekyll, part 2 | Ricardo Lopes"
+    />
+
+    <meta property="og:site_name" content="Ricardo Lopes" />
+    <meta
+      property="og:title"
+      content="Setting up a hacker's blog with Jekyll, part 2"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/"
+    />
+  </head>
+  <body>
+    <header>
+      <a id="header-title" href="/">Ricardo Lopes</a>
+      <ul>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </header>
+    <div id="content">
+      <div id="main">
+        <section itemscope itemtype="http://schema.org/Article">
+          <meta itemprop="author" content="Ricardo Lopes" />
+          <link
+            itemprop="url"
+            href="https://ricardolopes.net/blog/setting-up-a-hackers-blog-with-jekyll-part-2/"
+          />
+          <h2 itemprop="headline">
+            Setting up a hacker's blog with Jekyll, part 2
+          </h2>
+          <div itemprop="articleBody">
+            <p>
+              <i
+                >This is an archived blog post that is no longer listed. That's
+                because this is an old post, from a previous blog I've had in
+                this domain, years ago. I'm keeping this post up only in the
+                interest of link preservation.</i
+              >
+            </p>
+            <p><i>This post was originally posted on 13th March 2015.</i></p>
+            <p>
+              Feeling like building your new bog from scratch with tools that
+              empower you to develop it the way you want? You’ve come to the
+              right place. If you’re just starting, make sure you read
+              <a href="/blog/setting-up-a-hackers-blog-with-jekyll/">part 1</a>
+              of this tutorial, where you can learn the advantages of using
+              Jekyll over other options and how to use it to create a basic blog
+              from scratch. In this second part we’ll be working with the same
+              blog example code to extend it and make it more interesting.
+              However, if you’re just looking for a particular solution to a
+              problem you might have with your existing blog, these examples
+              should be self-contained enough.
+            </p>
+            <p>
+              Just to recap from the previous tutorial: we’re using the gem
+              <a href="http://jekyllrb.com/">Jekyll</a> to generate our blog’s
+              static pages. We do that by running <code>jekyll serve</code>,
+              which also allows us to test it in our browser locally. Our blog
+              code structure is currently looking like this:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang="bash"><span></span>_config.yml
+_layouts
+    default.html
+    post.html
+_posts
+    <span class="m">2015</span>-02-01-hello-world.md
+_site
+index.html</code></pre>
+            </figure>
+            <p>Now without further ado let’s get hacking.</p>
+            <h2 id="better-urls">Better URLs</h2>
+            <p>
+              Jekyll defaults URLs to the format
+              <code>/:year/:month/:day/:title.html</code>. So our Hello World
+              post has the URL <code>/2015/02/01/hello-world.html</code>.
+              However, this isn’t the best structure: it’s long and exposes a
+              file extension and the full date. We can change this by setting a
+              value to <code>permalink</code> in <code>_config.yml</code>.
+            </p>
+            <p>
+              If you’re ok with showing the full date on the URL (some blogs do
+              this to give a temporal context and to make it easier to have
+              multiple posts with the same slug), then you can set the value of
+              <code>permalink</code> to <code>pretty</code>, which hides the
+              HTML extension:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: pretty</code></pre>
+            </figure>
+            <p>
+              I typically prefer to remove the date from the URL, because I want
+              my posts to be generally timeless, and because if they got an
+              update, that URL would suddenly be misleading. You can do that
+              setting <code>permalink</code> to <code>none</code>.
+            </p>
+            <p>
+              However, that still exposes the HMTL file extension, which I also
+              don’t want. Jekyll doesn’t provide a direct value for these
+              requirements, but fortunately it lets you build your own custom
+              URLs. So if you want URLs that simply display the post slug you
+              need to change your <code>_config.yml</code> to:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: "/:title"</code></pre>
+            </figure>
+            <p>
+              You can adapt that to your needs: prefer having the categories and
+              the publication year included? Change it to
+              <code>/:categories/:year/:title</code>. And so on.
+            </p>
+            <h2 id="paginating-our-list-of-posts">
+              Paginating our list of posts
+            </h2>
+            <p>
+              Right now we’re displaying every single blog post in our index
+              page, which is far from ideal. Since we have just one blog post so
+              far we still don’t see a problem with it, but if we get to
+              hundreds, we really shouldn’t be showing them all in one page.
+            </p>
+            <p>
+              For the sake of experimentation, let’s create two new blog posts.
+              Our posts directory should now look like this:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang="bash"><span></span>_posts
+    <span class="m">2015</span>-02-01-hello-world.md
+    <span class="m">2015</span>-03-01-my-second-post.md
+    <span class="m">2015</span>-04-01-aprils-fools-post.md</code></pre>
+            </figure>
+            <p>
+              Now that we have 3 different posts, we can paginate our blog to
+              show only 2 posts per page. Ideally you might want more posts per
+              page, but for now this should be good enough to test what we want.
+            </p>
+            <p>
+              Pagination is done by setting the number of posts per page in the
+              config attribute <code>paginate</code> and, if you want a
+              particular URL for those pages, setting its format like the one
+              described for permalinks in the config attribute
+              <code>paginate_path</code>. So to test for 2 posts per page, our
+              <code>_config.yml</code> would change to something like:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>name: My blog
+author: Ricardo Lopes
+twitter: ricardoplopes
+
+permalink: "/:title"
+
+paginate: 2
+paginate_path: "/:num"</code></pre>
+            </figure>
+            <p>
+              However, if you visit your blog now you’ll notice that it’s still
+              not paginating. That’s because we’ve configured pagination, but
+              we’re still not using it. Let’s look back at
+              <code>index.html</code>:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>---
+layout: default
+---
+
+{% for post in site.posts %}
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ post.url }}"</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  {{ post.excerpt }}
+{% endfor %}</code></pre>
+            </figure>
+            <p>
+              We’re iterating over the full list of the website’s posts. We want
+              to iterate over the posts that belong to a particular page of our
+              pagination. To do that, we have to fetch <code>posts</code> not
+              from <code>site</code>, but from <code>paginator</code>:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ post.url }}"</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  {{ post.excerpt }}
+{% endfor %}</code></pre>
+            </figure>
+            <p>
+              Great, now we should just see the latest two posts. And if we
+              browse <code>/2</code> we should see the second page, with the
+              oldest post there. Still, there’s no paginator to browse different
+              pages easily.
+            </p>
+            <p>
+              We can add that to the end of <code>index.html</code>, so that it
+              shows after the list of posts. we only want to show it if there’s
+              any need for it, i.e. only if there’s a previous page or a next
+              page:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>...
+
+{% if paginator.next_page or paginator.previous_page %}
+  <span class="c">&lt;!-- paginator code here --&gt;</span>
+{% endif %}</code></pre>
+            </figure>
+            <p>
+              With this interface you can do the fanciest paginator you can
+              think of. Here’s a suggestion for how
+              <code>index.html</code> might look like with one of the simplest
+              paginators that can be done:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ post.url }}"</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  {{ post.excerpt }}
+{% endfor %}
+
+{% if paginator.next_page or paginator.previous_page %}
+  {% if paginator.previous_page %}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ paginator.previous_page_path }}"</span><span class="p">&gt;</span>Previous page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  {% else %}
+    Previous page
+  {% endif %}
+  |
+  {% if paginator.next_page %}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ paginator.next_page_path }}"</span><span class="p">&gt;</span>Next page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  {% else %}
+    Next page
+  {% endif %}
+{% endif %}</code></pre>
+            </figure>
+            <p>
+              Great, we now have pagination working with proper navigation. Our
+              <code>index.html</code> is starting to look crowded, though, and
+              if we ever want to reuse the paginator code, there’s a lot there
+              to copy and to maintain. It’s time to look at includes.
+            </p>
+            <h2 id="includes">Includes</h2>
+            <p>
+              Jekyll has this nice thing called includes, which are basically
+              partials that you can reuse on multiple pages. So if you’ve just
+              built your perfect paginator and you want to use it in different
+              lists of posts, you can just put it in its own include and then
+              just call it from those pages. Includes, unlike regular layouts,
+              go inside their own directory: <code>_includes</code>. If you want
+              to isolate the paginator code into one, then you’ll need to create
+              a <code>_includes/paginator.html</code>. Using the same code as
+              above, that file would be something like:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>{% if paginator.next_page or paginator.previous_page %}
+  {% if paginator.previous_page %}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ paginator.previous_page_path }}"</span><span class="p">&gt;</span>Previous page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  {% else %}
+    Previous page
+  {% endif %}
+  |
+  {% if paginator.next_page %}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ paginator.next_page_path }}"</span><span class="p">&gt;</span>Next page<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  {% else %}
+    Next page
+  {% endif %}
+{% endif %}</code></pre>
+            </figure>
+            <p>
+              As you can see, there’s no need to add a front matter for
+              includes. Having this new file, we could then change our
+              <code>index.html</code> to be simply:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>---
+layout: default
+---
+
+{% for post in paginator.posts %}
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ post.url }}"</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  {{ post.excerpt }}
+{% endfor %}
+
+{% include paginator.html %}</code></pre>
+            </figure>
+            <p>
+              In the beginning, it might seem that using includes is an overkill
+              that just scatters the code all over your code. However, as the
+              code gets more complex, some parts start to repeat, or files start
+              to get too big. Right now this paginator is only used for one page
+              (the blog index), but is ready to be reused by other future pages,
+              like tags or categories pages. Another good use for includes is
+              using them to isolate external blocks, like share links or
+              comments. Speaking of comments…
+            </p>
+            <h2 id="comments-with-disqus">Comments with Disqus</h2>
+            <p>
+              Because these blogs are nothing but a group of static pages, it’s
+              impossible to serve comments as you would with Wordpress or
+              something similar: when a reader wants to post a comment, there’s
+              no database for it to go to. So the solution is to use a
+              third-party tool to serve comments.
+            </p>
+            <p>
+              There are plenty of solutions out there that can be used. The most
+              popular one, which is also the one I’m using for my blog, must
+              probably be <a href="https://disqus.com/">Disqus</a>. It’s usually
+              a good option because it allows users to post using their
+              favourite social network accounts, lets the same account post on
+              multiple blogs, instead of having to create a new one per blog,
+              and gives blog authors a good set of tools to moderate and manage
+              inbound comments.
+            </p>
+            <p>
+              There are other platforms for blog comments, like Facebook’s,
+              Google’s and more. You should really pick the one that you think
+              makes more sense for the type of blog you’re creating. So if
+              you’re building an awesome new hacker’s blog, there probably won’t
+              be a big audience that prefers to use their personal Facebook
+              accounts to engage in the discussions.
+            </p>
+            <p>
+              Because Disqus is usually seen as a good generic option and
+              because that’s what I experimented with when I built my blog,
+              that’s the one I’m showing how to use. If you want to use another,
+              you might still benefit from some of the tips below.
+            </p>
+            <p>
+              To get started with Disqus go to
+              <a href="https://disqus.com/">their website</a>, register and
+              follow their instructions. You should be given a code snippet to
+              paste into your blog. That code snippet should be asking for
+              important information like your username, the post’s identifier
+              and the post’s URL. This is a great example of code that we can
+              put in its own include. So let’s create a
+              <code>_includes/disqus.html</code> and drop the code there, using
+              the right tags to fill the requested information:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">"disqus_thread"</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="p">&gt;</span>
+    <span class="cm">/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */</span>
+    <span class="kd">var</span> <span class="nx">disqus_shortname</span> <span class="o">=</span> <span class="s1">'your_disqus_shortname'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">disqus_identifier</span> <span class="o">=</span> <span class="s1">'{{ page.url }}'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">disqus_url</span> <span class="o">=</span> <span class="s1">'{{ site.url }}{{ page.url }}'</span><span class="p">;</span>
+
+    <span class="cm">/* * * DON'T EDIT BELOW THIS LINE * * */</span>
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">dsq</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span> <span class="nx">dsq</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'text/javascript'</span><span class="p">;</span> <span class="nx">dsq</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">dsq</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'//'</span> <span class="o">+</span> <span class="nx">disqus_shortname</span> <span class="o">+</span> <span class="s1">'.disqus.com/embed.js'</span><span class="p">;</span>
+        <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'head'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'body'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">dsq</span><span class="p">);</span>
+    <span class="p">})();</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></code></pre>
+            </figure>
+            <p>
+              <strong
+                >Please remember that, because this is a third-party tool, it
+                might have changed since this post was written. Make sure that
+                you get the most up-to-date code instead of just copying this
+                example.</strong
+              >
+            </p>
+            <p>
+              Now that we have a new include, we just need to add it wherever we
+              prefer. Because it’s comments, it makes sense to add it to the
+              blog post layout. So <code>_layouts/post.html</code> should be
+              updated to:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-html" data-lang="html"><span></span>---
+layout: default
+---
+
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>{{ page.title }}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ page.date | date_to_string }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{{ content }}
+
+{% include disqus.html %}</code></pre>
+            </figure>
+            <p>
+              That should be enough to have comments on your blog. Disqus will
+              also give you moderator options through their website. Other
+              providers should probably give you similar tools. If at some point
+              you want to switch commenting providers, you can work on the new
+              one’s code on its own include while still keeping the old one, and
+              when you’re happy to do the switch you just need to change in the
+              post layout the include to be used.
+            </p>
+            <h2 id="whats-next">What’s next</h2>
+            <p>
+              After having improved our blog in this second tutorial, we should
+              now have a structure like this:
+            </p>
+            <figure class="highlight">
+              <pre><code class="language-bash" data-lang="bash"><span></span>_config.yml
+_layouts
+    default.html
+    post.html
+_includes
+    disqus.html
+    paginator.html
+_posts
+    <span class="m">2015</span>-02-01-hello-world.md
+    <span class="m">2015</span>-03-01-my-second-post.md
+    <span class="m">2015</span>-04-01-aprils-fools-post.md
+_site
+index.html</code></pre>
+            </figure>
+            <p>
+              In this second tutorial we covered some more material to get to an
+              awesome hacker’s blog. However, there’s still a lot more that we
+              can add, and it wouldn’t fit in a single blog post. So there will
+              be a third post where I’ll try to cover RSS, categories, tags and
+              some theming. If you think that there’s something else worth
+              mentioning, do shout.
+            </p>
+            <p>
+              <strong>Update:</strong>
+              <a href="/blog/setting-up-a-hackers-blog-with-jekyll-part-3/"
+                >Part 3</a
+              >
+              now available.
+            </p>
+            <p>
+              <i
+                >Update from 2024: This blog no longer uses Jekyll. I haven't
+                been following its progress, so I also don't know how many
+                breaking changes it may have gotten, and how broken this
+                tutorial may be today.</i
+              >
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <footer>
+      <p>&#169; Ricardo Lopes</p>
+    </footer>
+  </body>
+</html>
