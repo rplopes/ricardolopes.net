@@ -42,6 +42,11 @@ li {
   margin: 0.2rem 0 0.4rem 0;
 }
 
+#main p img {
+  display: block;
+  margin: auto;
+}
+
 header {
   max-width: 42rem;
   margin: 1rem auto;
