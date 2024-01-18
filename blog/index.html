@@ -1,9 +1,60 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blog | Ricardo Lopes</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="A collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more"
+    />
+    <meta name="author" content="Ricardo Lopes" />
+    <link href="../styles/modern-normalize.min.css" rel="stylesheet" />
+    <link href="../styles/style.css" rel="stylesheet" />
+    <link rel="icon" href="../favicon.ico" />
 
-{% for post in paginator.posts %}
-  {% include post_in_list.html %}
-{% endfor %}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@ricardoplopes" />
+    <meta name="twitter:title" content="Blog | Ricardo Lopes" />
+    <meta
+      name="twitter:description"
+      content="A collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more"
+    />
+    <meta name="twitter:image" content="https://ricardolopes.net/pfp.png" />
 
-{% include paginator.html %}
+    <meta property="og:site_name" content="Ricardo Lopes" />
+    <meta property="og:title" content="Blog" />
+    <meta
+      name="twitter:description"
+      content="A collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ricardolopes.net/blog/" />
+    <meta property="og:image" content="https://ricardolopes.net/pfp.png" />
+  </head>
+  <body>
+    <header>
+      <a id="header-title" href="/">Ricardo Lopes</a>
+      <ul>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </header>
+    <div id="content">
+      <div id="main">
+        <section>
+          <h2>Blog</h2>
+          <p>
+            A collection of thoughts, experiments, wise advice from my mentors,
+            notes on things I'm reading, and more.
+          </p>
+        </section>
+        <section>
+          <p>First posts coming soon!</p>
+        </section>
+      </div>
+    </div>
+    <footer>
+      <p>&#169; Ricardo Lopes</p>
+    </footer>
+  </body>
+</html>
