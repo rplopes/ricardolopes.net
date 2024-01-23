@@ -91,3 +91,14 @@ footer {
   font-size: 1rem;
   text-align: center;
 }
+
+ul.post-meta {
+  padding: 0;
+  font-size: 0.9rem;
+  color: #888888;
+
+  li {
+    display: inline;
+    margin-right: 1rem;
+  }
+}
