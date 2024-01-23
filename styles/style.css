@@ -14,15 +14,22 @@ section {
   margin: 5rem auto 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
+}
+
 h1 {
   font-size: 3rem;
-  font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
   line-height: 3rem;
 }
 
 h2 {
   font-size: 2rem;
-  font-family: Palatino, Palatino Linotype, Lucida Grande, Helvetica, Arial;
   line-height: 2rem;
 }
 
@@ -98,6 +105,11 @@ ul.post-meta {
   color: #888888;
 
   li {
+    display: inline;
+    margin-right: 1rem;
+  }
+}
+
     display: inline;
     margin-right: 1rem;
   }
