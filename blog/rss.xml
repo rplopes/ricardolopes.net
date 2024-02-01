@@ -1,0 +1,24 @@
+<rss version="2.0">
+<channel>
+<title>Ricardo Lopes</title>
+<description>Ricardo Lopes</description>
+<link>https://ricardolopes.net/blog</link>
+<atom:link href="https://ricardolopes.net/blog/rss.xml" rel="self" type="application/rss+xml"/>
+<language>en</language>
+<ttl>60</ttl>
+<atom:link rel="next" href="https://ricardolopes.net/blog/rss.xml?page=1"/>
+<item>
+<title>About This Blog</title>
+<description>
+<p>Hi, I'm Ricardo Lopes, a tech lead and backend engineer. Welcome to my blog! This is where I'm sharing a collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more. All views are my own and not of any employer.</p><p>My first goal with this blog is selfish: I want to write about those topics because writing helps clarify my thinking and crystallise what I've learnt. I've been learning so much since I started this journey over a decade ago, if I don't write things down, I risk forgetting important anecdotes and nuggets of wisdom.</p><p>But if that were my only goal, I wouldn't need to post anything in public.</p><p>I believe I wouldn't be where I am today in my career if it weren't for the exceptional mentors I had along the way. I've learnt a lot from them, and I'm a much better developer today than what I would have been otherwise.</p><p>Now that I've benefited from all those lessons, I believe it's my turn to pay it forward and to share what I've learnt with you.</p><p>I'm no guru preaching his gospel to his disciples. I don't claim to have all the answers, and I still view myself more as a student, not as a teacher. So this is more about sharing notes as peers of the things that resonated with me the most.</p><p>If you're curious and want to learn more, be sure to subscribe and follow along. I hope to make it well worth your time!</p><p>You can also follow or DM me on <a target="_blank" href="https://x.com/ricardoplopes">X (formerly Twitter)</a> or <a target="_blank" href="https://www.linkedin.com/in/ricardopintolopes">LinkedIn</a>.</p>
+</description>
+<link>https://ricardolopes.net/blog/about</link>
+<guid isPermaLink="true">https://ricardolopes.net/blog/about</guid>
+<dc:creator>Ricardo Lopes</dc:creator>
+<pubDate>Fri, 19 Jan 2024 00:39:14 GMT</pubDate>
+<cover_image>
+https://ricardolopes.net/blog/about/cover.jpg
+</cover_image>
+</item>
+</channel>
+</rss>
