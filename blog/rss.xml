@@ -8,7 +8,379 @@
     <item>
       <title>Resist Exploding Complexity</title>
       <description>
-        <p>Building web applications seems to be getting more and more complex. Abstractions upon abstractions, and fixes for problems caused by fixes for other problems. But does it have to be this way?</p><p>There's a place for complex frameworks and architectures, sure. But for many projects, they may be an overkill.</p><p>Let's think through first principles and explore what the web platforms offer by default to see how far we can go before starting to explode complexity. This is a thought exercise to challenge assumptions, not a prescription to blindly follow.</p><p>If we browse the <a target="_blank" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">Node.js documentation</a>, we can get a simple working web server:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node:http'</span>);<span class="hljs-keyword">const</span> hostname = <span class="hljs-string">'127.0.0.1'</span>;<span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">'Content-Type'</span>, <span class="hljs-string">'text/plain'</span>); res.end(<span class="hljs-string">'Hello World\n'</span>);});server.listen(port, hostname, <span class="hljs-function">() =&gt;</span> { <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server running at http://<span class="hljs-subst">${hostname}</span>:<span class="hljs-subst">${port}</span>/`</span>);});</code></pre><p>We can test to see if it works:</p><pre><code class="lang-plaintext">$ node server.jsServer running at http://127.0.0.1:3000/</code></pre><pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000Hello World</code></pre><p>We can adapt the server to use routes for specific endpoints. For instance, it can reply to requests to <code>/</code>, and return 404 otherwise:</p><pre><code class="lang-javascript"><span class="hljs-comment">// GET /</span><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>); res.end(<span class="hljs-string">"Hello World\n"</span>);};<span class="hljs-keyword">const</span> throwNotFound = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">404</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>); res.end(<span class="hljs-string">"Not Found\n"</span>);};<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) { getIndex(req, res); } <span class="hljs-keyword">else</span> { throwNotFound(req, res); }});</code></pre><pre><code class="lang-plaintext">$ curl -i http://127.0.0.1:3000HTTP/1.1 200 OKContent-Type: text/plain...Hello World$ curl -i http://127.0.0.1:3000/helloHTTP/1.1 404 Not FoundContent-Type: text/plain...Not Found</code></pre><p>Great! We can also return HTML, to serve web pages to the browser:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>); res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Hello World&lt;/h1&gt; &lt;/body&gt;&lt;/html&gt;`</span>);};</code></pre><pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;Hello World&lt;/h1&gt; &lt;/body&gt;&lt;/html&gt;</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1706315521091/96f261b8-6397-4abc-a885-cd3dbf6d4c41.png" alt class="image--center mx-auto" /></p><p>We can also send dynamic data:</p><pre><code class="lang-javascript"><span class="hljs-comment">// Dynamic list of to-do items (non-persisted)</span><span class="hljs-keyword">const</span> todos = [<span class="hljs-string">'accept user input'</span>];<span class="hljs-comment">// GET /</span><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>); res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;To-Do:&lt;/h1&gt; &lt;ul&gt;<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">` &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span> &lt;/ul&gt; &lt;/body&gt;&lt;/html&gt;\n`</span>);};</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1706315847832/656b2b9c-3616-41e9-8355-e4d6edddd55c.png" alt class="image--center mx-auto" /></p><p>And we can add a new endpoint to create new entries for that dynamic data, once again just following the <a target="_blank" href="https://nodejs.org/en/guides/anatomy-of-an-http-transaction/#request-body">official documentation</a>:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> querystring = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node:querystring"</span>);<span class="hljs-comment">// POST /todos</span><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { <span class="hljs-keyword">let</span> body = []; req .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> { body.push(chunk); }) .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> { body = Buffer.concat(body).toString(); <span class="hljs-keyword">const</span> parsedBody = querystring.parse(body); <span class="hljs-keyword">if</span> (parsedBody.todo) { todos.push(parsedBody.todo); } res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">Location</span>: <span class="hljs-string">"/"</span> }).end(); });};<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) { getIndex(req, res); } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"POST"</span> &amp;&amp; req.url === <span class="hljs-string">"/todos"</span>) { postTodo(req, res); } <span class="hljs-keyword">else</span> { throwNotFound(req, res); }});</code></pre><pre><code class="lang-plaintext">$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;To-Do:&lt;/h1&gt; &lt;ul&gt; &lt;li&gt;accept user input&lt;/li&gt; &lt;li&gt;test new endpoint&lt;/li&gt; &lt;/ul&gt; &lt;/body&gt;&lt;/html&gt;</code></pre><p>After that, we can add a form to allow adding new entries through the browser:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>); res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;To-Do:&lt;/h1&gt; &lt;form method="POST" action="/todos"&gt; &lt;input type="text" name="todo" /&gt; &lt;button type="submit"&gt;Add&lt;/button&gt; &lt;/form&gt; &lt;ul&gt;<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">` &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span> &lt;/ul&gt; &lt;/body&gt;&lt;/html&gt;\n`</span>);};</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1706320056558/de28ca68-02fa-42f1-9fb8-3552bcd584b4.png" alt class="image--center mx-auto" /></p><p>This may be all good, but it's still only server-side interaction. We want some JavaScript to make client-side interactions that make this feel more like an SPA, without page refreshes. Let's add some progressive enhancement.</p><p>The first step is to update the <code>POST /todos</code> endpoint to accept JSON requests from client-side JavaScript, in addition to the HTML form it already supported:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { <span class="hljs-keyword">let</span> body = []; req .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> { body.push(chunk); }) .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> { body = Buffer.concat(body).toString(); <span class="hljs-keyword">const</span> isJson = req.headers[<span class="hljs-string">"content-type"</span>] === <span class="hljs-string">"application/json"</span>; <span class="hljs-keyword">const</span> parsedBody = isJson ? <span class="hljs-built_in">JSON</span>.parse(body) : querystring.parse(body); <span class="hljs-keyword">if</span> (parsedBody.todo) { todos.push(parsedBody.todo); } <span class="hljs-keyword">if</span> (isJson) { <span class="hljs-comment">// Return 201 with HTML list if requested from client-side JS</span> res.statusCode = <span class="hljs-number">201</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>); res.end(todos.map(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> <span class="hljs-string">` &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;\n`</span>).join(<span class="hljs-string">""</span>)); } <span class="hljs-keyword">else</span> { <span class="hljs-comment">// Return 301 with redirect to GET / if requested from HTML form</span> res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">location</span>: <span class="hljs-string">"/"</span> }).end(); } });};</code></pre><p>Notice that the endpoint is returning HTML instead of a JSON object. Both are fine, but HTML responses at least minimise the work required on the client.</p><p>With this new support, we can finally add some client-side JavaScript to intercept the form request and use <code>fetch()</code> instead, so that we can add a new entry and update the list with no page refresh:</p><pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> { res.statusCode = <span class="hljs-number">200</span>; res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>); res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt; &lt;head&gt; &lt;meta charset="UTF-8" /&gt; &lt;title&gt;My Simple Web Application&lt;/title&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt; &lt;/head&gt; &lt;body&gt; &lt;h1&gt;To-Do:&lt;/h1&gt; &lt;form id="add-todo" method="POST" action="/todos" onsubmit="return postTodo();"&gt; &lt;input type="text" name="todo" /&gt; &lt;button type="submit"&gt;Add&lt;/button&gt; &lt;/form&gt; &lt;ul id="todos"&gt;<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">` &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span> &lt;/ul&gt; &lt;script&gt; function postTodo() { const todo = document.getElementById("add-todo").todo; const ul = document.getElementById("todos"); fetch("/todos", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ todo: todo.value }) }) .then(response =&gt; response.text()) .then(html =&gt; { ul.innerHTML = html; todo.value = ""; }); return false; } &lt;/script&gt; &lt;/body&gt;&lt;/html&gt;\n`</span>);};</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1706743859614/2883585a-30f0-426d-8da3-6fc8a2e45796.png" alt class="image--center mx-auto" /></p><p>It works! It's now sending an <code>application/json</code> request that receives a 201 instead of an <code>application/x-www-form-urlencoded</code> with a 301 back to the main page.</p><p>We could go on. Next, we'd add editing, deleting, persistence, styling, and so on. We could also do some much-needed refactoring, such as extracting request body parsing and building HTML responses. Or moving the client-side JavaScript into its own file that is requested by the HTML page, to avoid that ugly JavaScript inside a template string. But this post is getting long, and hopefully I've already made my point by now.</p><p>The full web application so far is a single JavaScript file with 97 lines, including blank lines, comments and some duplicated code that could probably be simplified. And that's enough to power a web application (frontend and backend) with server-side and progressively enhanced client-side data handling. No React, NextJS or even a build step required. No <code>package.json</code> file needed to install 184726 dependencies full of security and deprecation warnings. No fear that in 6 months this will no longer run because of breaking changes and incompatibilities.</p><p>Am I recommending you to follow this exact approach on your next project? Absolutely not! My point isn't that this is the Right Way and anything else is the Wrong Way. My point is that we can resist the exploding complexity of code and abstractions if we don't need them. There's a place for complex frameworks and architectures, but we don't need to expose ourselves to that complexity elsewhere. Or at least we don't need to start from that point.</p><p>Let's celebrate the powerful primitives our platforms already provide us, and climb the exploding complexity ladder only when those primitives are no longer sufficient.</p>
+            <p>
+              Building web applications seems to be getting more and more
+              complex. Abstractions upon abstractions, and fixes for problems
+              caused by fixes for other problems. But does it have to be this
+              way?
+            </p>
+            <p>
+              There's a place for complex frameworks and architectures, sure.
+              But for many projects, they may be an overkill.
+            </p>
+            <p>
+              Let's think through first principles and explore what the web
+              platforms offer by default to see how far we can go before
+              starting to explode complexity. This is a thought exercise to
+              challenge assumptions, not a prescription to blindly follow.
+            </p>
+            <p>
+              If we browse the
+              <a
+                target="_blank"
+                href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"
+                >Node.js documentation</a
+              >, we can get a simple working web server:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node:http'</span>);
+
+<span class="hljs-keyword">const</span> hostname = <span class="hljs-string">'127.0.0.1'</span>;
+<span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;
+
+<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">'Content-Type'</span>, <span class="hljs-string">'text/plain'</span>);
+  res.end(<span class="hljs-string">'Hello World\n'</span>);
+});
+
+server.listen(port, hostname, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server running at http://<span class="hljs-subst">${hostname}</span>:<span class="hljs-subst">${port}</span>/`</span>);
+});
+</code></pre>
+            <p>We can test to see if it works:</p>
+            <pre><code class="lang-plaintext">$ node server.js
+Server running at http://127.0.0.1:3000/
+</code></pre>
+            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
+Hello World
+</code></pre>
+            <p>
+              We can adapt the server to use routes for specific endpoints. For
+              instance, it can reply to requests to <code>/</code>, and return
+              404 otherwise:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-comment">// GET /</span>
+<span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>);
+  res.end(<span class="hljs-string">"Hello World\n"</span>);
+};
+
+<span class="hljs-keyword">const</span> throwNotFound = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">404</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>);
+  res.end(<span class="hljs-string">"Not Found\n"</span>);
+};
+
+<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) {
+    getIndex(req, res);
+  } <span class="hljs-keyword">else</span> {
+    throwNotFound(req, res);
+  }
+});
+</code></pre>
+            <pre><code class="lang-plaintext">$ curl -i http://127.0.0.1:3000
+HTTP/1.1 200 OK
+Content-Type: text/plain
+...
+
+Hello World
+
+$ curl -i http://127.0.0.1:3000/hello
+HTTP/1.1 404 Not Found
+Content-Type: text/plain
+...
+
+Not Found
+</code></pre>
+            <p>
+              Great! We can also return HTML, to serve web pages to the browser:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;`</span>);
+};
+</code></pre>
+            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>
+              <img
+                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen1.png"
+              />
+            </p>
+            <p>We can also send dynamic data:</p>
+            <pre><code class="lang-javascript"><span class="hljs-comment">// Dynamic list of to-do items (non-persisted)</span>
+<span class="hljs-keyword">const</span> todos = [<span class="hljs-string">'accept user input'</span>];
+
+<span class="hljs-comment">// GET /</span>
+<span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;To-Do:&lt;/h1&gt;
+    &lt;ul&gt;
+<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;\n`</span>);
+};
+</code></pre>
+            <p>
+              <img
+                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen2.png"
+              />
+            </p>
+            <p>
+              And we can add a new endpoint to create new entries for that
+              dynamic data, once again just following the
+              <a
+                target="_blank"
+                href="https://nodejs.org/en/guides/anatomy-of-an-http-transaction/#request-body"
+                >official documentation</a
+              >:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> querystring = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node:querystring"</span>);
+
+<span class="hljs-comment">// POST /todos</span>
+<span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> body = [];
+  req
+    .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+      body.push(chunk);
+    })
+    .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> {
+      body = Buffer.concat(body).toString();
+      <span class="hljs-keyword">const</span> parsedBody = querystring.parse(body);
+      <span class="hljs-keyword">if</span> (parsedBody.todo) {
+        todos.push(parsedBody.todo);
+      }
+      res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">Location</span>: <span class="hljs-string">"/"</span> }).end();
+    });
+};
+
+<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) {
+    getIndex(req, res);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"POST"</span> &amp;&amp; req.url === <span class="hljs-string">"/todos"</span>) {
+    postTodo(req, res);
+  } <span class="hljs-keyword">else</span> {
+    throwNotFound(req, res);
+  }
+});
+</code></pre>
+            <pre><code class="lang-plaintext">$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;To-Do:&lt;/h1&gt;
+    &lt;ul&gt;
+      &lt;li&gt;accept user input&lt;/li&gt;
+      &lt;li&gt;test new endpoint&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            <p>
+              After that, we can add a form to allow adding new entries through
+              the browser:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;To-Do:&lt;/h1&gt;
+    &lt;form method="POST" action="/todos"&gt;
+      &lt;input type="text" name="todo" /&gt;
+      &lt;button type="submit"&gt;Add&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;ul&gt;
+<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
+    &lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;\n`</span>);
+};
+</code></pre>
+            <p>
+              <img
+                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen3.png"
+              />
+            </p>
+            <p>
+              This may be all good, but it's still only server-side interaction.
+              We want some JavaScript to make client-side interactions that make
+              this feel more like an SPA, without page refreshes. Let's add some
+              progressive enhancement.
+            </p>
+            <p>
+              The first step is to update the <code>POST /todos</code> endpoint
+              to accept JSON requests from client-side JavaScript, in addition
+              to the HTML form it already supported:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> body = [];
+  req
+    .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+      body.push(chunk);
+    })
+    .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> {
+      body = Buffer.concat(body).toString();
+      <span class="hljs-keyword">const</span> isJson = req.headers[<span class="hljs-string">"content-type"</span>] === <span class="hljs-string">"application/json"</span>;
+      <span class="hljs-keyword">const</span> parsedBody = isJson ? <span class="hljs-built_in">JSON</span>.parse(body) : querystring.parse(body);
+      <span class="hljs-keyword">if</span> (parsedBody.todo) {
+        todos.push(parsedBody.todo);
+      }
+      <span class="hljs-keyword">if</span> (isJson) {
+        <span class="hljs-comment">// Return 201 with HTML list if requested from client-side JS</span>
+        res.statusCode = <span class="hljs-number">201</span>;
+        res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+        res.end(todos.map(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;\n`</span>).join(<span class="hljs-string">""</span>));
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// Return 301 with redirect to GET / if requested from HTML form</span>
+        res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">location</span>: <span class="hljs-string">"/"</span> }).end();
+      }
+    });
+};
+</code></pre>
+            <p>
+              Notice that the endpoint is returning HTML instead of a JSON
+              object. Both are fine, but HTML responses at least minimise the
+              work required on the client.
+            </p>
+            <p>
+              With this new support, we can finally add some client-side
+              JavaScript to intercept the form request and use
+              <code>fetch()</code> instead, so that we can add a new entry and
+              update the list with no page refresh:
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.statusCode = <span class="hljs-number">200</span>;
+  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
+  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;My Simple Web Application&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;To-Do:&lt;/h1&gt;
+    &lt;form id="add-todo" method="POST" action="/todos" onsubmit="return postTodo();"&gt;
+      &lt;input type="text" name="todo" /&gt;
+      &lt;button type="submit"&gt;Add&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;ul id="todos"&gt;
+<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
+    &lt;/ul&gt;
+    &lt;script&gt;
+      function postTodo() {
+        const todo = document.getElementById("add-todo").todo;
+        const ul = document.getElementById("todos");
+
+        fetch("/todos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ todo: todo.value })
+        })
+        .then(response =&gt; response.text())
+        .then(html =&gt; {
+          ul.innerHTML = html;
+          todo.value = "";
+        });
+
+        return false;
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;\n`</span>);
+};
+</code></pre>
+            <p>
+              <img
+                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen4.png"
+              />
+            </p>
+            <p>
+              It works! It's now sending an
+              <code>application/json</code> request that receives a 201 instead
+              of an <code>application/x-www-form-urlencoded</code> with a 301
+              back to the main page.
+            </p>
+            <p>
+              We could go on. Next, we'd add editing, deleting, persistence,
+              styling, and so on. We could also do some much-needed refactoring,
+              such as extracting request body parsing and building HTML
+              responses. Or moving the client-side JavaScript into its own file
+              that is requested by the HTML page, to avoid that ugly JavaScript
+              inside a template string. But this post is getting long, and
+              hopefully I've already made my point by now.
+            </p>
+            <p>
+              The full web application so far is a single JavaScript file with
+              97 lines, including blank lines, comments and some duplicated code
+              that could probably be simplified. And that's enough to power a
+              web application (frontend and backend) with server-side and
+              progressively enhanced client-side data handling. No React, NextJS
+              or even a build step required. No <code>package.json</code> file
+              needed to install 184726 dependencies full of security and
+              deprecation warnings. No fear that in 6 months this will no longer
+              run because of breaking changes and incompatibilities.
+            </p>
+            <p>
+              Am I recommending you to follow this exact approach on your next
+              project? Absolutely not! My point isn't that this is the Right Way
+              and anything else is the Wrong Way. My point is that we can resist
+              the exploding complexity of code and abstractions if we don't need
+              them. There's a place for complex frameworks and architectures,
+              but we don't need to expose ourselves to that complexity
+              elsewhere. Or at least we don't need to start from that point.
+            </p>
+            <p>
+              Let's celebrate the powerful primitives our platforms already
+              provide us, and climb the exploding complexity ladder only when
+              those primitives are no longer sufficient.
+            </p>
       </description>
       <link>https://ricardolopes.net/blog/resist-exploding-complexity/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/resist-exploding-complexity/</guid>

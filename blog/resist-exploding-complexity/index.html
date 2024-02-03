@@ -90,8 +90,7 @@
                 >Node.js documentation</a
               >, we can get a simple working web server:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node:http'</span>);
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node:http'</span>);
 
 <span class="hljs-keyword">const</span> hostname = <span class="hljs-string">'127.0.0.1'</span>;
 <span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;
@@ -106,25 +105,19 @@ server.listen(port, hostname, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server running at http://<span class="hljs-subst">${hostname}</span>:<span class="hljs-subst">${port}</span>/`</span>);
 });
 </code></pre>
-            </div>
             <p>We can test to see if it works:</p>
-            <div style="position: relative">
-              <pre><code class="lang-plaintext">$ node server.js
+            <pre><code class="lang-plaintext">$ node server.js
 Server running at http://127.0.0.1:3000/
 </code></pre>
-            </div>
-            <div style="position: relative">
-              <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
+            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
 Hello World
 </code></pre>
-            </div>
             <p>
               We can adapt the server to use routes for specific endpoints. For
               instance, it can reply to requests to <code>/</code>, and return
               404 otherwise:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-comment">// GET /</span>
+            <pre><code class="lang-javascript"><span class="hljs-comment">// GET /</span>
 <span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
   res.statusCode = <span class="hljs-number">200</span>;
   res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>);
@@ -145,9 +138,7 @@ Hello World
   }
 });
 </code></pre>
-            </div>
-            <div style="position: relative">
-              <pre><code class="lang-plaintext">$ curl -i http://127.0.0.1:3000
+            <pre><code class="lang-plaintext">$ curl -i http://127.0.0.1:3000
 HTTP/1.1 200 OK
 Content-Type: text/plain
 ...
@@ -161,12 +152,10 @@ Content-Type: text/plain
 
 Not Found
 </code></pre>
-            </div>
             <p>
               Great! We can also return HTML, to serve web pages to the browser:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
   res.statusCode = <span class="hljs-number">200</span>;
   res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
   res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
@@ -182,9 +171,7 @@ Not Found
 &lt;/html&gt;`</span>);
 };
 </code></pre>
-            </div>
-            <div style="position: relative">
-              <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
+            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;
@@ -197,15 +184,13 @@ Not Found
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-            </div>
             <p>
               <img
                 src="https://ricardolopes.net/blog/resist-exploding-complexity/screen1.png"
               />
             </p>
             <p>We can also send dynamic data:</p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-comment">// Dynamic list of to-do items (non-persisted)</span>
+            <pre><code class="lang-javascript"><span class="hljs-comment">// Dynamic list of to-do items (non-persisted)</span>
 <span class="hljs-keyword">const</span> todos = [<span class="hljs-string">'accept user input'</span>];
 
 <span class="hljs-comment">// GET /</span>
@@ -228,7 +213,6 @@ Not Found
 &lt;/html&gt;\n`</span>);
 };
 </code></pre>
-            </div>
             <p>
               <img
                 src="https://ricardolopes.net/blog/resist-exploding-complexity/screen2.png"
@@ -243,8 +227,7 @@ Not Found
                 >official documentation</a
               >:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> querystring = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node:querystring"</span>);
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> querystring = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node:querystring"</span>);
 
 <span class="hljs-comment">// POST /todos</span>
 <span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
@@ -273,9 +256,7 @@ Not Found
   }
 });
 </code></pre>
-            </div>
-            <div style="position: relative">
-              <pre><code class="lang-plaintext">$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"
+            <pre><code class="lang-plaintext">$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;
@@ -292,13 +273,11 @@ Not Found
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-            </div>
             <p>
               After that, we can add a form to allow adding new entries through
               the browser:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
   res.statusCode = <span class="hljs-number">200</span>;
   res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
   res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
@@ -321,7 +300,6 @@ Not Found
 &lt;/html&gt;\n`</span>);
 };
 </code></pre>
-            </div>
             <p>
               <img
                 src="https://ricardolopes.net/blog/resist-exploding-complexity/screen3.png"
@@ -338,8 +316,7 @@ Not Found
               to accept JSON requests from client-side JavaScript, in addition
               to the HTML form it already supported:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
   <span class="hljs-keyword">let</span> body = [];
   req
     .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
@@ -364,7 +341,6 @@ Not Found
     });
 };
 </code></pre>
-            </div>
             <p>
               Notice that the endpoint is returning HTML instead of a JSON
               object. Both are fine, but HTML responses at least minimise the
@@ -376,8 +352,7 @@ Not Found
               <code>fetch()</code> instead, so that we can add a new entry and
               update the list with no page refresh:
             </p>
-            <div style="position: relative">
-              <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
   res.statusCode = <span class="hljs-number">200</span>;
   res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
   res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
@@ -419,7 +394,6 @@ Not Found
 &lt;/html&gt;\n`</span>);
 };
 </code></pre>
-            </div>
             <p>
               <img
                 src="https://ricardolopes.net/blog/resist-exploding-complexity/screen4.png"
