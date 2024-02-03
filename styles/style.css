@@ -110,7 +110,8 @@ ul.post-meta {
   }
 }
 
-    display: inline;
-    margin-right: 1rem;
-  }
+pre {
+  padding: 1.1em;
+  font-size: 0.9em;
+  overflow: auto;
 }
