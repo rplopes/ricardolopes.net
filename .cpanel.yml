@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/example/public_html/
+    - export DEPLOYPATH=/home/ricardol/public_html/
     # Home page
     - /bin/cp index.html $DEPLOYPATH
     # Blog
