@@ -115,3 +115,15 @@ pre {
   font-size: 0.9em;
   overflow: auto;
 }
+
+#article-footer {
+  padding: 0.5em 1.2em;
+  font-size: 0.9em;
+  color: #222222;
+  background-color: #dddddd;
+
+  @media (prefers-color-scheme: dark) {
+    color: #dddddd;
+    background: #222222;
+  }
+}
