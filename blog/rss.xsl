@@ -77,6 +77,18 @@
             margin-right: 1rem;
           }
         }
+
+        #instructions {
+          padding: 0.5em 1.2em;
+          font-size: 0.9em;
+          color: #222222;
+          background-color: #dddddd;
+
+          @media (prefers-color-scheme: dark) {
+            color: #dddddd;
+            background: #222222;
+          }
+        }
       </style>
       </head>
       <body>
@@ -111,6 +123,18 @@
                 </xsl:attribute>
                 Visit Blog
               </a>
+            </section>
+            <section>
+              <div id="instructions">
+                <p>
+                  Subscribe with <a target="_blank" href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fricardolopes.net%2Fblog%2Frss.xml">Feedly</a>,
+                  <a target="_blank" href="https://www.inoreader.com/search/feeds/https%3A%2F%2Fricardolopes.net%2Fblog%2Frss.xml">Inoreader</a>,
+                  or with any other RSS reader by adding this feed's URL.
+                </p>
+                <p>
+                  If you prefer to subscribe by email, you can use this feed's URL on a service like <a target="_blank" href="https://feedrabbit.com/subscriptions/new?url=https%3A%2F%2Fricardolopes.net%2Fblog%2Frss.xml">Feedrabbit</a>.
+                </p>
+              </div>
             </section>
             <section>
               <h2>All Posts:</h2>
