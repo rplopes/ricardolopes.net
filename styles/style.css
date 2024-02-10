@@ -24,13 +24,18 @@ h6 {
 }
 
 h1 {
-  font-size: 3rem;
-  line-height: 3rem;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
 }
 
 h2 {
   font-size: 2rem;
   line-height: 2rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
 }
 
 a {
@@ -116,14 +121,35 @@ pre {
   overflow: auto;
 }
 
+blockquote {
+  font-style: italic;
+  margin: 0;
+  border-left: 0.1rem solid #e00000;
+}
+
+blockquote,
 #article-footer {
-  padding: 0.5em 1.2em;
-  font-size: 0.9em;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
   color: #222222;
   background-color: #dddddd;
 
   @media (prefers-color-scheme: dark) {
     color: #dddddd;
     background: #222222;
+  }
+}
+
+.posts-list {
+  h3 {
+    margin: 0.5rem 0;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  p {
+    margin: 0.3rem 0 2.5rem 0;
   }
 }
