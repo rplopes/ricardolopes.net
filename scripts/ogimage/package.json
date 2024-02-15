@@ -1,0 +1,15 @@
+{
+  "name": "ogimage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ricardo Lopes",
+  "license": "ISC",
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.0",
+    "satori": "^0.10.13"
+  }
+}
