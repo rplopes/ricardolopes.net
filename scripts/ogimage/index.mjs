@@ -19,8 +19,8 @@ import satori from "satori";
             type: "img",
             props: {
               src: pfp.buffer,
-              width: 70,
-              height: 70,
+              width: 80,
+              height: 80,
             },
           },
           {
@@ -29,7 +29,7 @@ import satori from "satori";
               children: "Ricardo Lopes",
               style: {
                 fontFamily: "Palatino",
-                fontSize: "2.5em",
+                fontSize: "3.5em",
                 color: "#e00000",
               },
             },
@@ -52,7 +52,7 @@ import satori from "satori";
               children: `${estimate} min read`,
               style: {
                 fontFamily: "Lucida Grande",
-                fontSize: "1.5em",
+                fontSize: "2em",
               },
             },
           },
@@ -73,7 +73,7 @@ import satori from "satori";
     },
     {
       width: 1200,
-      height: 630,
+      height: 631,
       fonts: [
         { name: "Lucida Grande", data: lucidaGrande },
         { name: "Palatino", data: palatino },
