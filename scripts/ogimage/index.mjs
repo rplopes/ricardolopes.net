@@ -3,8 +3,8 @@ import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 
 (async () => {
-  const title = "I Changed My Mind About Remote Communication";
-  const estimate = 5;
+  const title = process.env.TITLE;
+  const estimate = process.env.ESTIMATE;
   const [lucidaGrande, palatino, pfp] = await Promise.all([
     fs.readFile("./fonts/Lucida Grande.ttf"),
     fs.readFile("./fonts/Palatino Bold.ttf"),
