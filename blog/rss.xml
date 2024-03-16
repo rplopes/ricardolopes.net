@@ -8,6 +8,197 @@
     <atom:link href="https://ricardolopes.net/blog/rss.xml" rel="self" type="application/rss+xml"/>
     <language>en</language>
     <item>
+      <title>Document Your Code Through Version Control</title>
+      <description>
+            <p>
+              A significant challenge with code maintainability is understanding
+              why the code is the way it is. This includes understanding the
+              trade-offs that were considered, why certain convoluted parts of
+              the codebase can't be simplified, and so on. That's what we use
+              documentation for.
+            </p>
+            <h2 id="heading-using-code-comments">Using code comments</h2>
+            <p>
+              The common approach to documenting all those code decisions is to
+              introduce code comments.
+            </p>
+            <pre><code class="lang-javascript"><span class="hljs-comment">// </span>
+<span class="hljs-comment">// Dear maintainer:</span>
+<span class="hljs-comment">// </span>
+<span class="hljs-comment">// Once you are done trying to 'optimize' this routine,</span>
+<span class="hljs-comment">// and have realized what a terrible mistake that was,</span>
+<span class="hljs-comment">// please increment the following counter as a warning</span>
+<span class="hljs-comment">// to the next guy:</span>
+<span class="hljs-comment">// </span>
+<span class="hljs-comment">// total_hours_wasted_here = 42</span>
+<span class="hljs-comment">//</span>
+</code></pre>
+            <p>
+              Source:
+              <a
+                target="_blank"
+                href="https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129"
+                >https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129</a
+              >
+            </p>
+            <p>
+              However, code comments can quickly become outdated, are often
+              missing when we need them the most, and are perpetually taking up
+              space next to our code.
+            </p>
+            <h2 id="heading-using-git">Using git</h2>
+            <p>
+              Alternatively, we can use our project's own version control system
+              to better document it! Here's how it works:
+            </p>
+            <ol>
+              <li>
+                <p>
+                  Every line of code in your repo was introduced at some point
+                  in a commit, which you can find with <code>git blame</code>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Every commit should be atomic, i.e. introducing a single
+                  (complete) change, and nothing more
+                </p>
+              </li>
+              <li>
+                <p>
+                  Each commit should have a descriptive commit message
+                  explaining its unique change, which should include any
+                  relevant context like trade-offs and explanations
+                </p>
+              </li>
+              <li>
+                <p>
+                  This means now every line of code is documented with helpful
+                  and relevant commit messages, along with historical context
+                  (git history from that commit)
+                </p>
+              </li>
+            </ol>
+            <p>
+              I was first introduced to this alternative approach to code
+              documentation by an exceptional mentor and former CTO
+              <a
+                target="_blank"
+                href="https://blog.mocoso.co.uk/talks/2015/01/12/telling-stories-through-your-commits/"
+                >Joel Chippindale</a
+              >. It was a revelation at the time. Now, every line had helpful,
+              up-to-date documentation that you could summon when needed, at the
+              cost of being a bit more thoughtful with your git history.
+            </p>
+            <p>
+              <img
+                loading="lazy"
+                src="./screenshot.png"
+                alt="Example of how descriptive commit messages help documenting code"
+              />
+            </p>
+            <p>
+              Source:
+              <a
+                target="_blank"
+                href="https://mislav.net/2014/02/hidden-documentation/"
+                >https://mislav.net/2014/02/hidden-documentation/</a
+              >
+            </p>
+            <p>
+              I found long, descriptive commit messages incredibly useful for
+              working with large projects. It was disappointing to later find
+              out that other companies weren't following this. I was so used to
+              <code>git blame</code>, <code>git bisect</code> and travelling
+              through git time for debugging that it felt like losing a
+              superpower.
+            </p>
+            <h2 id="heading-using-github">Using GitHub</h2>
+            <p>
+              However, now that the
+              <a
+                target="_blank"
+                href="https://docs.github.com/en/get-started/quickstart/github-flow"
+                >GitHub flow</a
+              >
+              is basically an industry standard, we can all replicate this
+              system!
+            </p>
+            <p>
+              Even if your team pays little attention to commit messages or uses
+              some one-liner rule like
+              <a target="_blank" href="https://www.conventionalcommits.org/"
+                >Conventional Commits</a
+              >, they're all still linked to a specific Pull Request.
+            </p>
+            <p>
+              When you approve and merge a PR on GitHub, it adds a new merge or
+              squashed commit on <code>main</code> with those changes. That
+              commit includes the PR id in its message. This means that now
+              every line of code belongs to a commit, which belongs to a merged
+              PR.
+            </p>
+            <p>
+              Commit messages may not be getting a lot of attention, but PR
+              descriptions are (or should)! We can use
+              <a
+                target="_blank"
+                href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository"
+                >predefined PR templates</a
+              >, include links to issue trackers or other context, and even add
+              rich media like architecture diagrams, performance benchmark
+              graphics, video walkthroughs of UI changes, and so on. And we also
+              get the full code review discussion, which often adds even more
+              context on many decisions.
+            </p>
+            <p>
+              So make sure you ship small PRs with atomic changes and add plenty
+              of context on those PR descriptions! Then, enjoy your brand new
+              debugging superpower by using <code>git blame</code> to find that
+              line's commit and the corresponding PR with full context.
+            </p>
+            <p>
+              To sum up, here's the adapted process, which now uses GitHub PR
+              descriptions instead of direct git commit messages:
+            </p>
+            <ol>
+              <li>
+                <p>
+                  Every line of code in your repo was introduced at some point
+                  in a commit, which you can find with <code>git blame</code>,
+                  which in turn was introduced in a PR, which you can find using
+                  the id in the commit message
+                </p>
+              </li>
+              <li>
+                <p>
+                  Every PR should be atomic, i.e. introducing a single
+                  (complete) change, and nothing more
+                </p>
+              </li>
+              <li>
+                <p>
+                  Each PR should have a helpful PR description explaining its
+                  unique change, which should include any relevant context like
+                  trade-offs and explanations (which, unlike with plain commit
+                  messages, can also have rich media and discussions)
+                </p>
+              </li>
+              <li>
+                <p>
+                  This means now every line of code is documented with helpful
+                  and relevant PR descriptions/discussions, along with
+                  historical context (git history from that PR's merge commit)
+                </p>
+              </li>
+            </ol>
+      </description>
+      <link>https://ricardolopes.net/blog/document-your-code-through-version-control/</link>
+      <guid isPermaLink="true">https://ricardolopes.net/blog/document-your-code-through-version-control/</guid>
+      <dc:creator>Ricardo Lopes</dc:creator>
+      <pubDate>Fri, 16 Mar 2024 00:31:23 GMT</pubDate>
+    </item>
+    <item>
       <title>I Changed My Mind About Remote Communication</title>
       <description>
             <p>
