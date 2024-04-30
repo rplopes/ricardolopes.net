@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stop Trying to Fix Technical Debt | Ricardo Lopes</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS Feed"
+      href="../rss.xml"
+    />
+
+    <meta
+      name="description"
+      content="Technical debt is an almost useless term that is holding us back. Instead of fixing technical debt, we should be focused on fixing actual problems."
+    />
+    <meta name="author" content="Ricardo Lopes" />
+    <link href="../../styles/modern-normalize.min.css" rel="stylesheet" />
+    <link href="../../styles/style.css" rel="stylesheet" />
+    <link href="../../styles/monkai.css" rel="stylesheet" />
+    <link rel="icon" href="../../favicon.ico" />
+    <link
+      rel="canonical"
+      href="https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ricardoplopes" />
+    <meta name="twitter:creator" content="@ricardoplopes" />
+
+    <meta property="og:site_name" content="Ricardo Lopes" />
+    <meta property="og:title" content="Stop Trying to Fix Technical Debt" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/"
+    />
+    <meta
+      property="og:description"
+      content="Technical debt is an almost useless term that is holding us back. Instead of fixing technical debt, we should be focused on fixing actual problems."
+    />
+    <meta
+      property="og:image"
+      content="https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/og.png"
+    />
+  </head>
+  <body>
+    <header>
+      <a id="header-title" href="/">Ricardo Lopes</a>
+      <ul>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </header>
+    <div id="content">
+      <div id="main">
+        <section itemscope itemtype="http://schema.org/Article">
+          <meta itemprop="author" content="Ricardo Lopes" />
+          <link
+            itemprop="url"
+            href="https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/"
+          />
+          <h1 itemprop="headline">Stop Trying to Fix Technical Debt</h1>
+          <ul class="post-meta">
+            <li>
+              <time itemprop="datePublished" datetime="2024-04-30">
+                30 Apr 2024
+              </time>
+            </li>
+            <li>3 min read</li>
+          </ul>
+          <div itemprop="articleBody">
+            <p>
+              I'm done trying to fix technical debt. When we ask leadership to
+              budget time for fixing tech debt that is holding us back, it's no
+              longer a surprise that the answer is almost always no. Of course
+              they prefer delivering value to users over obsessing about code
+              yet again.
+            </p>
+            <p>
+              That used to get me mad when I was starting out. How come there
+              was broken code slowing us down, and all leadership cared about
+              was shipping new features! We were losing more time dealing with
+              all the preventable data issues than the time it would have
+              actually taken to fix their underlying cause. That made absolutely
+              no sense!
+            </p>
+            <p>
+              What I didn't understand at the time was that advocating for
+              technical debt to be prioritised isn't leadership's job: it's
+              ours, as the codebase specialists. Just like when we hire someone
+              to fix our water pipes or car, we're not the ones asking for
+              additional maintenance tasks: that's the specialists' job when
+              they're doing their work and noticing what can be problematic for
+              the future.
+            </p>
+            <p>
+              Imagine your car mechanic told you that he found a mechanical debt
+              issue that needed to be fixed before it could cause more damage to
+              the car. That would sound like he's scamming you and taking
+              advantage of your lack of car mechanics knowledge to get a higher
+              pay. Imagine you asked him what's the problem exactly, and if we
+              can't just deal with it later, and he'd give you another vague
+              answer, like the problem being missing maintenance, that may cause
+              maintenance-related issues in the future. How happy would you be
+              accepting that extra cost after that interaction?
+            </p>
+            <p>Don't be that guy.</p>
+            <p>
+              The problem with technical debt is that it means too many things
+              at once. Critical architecture flaw? Tech debt. Big untested mess
+              full of hard to find bugs? Tech debt. Any code that I think I
+              could have written in a more elegant form? Tech debt.
+            </p>
+            <p>
+              Technical debt is an almost useless term, and we should abandon it
+              for good.
+            </p>
+            <p>
+              Instead, we should start describing the actual issues the code
+              faces, and what they mean for the business and for the users.
+              Which happens to be precisely what leadership wants to talk about.
+            </p>
+            <p>
+              Don't say that we need to tackle technical debt related to
+              deprecated dependencies. That means nothing for the business and
+              for the users. Instead, (depending on your context) you could say
+              that if protecting our users and our operations is a top priority,
+              then we must upgrade any dependency with reported vulnerabilities
+              ASAP, otherwise any attacker can exploit it. And ideally get
+              others up-to-date as well, to minimise development time in case we
+              need to release an urgent update to fix a possible new
+              vulnerability.
+            </p>
+            <p>
+              Don't say that we have technical debt around data integrity for
+              horizontally scaling the API. Again, there's nothing in there for
+              leadership to feel the need to prioritise it above its own
+              roadmap. Instead, you can say that the API has critical blockers
+              to scaling to meet our projected user activity growth, so the
+              company will miss its growth targets unless this is prioritised
+              and fixed in time.
+            </p>
+            <p>
+              Notice how neither of those alternatives even mention the term
+              technical debt. And how both mention specific business goals and
+              the real impact on them of not prioritising the work.
+            </p>
+            <p>
+              It's not leadership's job to advocate for fixing technical debt.
+              It's yours. Leadership's job is to bring actual value to users and
+              stakeholders. And that's what a company is about. So that's the
+              lens us developers also need to use to advocate for this type of
+              work. If the tech debt work doesn't meet that bar, let's be honest
+              with ourselves: maybe there really is more important work to deal
+              with first.
+            </p>
+            <p>
+              Stop trying to fix technical debt. Start fixing actual business
+              problems, which may incidentally be technical ones.
+            </p>
+          </div>
+        </section>
+        <section id="article-footer">
+          <p>
+            Want more posts? Subscribe to my
+            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
+              >RSS feed</a
+            >.
+          </p>
+        </section>
+      </div>
+    </div>
+    <footer>
+      <p>&#169; Ricardo Lopes</p>
+    </footer>
+  </body>
+</html>
