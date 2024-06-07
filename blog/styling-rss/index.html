@@ -77,11 +77,6 @@
               anyway.
             </p>
             <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/unstyledrss.png"
-              />
-            </p>
-            <p>
               I strongly believe we can create a better web for everyone if we
               champion open standards and decentralisation over proprietary
               formats and user-hostile monopolies. I'd love to see the return of
@@ -102,6 +97,15 @@
               browser or starts a download. This is an unacceptable experience
               for new users, who will think something must be broken and will
               eventually look for other alternatives.
+            </p>
+            <p>
+              Seriously, this is what browsers today show if you click one of
+              those “Subscribe with RSS” links:
+            </p>
+            <p>
+              <img
+                src="https://ricardolopes.net/blog/styling-rss/unstyledrss.png"
+              />
             </p>
             <p>
               This wasn't always the case. During the peak of RSS, before social
@@ -132,10 +136,12 @@
               An RSS feed is simply an XML file that follows a specific schema.
               XSLT is a language for transforming XML files into other XML
               files. We can use an XSLT file to transform an RSS feed (an XML
-              file) into an HTML page (also an XML file), complete with CSS and
-              JavaScript. The browser still opens an RSS feed that you can
-              subscribe to, but now it knows how to render it as an HTML page
-              instead of raw XML.
+              file) into an HTML page (also an XML file, if you don't think too
+              much about the deviations browsers accept these days), complete
+              with CSS and JavaScript. With that transformation, the browser can
+              show a user-friendly HTML page instead of raw XML when you open
+              the RSS feed, and you can still use that feed to subscribe with
+              your favourite reader.
             </p>
             <p>
               Here's how this blog's RSS feed renders in the browser, thanks to
@@ -221,8 +227,7 @@
               After you've created your template, you only need to add these two
               lines at the top of your RSS file:
             </p>
-            <pre><code class="lang-xml">
-<span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-meta">&lt;?xml-stylesheet href="&lt;link/to/your/xslt/file.xsl&gt;" type="text/xsl"?&gt;</span>
 </code></pre>
             <p>
@@ -232,8 +237,7 @@
                 >https://ricardolopes.net/blog/rss.xml</a
               >:
             </p>
-            <pre><code class="lang-xml">
-<span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-meta">&lt;?xml-stylesheet href="https://ricardolopes.net/blog/rss.xsl" type="text/xsl"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">rss</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"2.0"</span> <span class="hljs-attr">xmlns:atom</span>=<span class="hljs-string">"http://www.w3.org/2005/Atom"</span> <span class="hljs-attr">xmlns:dc</span>=<span class="hljs-string">"http://purl.org/dc/elements/1.1/"</span>&gt;</span>
   ...
