@@ -1,14 +1,21 @@
 import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "url";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 (async () => {
   const title = process.env.TITLE;
   const estimate = process.env.ESTIMATE;
+  const outputPath = process.env.OUTPUT_PATH || "./thumbnail.png";
+
   const [lucidaGrande, palatino, pfp] = await Promise.all([
-    fs.readFile("./fonts/Lucida Grande.ttf"),
-    fs.readFile("./fonts/Palatino Bold.ttf"),
-    fs.readFile("../../pfp.png"),
+    fs.readFile(path.join(__dirname, "fonts", "Lucida Grande.ttf")),
+    fs.readFile(path.join(__dirname, "fonts", "Palatino Bold.ttf")),
+    fs.readFile(path.join(__dirname, "..", "..", "pfp.png")),
   ]);
   const svg = await satori(
     {
@@ -83,5 +90,11 @@ import satori from "satori";
   const resvg = new Resvg(svg);
   const png = resvg.render();
 
-  await fs.writeFile("./thumbnail.png", png.asPng());
+  // Ensure the directory exists
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+
+  // Write the file to the specified output path
+  await fs.writeFile(outputPath, png.asPng());
+
+  console.log(`Image generated successfully at: ${outputPath}`);
 })();
