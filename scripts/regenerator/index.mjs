@@ -38,14 +38,10 @@ async function fetchBlogPostContent(url) {
   const html = await response.text();
   const $ = cheerio.load(html);
 
-  // Use the correct selector for the post content
   const content = $('#post-content-wrapper').html();
-
   if (!content) throw new Error(`Could not find content for post: ${url}`);
 
-  // Extract the reading time
   const readingTime = $('span:contains("min read")').text().trim();
-
   if (!readingTime) throw new Error(`Could not find reading time for post: ${url}`);
 
   return { content, readingTime };
@@ -86,14 +82,7 @@ async function createBlogPost(item, template) {
   const dir = path.join(BLOG_DIR, slug);
   await fsPromises.mkdir(dir, { recursive: true });
 
-  const postData = await fetchBlogPostContent(item.link);
-
-  if (!postData) {
-    console.error(`Skipping post due to missing content: ${item.link}`);
-    return;
-  }
-
-  let { content, readingTime } = postData;
+  let { content, readingTime } = await fetchBlogPostContent(item.link);
 
   let $ = cheerio.load(content, { decodeEntities: false });
 
@@ -108,7 +97,6 @@ async function createBlogPost(item, template) {
       const localPath = `/blog/${slug}/${filename}`;
       const fullLocalPath = path.join(dir, filename);
       img.attr('src', `https://ricardolopes.net${localPath}`);
-      // Remove class attribute from image
       img.removeAttr('class');
       imagePromises.push(downloadImage(src, fullLocalPath));
     }
@@ -116,7 +104,7 @@ async function createBlogPost(item, template) {
 
   await Promise.all(imagePromises);
 
-  content = $.html();
+  content = $('body').html();
 
   const $template = cheerio.load(template, { decodeEntities: false });
 
@@ -160,22 +148,87 @@ async function createBlogPost(item, template) {
   // Update og:image
   $template('meta[property="og:image"]').attr('content', `${canonicalUrl}${ogImageFilename}`);
 
-  // Generate the final HTML without pretty formatting
-  let html = $template.html({ decodeEntities: false });
+  const html = $template.html({ decodeEntities: false });
 
   await fsPromises.writeFile(path.join(dir, 'index.html'), html, 'utf8');
+
+  return {
+    title: item.title,
+    content,
+    url: canonicalUrl,
+    pubDate: item.pubDate
+  };
+}
+
+async function generateRSSFeed(blogPosts) {
+  const parser = new xml2js.Parser();
+  const builder = new xml2js.Builder();
+
+  try {
+    // Read the existing RSS file
+    const rssContent = await fsPromises.readFile(path.join(BLOG_DIR, 'rss.xml'), 'utf-8');
+    
+    // Parse the RSS content
+    const result = await parser.parseStringPromise(rssContent);
+
+    // Update the channel's lastBuildDate
+    result.rss.channel[0].lastBuildDate = [new Date().toUTCString()];
+
+    // Clear existing items
+    result.rss.channel[0].item = [];
+
+    // Convert blog posts to RSS items and sort them
+    const items = blogPosts
+      .map(post => ({
+        title: post.title,
+        description: post.content,
+        link: post.url,
+        guid: {
+          _: post.url,
+          $: { isPermaLink: 'true' }
+        },
+        'dc:creator': 'Ricardo Lopes',
+        pubDate: new Date(post.pubDate).toUTCString()
+      }))
+      .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+    // Add sorted items to the RSS feed
+    result.rss.channel[0].item = items;
+
+    // Convert back to XML
+    let xmlString = builder.buildObject(result);
+
+    // Add the XML stylesheet processing instruction
+    xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="https://ricardolopes.net/blog/rss.xsl" type="text/xsl"?>
+${xmlString.split('\n').slice(1).join('\n')}`;
+
+    // Write the updated XML back to the file
+    await fsPromises.writeFile(path.join(BLOG_DIR, 'rss.xml'), xmlString);
+
+    console.log('RSS feed generated successfully');
+  } catch (error) {
+    console.error('Error generating RSS feed:', error);
+  }
 }
 
 async function main() {
-  const rss = await fetchRSS(RSS_URL);
-  const items = rss.rss.channel.item;
+  const hashnode_rss = await fetchRSS(RSS_URL);
+  const items = hashnode_rss.rss.channel.item;
   const template = await fsPromises.readFile(TEMPLATE_PATH, 'utf-8');
 
+  const blogPosts = [];
+
   for (const item of items) {
-    await createBlogPost(item, template);
+    const post = await createBlogPost(item, template);
+    if (post) {
+      blogPosts.push(post);
+    }
   }
 
-  console.log('Blog updated successfully!');
+  await generateRSSFeed(blogPosts);
+
+  console.log('Blog and RSS feed updated successfully!');
 }
 
 main().catch(console.error);
