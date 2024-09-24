@@ -27,7 +27,18 @@ async function fetchRSS(url) {
   return parser.parseStringPromise(xml);
 }
 
+async function imageExists(path) {
+  return fsPromises
+    .access(path)
+    .then(() => true)
+    .catch(() => false);
+}
+
 async function downloadImage(url, outputPath) {
+  if (await imageExists(outputPath)) {
+    return;
+  }
+
   const response = await fetch(url);
   if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
   await pipeline(response.body, fs.createWriteStream(outputPath));
@@ -53,25 +64,21 @@ async function generateOgImage(title, estimate, dir) {
   const ogImageFilename = `${hash}.png`;
   const ogImagePath = path.join(dir, ogImageFilename);
 
-  // Check if the image with this hash already exists
-  const imageExists = await fsPromises
-    .access(ogImagePath)
-    .then(() => true)
-    .catch(() => false);
+  if (await imageExists(ogImagePath)) {
+    return;
+  }
 
-  if (!imageExists) {
-    try {
-      await execPromise(
-        `TITLE="${title}" ESTIMATE="${estimate}" OUTPUT_PATH="${ogImagePath}" node scripts/ogimage/index.mjs`,
-        {
-          cwd: path.join(__dirname, '..', '..'),
-        }
-      );
+  try {
+    await execPromise(
+      `TITLE="${title}" ESTIMATE="${estimate}" OUTPUT_PATH="${ogImagePath}" node scripts/ogimage/index.mjs`,
+      {
+        cwd: path.join(__dirname, '..', '..'),
+      }
+    );
 
-      console.log(`Generated ${ogImageFilename} for: ${title}`);
-    } catch (error) {
-      console.error(`Error generating ${ogImageFilename} for ${title}:`, error);
-    }
+    console.log(`Generated ${ogImageFilename} for: ${title}`);
+  } catch (error) {
+    console.error(`Error generating ${ogImageFilename} for ${title}:`, error);
   }
 
   return ogImageFilename;
@@ -156,8 +163,41 @@ async function createBlogPost(item, template) {
     title: item.title,
     content,
     url: canonicalUrl,
-    pubDate: item.pubDate
+    pubDate: item.pubDate,
+    description: item.description,
+    readingTime,
   };
+}
+
+async function updateBlogIndex(blogPosts) {
+  const indexPath = path.join(BLOG_DIR, 'index.html');
+  const indexContent = await fsPromises.readFile(indexPath, 'utf-8');
+  const $ = cheerio.load(indexContent, { decodeEntities: false });
+
+  // Clear existing posts
+  $('.posts-list').empty();
+
+  // Add new posts
+  blogPosts.forEach((post) => {
+    const postDate = new Date(post.pubDate);
+    const formattedDate = postDate.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+
+    $('.posts-list').append(`
+      <h3>
+        <a href="${post.url}">${post.title}</a>
+      </h3>
+      <ul class="post-meta">
+        <li>
+          <time datetime="${postDate.toISOString().split('T')[0]}">${formattedDate}</time>
+        </li>
+        ${post.readingTime ? `<li>${post.readingTime}</li>` : ''}
+      </ul>
+      <p>${post.description || ''}</p>`);
+  });
+
+  // Write updated content back to file
+  await fsPromises.writeFile(indexPath, $.html({ decodeEntities: false }));
+  console.log('Blog index updated successfully');
 }
 
 async function generateRSSFeed(blogPosts) {
@@ -167,7 +207,7 @@ async function generateRSSFeed(blogPosts) {
   try {
     // Read the existing RSS file
     const rssContent = await fsPromises.readFile(path.join(BLOG_DIR, 'rss.xml'), 'utf-8');
-    
+
     // Parse the RSS content
     const result = await parser.parseStringPromise(rssContent);
 
@@ -178,19 +218,17 @@ async function generateRSSFeed(blogPosts) {
     result.rss.channel[0].item = [];
 
     // Convert blog posts to RSS items and sort them
-    const items = blogPosts
-      .map(post => ({
-        title: post.title,
-        description: post.content,
-        link: post.url,
-        guid: {
-          _: post.url,
-          $: { isPermaLink: 'true' }
-        },
-        'dc:creator': 'Ricardo Lopes',
-        pubDate: new Date(post.pubDate).toUTCString()
-      }))
-      .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    const items = blogPosts.map((post) => ({
+      title: post.title,
+      description: post.content,
+      link: post.url,
+      guid: {
+        _: post.url,
+        $: { isPermaLink: 'true' },
+      },
+      'dc:creator': 'Ricardo Lopes',
+      pubDate: new Date(post.pubDate).toUTCString(),
+    }));
 
     // Add sorted items to the RSS feed
     result.rss.channel[0].item = items;
@@ -217,18 +255,18 @@ async function main() {
   const items = hashnode_rss.rss.channel.item;
   const template = await fsPromises.readFile(TEMPLATE_PATH, 'utf-8');
 
-  const blogPosts = [];
+  const blogPosts = await Promise.all(items.map((item) => createBlogPost(item, template)));
 
-  for (const item of items) {
-    const post = await createBlogPost(item, template);
-    if (post) {
-      blogPosts.push(post);
-    }
-  }
+  // Sort blog posts by publication date (newest first)
+  blogPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
+  // Generate RSS feed
   await generateRSSFeed(blogPosts);
 
-  console.log('Blog and RSS feed updated successfully!');
+  // Update blog index
+  await updateBlogIndex(blogPosts);
+
+  console.log('Blog, RSS feed, and index updated successfully!');
 }
 
 main().catch(console.error);
