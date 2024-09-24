@@ -1,49 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
     <title>Against Overly Defensive Coding | Ricardo Lopes</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href="../rss.xml"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="../rss.xml">
 
-    <meta
-      name="description"
-      content="Defensive coding is important to prevent bugs, but there's such a thing as being too defensive."
-    />
-    <meta name="author" content="Ricardo Lopes" />
-    <link href="../../styles/modern-normalize.min.css" rel="stylesheet" />
-    <link href="../../styles/style.css" rel="stylesheet" />
-    <link href="../../styles/monkai.css" rel="stylesheet" />
-    <link rel="icon" href="../../favicon.ico" />
-    <link
-      rel="canonical"
-      href="https://ricardolopes.net/blog/overly-defensive-coding/"
-    />
+    <meta name="description" content="Defensive coding is important to prevent bugs, but there's such a thing as being too defensive">
+    <meta name="author" content="Ricardo Lopes">
+    <link href="../../styles/modern-normalize.min.css" rel="stylesheet">
+    <link href="../../styles/style.css" rel="stylesheet">
+    <link href="../../styles/monkai.css" rel="stylesheet">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://ricardolopes.net/blog/overly-defensive-coding/">
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ricardoplopes" />
-    <meta name="twitter:creator" content="@ricardoplopes" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ricardoplopes">
+    <meta name="twitter:creator" content="@ricardoplopes">
 
-    <meta property="og:site_name" content="Ricardo Lopes" />
-    <meta property="og:title" content="Against Overly Defensive Coding" />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://ricardolopes.net/blog/overly-defensive-coding/"
-    />
-    <meta
-      property="og:description"
-      content="Defensive coding is important to prevent bugs, but there's such a thing as being too defensive."
-    />
-    <meta
-      property="og:image"
-      content="https://ricardolopes.net/blog/overly-defensive-coding/og.png"
-    />
+    <meta property="og:site_name" content="Ricardo Lopes">
+    <meta property="og:title" content="Against Overly Defensive Coding">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ricardolopes.net/blog/overly-defensive-coding/">
+    <meta property="og:description" content="Defensive coding is important to prevent bugs, but there's such a thing as being too defensive">
+    <meta property="og:image" content="https://ricardolopes.net/blog/overly-defensive-coding/undefined">
   </head>
   <body>
     <header>
@@ -54,30 +32,19 @@
     </header>
     <div id="content">
       <div id="main">
-        <section itemscope itemtype="http://schema.org/Article">
-          <meta itemprop="author" content="Ricardo Lopes" />
-          <link
-            itemprop="url"
-            href="https://ricardolopes.net/blog/overly-defensive-coding/"
-          />
+        <section itemscope="" itemtype="http://schema.org/Article">
+          <meta itemprop="author" content="Ricardo Lopes">
+          <link itemprop="url" href="https://ricardolopes.net/blog/overly-defensive-coding/">
           <h1 itemprop="headline">Against Overly Defensive Coding</h1>
           <ul class="post-meta">
             <li>
-              <time itemprop="datePublished" datetime="2024-09-10">
-                10 Sep 2024
-              </time>
+              <time itemprop="datePublished" datetime="2024-09-10">Sep 10, 2024</time>
             </li>
             <li>4 min read</li>
           </ul>
-          <div itemprop="articleBody">
-            <p>
-              This is one of the most common programming errors I see, and it's
-              probably one of the least obvious. Sure, we want to protect our
-              code from failure scenarios, but we need to be careful about it:
-              there's such a thing as being too defensive in our coding!
-            </p>
-            <p>To start, here's an example of good defensive coding:</p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
+          <div itemprop="articleBody"><p>This is one of the most common programming errors I see, and it's probably one of the least obvious. Sure, we want to protect our code from failure scenarios, but we need to be careful about it: there's such a thing as being too defensive in our coding!</p>
+<p>To start, here's an example of good defensive coding:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
   <span class="hljs-keyword">const</span> user = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
 
   <span class="hljs-keyword">if</span> (user) { <span class="hljs-comment">// user can be undefined if there are no results</span>
@@ -86,13 +53,8 @@
   }
 }
 </code></pre>
-            <p>
-              In this example, our code is protected against the failure
-              scenarios of not finding a user, and dealing with a user who
-              doesn't have a last name. It avoids bugs caused by a simpler
-              approach such as:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
+<p>In this example, our code is protected against the failure scenarios of not finding a user, and dealing with a user who doesn't have a last name. It avoids bugs caused by a simpler approach such as:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
   <span class="hljs-keyword">const</span> user = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
 
   <span class="hljs-comment">// fails if user wasn't found</span>
@@ -100,13 +62,10 @@
   <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${user.firstName}</span> <span class="hljs-subst">${user.lastName}</span>`</span>;
 }
 </code></pre>
-            <p>We write defensive code to avoid bugs like these.</p>
-            <p>
-              However, we can overdo it. Defensive code stops being useful when
-              it no longer protects us from real failure scenarios.
-            </p>
-            <p>Here's an example of defensive coding going too far:</p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
+<p>We write defensive code to avoid bugs like these.</p>
+<p>However, we can overdo it. Defensive code stops being useful when it no longer protects us from real failure scenarios.</p>
+<p>Here's an example of defensive coding going too far:</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">const</span> filteredUsers = users.filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
 
@@ -125,141 +84,37 @@
   }
 }
 </code></pre>
-            <p>In this example, the code is:</p>
-            <ul>
-              <li>
-                <p>
-                  Protecting against <code>.filter()</code> returning a nullish
-                  value, even though it always returns an array (which might be
-                  empty). This is unnecessary and confusing.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Using optional chaining (<code>?.</code>) to access
-                  <code>user</code> properties without throwing an error if
-                  <code>user</code> is not defined, even though it already
-                  checked that <code>user</code> is always is. This is
-                  redundant.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Checking if the selected user has the intended id, even though
-                  that's always true because it was filtered by that id. This is
-                  pointless.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Handling errors, even though no error is thrown. This is
-                  overkill.
-                </p>
-              </li>
-            </ul>
-            <p>
-              The problem with this kind of defensive coding isn't just that it
-              makes the code more complicated. There's something even worse
-              happening.
-            </p>
-            <p>
-              When we write code, we write it for other humans, not for
-              machines. Machines are happy with binary code, it's us imperfect
-              humans who prefer to go for higher levels of abstraction. The code
-              we write serves firstly to tell a story to the developers who will
-              maintain it, and only then to be compiled or interpreted for a
-              machine to run.
-            </p>
-            <p>
-              The story we tell with defensive coding is that there's danger,
-              and we're guarding against it. When we write
-              <code>if (user)</code>, we're signalling to other developers to be
-              cautious: <code>user</code> might not be defined, and assuming it
-              is could lead to problems.
-            </p>
-            <p>
-              This means that when we write <code>if (filteredUsers)</code>,
-              still drawing from the examples above, we're also telling a story
-              about the danger we're guarding against. But this time, there's no
-              actual danger: <code>filteredUsers</code> is always defined. The
-              story we're telling is a lie.
-            </p>
-            <p>
-              At best, this lie will be
-              <a href="https://ricardolopes.net/blog/no-surprises/"
-                >surprising</a
-              >
-              and confuse developers reading the code, which will throw them off
-              and hurt their productivity: "Huh, weird, why are we checking if
-              <code>filteredUsers</code> is set? Doesn't
-              <code>.filter()</code> always return an array?"
-            </p>
-            <p>
-              At worst, developers will believe this lie and think there's a
-              danger when there isn't. They might think
-              <code>.filter()</code> returns a nullish value when it doesn't
-              find records, even though that's not what it does! Or they might
-              think an empty array evaluates to <code>false</code>, while it
-              actually evaluates to <code>true</code> (a genuine mistake when
-              dealing with JavaScript).
-            </p>
-            <p>
-              When developers start believing incorrect things about the code,
-              these beliefs spread. If you're unsure whether a variable is set,
-              you end up adding unnecessary checks everywhere. If the code
-              throws an exception in a code branch that never runs, other
-              developers will see that exception and start handling it whenever
-              they call that code. This can also lead to them adding unit tests
-              with mocks that throw that exception, testing behaviour that
-              doesn't actually exist in production.
-            </p>
-            <p>
-              Ultimately, reacting to non-existent problems will harm developer
-              productivity, increase code complexity, and lengthen CI times due
-              to more code branches needing tests. It will also hurt performance
-              because of unnecessary checks and missed optimisation
-              opportunities.
-            </p>
-            <p>
-              We can push back against overly defensive coding by not blindly
-              believing the story the code tells. For example, we can always
-              verify what a piece of code actually does and remove anything
-              redundant. Another strategy is to ensure great test coverage,
-              making it easier to refactor with confidence, knowing we're just
-              removing unnecessary checks without changing behaviour. There are
-              even lint rules that can help, like eslint's
-              <a
-                target="_blank"
-                href="https://eslint.org/docs/latest/rules/no-useless-escape"
-                >no-useless-escape</a
-              >
-              or typescript-eslint's
-              <a
-                target="_blank"
-                href="https://typescript-eslint.io/rules/no-unnecessary-condition"
-                >no-unnecessary-condition</a
-              >.
-            </p>
-            <p>
-              It's important to defend against actual threats, but defending
-              against imaginary ones isn't just unimportant: it's actually
-              harmful. Be cautious of overly defensive coding, and always be on
-              the lookout for lies in the code.
-            </p>
-          </div>
+<p>In this example, the code is:</p>
+<ul>
+<li><p>Protecting against <code>.filter()</code> returning a nullish value, even though it always returns an array (which might be empty). This is unnecessary and confusing.</p>
+</li>
+<li><p>Using optional chaining (<code>?.</code>) to access <code>user</code> properties without throwing an error if <code>user</code> is not defined, even though it already checked that <code>user</code> is always is. This is redundant.</p>
+</li>
+<li><p>Checking if the selected user has the intended id, even though that's always true because it was filtered by that id. This is pointless.</p>
+</li>
+<li><p>Handling errors, even though no error is thrown. This is overkill.</p>
+</li>
+</ul>
+<p>The problem with this kind of defensive coding isn't just that it makes the code more complicated. There's something even worse happening.</p>
+<p>When we write code, we write it for other humans, not for machines. Machines are happy with binary code, it's us imperfect humans who prefer to go for higher levels of abstraction. The code we write serves firstly to tell a story to the developers who will maintain it, and only then to be compiled or interpreted for a machine to run.</p>
+<p>The story we tell with defensive coding is that there's danger, and we're guarding against it. When we write <code>if (user)</code>, we're signalling to other developers to be cautious: <code>user</code> might not be defined, and assuming it is could lead to problems.</p>
+<p>This means that when we write <code>if (filteredUsers)</code>, still drawing from the examples above, we're also telling a story about the danger we're guarding against. But this time, there's no actual danger: <code>filteredUsers</code> is always defined. The story we're telling is a lie.</p>
+<p>At best, this lie will be <a target="_blank" href="https://ricardolopes.net/blog/no-surprises/">surprising</a> and confuse developers reading the code, which will throw them off and hurt their productivity: "Huh, weird, why are we checking if <code>filteredUsers</code> is set? Doesn't <code>.filter()</code> always return an array?"</p>
+<p>At worst, developers will believe this lie and think there's a danger when there isn't. They might think <code>.filter()</code> returns a nullish value when it doesn't find records, even though that's not what it does! Or they might think an empty array evaluates to <code>false</code>, while it actually evaluates to <code>true</code> (a genuine mistake when dealing with JavaScript).</p>
+<p>When developers start believing incorrect things about the code, these beliefs spread. If you're unsure whether a variable is set, you end up adding unnecessary checks everywhere. If the code throws an exception in a code branch that never runs, other developers will see that exception and start handling it whenever they call that code. This can also lead to them adding unit tests with mocks that throw that exception, testing behaviour that doesn't actually exist in production.</p>
+<p>Ultimately, reacting to non-existent problems will harm developer productivity, increase code complexity, and lengthen CI times due to more code branches needing tests. It will also hurt performance because of unnecessary checks and missed optimisation opportunities.</p>
+<p>We can push back against overly defensive coding by not blindly believing the story the code tells. For example, we can always verify what a piece of code actually does and remove anything redundant. Another strategy is to ensure great test coverage, making it easier to refactor with confidence, knowing we're just removing unnecessary checks without changing behaviour. There are even lint rules that can help, like eslint's <a target="_blank" href="https://eslint.org/docs/latest/rules/no-useless-escape">no-useless-escape</a> or typescript-eslint's <a target="_blank" href="https://typescript-eslint.io/rules/no-unnecessary-condition">no-unnecessary-condition</a>.</p>
+<p>It's important to defend against actual threats, but defending against imaginary ones isn't just unimportant: it's actually harmful. Be cautious of overly defensive coding, and always be on the lookout for lies in the code.</p>
+</div>
         </section>
         <section id="article-footer">
           <p>
             Want more posts? Subscribe to my
-            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
-              >RSS feed</a
-            >.
+            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml">RSS feed</a>.
           </p>
         </section>
       </div>
     </div>
     <footer>
-      <p>&#169; Ricardo Lopes</p>
-    </footer>
-  </body>
-</html>
+      <p>© Ricardo Lopes</p>
+    </footer></body></html>

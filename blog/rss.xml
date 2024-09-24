@@ -9,184 +9,70 @@
     <language>en</language>
     <item>
       <title>Against Overly Defensive Coding</title>
-      <description>
-            <p>
-              This is one of the most common programming errors I see, and it's
-              probably one of the least obvious. Sure, we want to protect our
-              code from failure scenarios, but we need to be careful about it:
-              there's such a thing as being too defensive in our coding!
-            </p>
-            <p>To start, here's an example of good defensive coding:</p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
-  <span class="hljs-keyword">const</span> user = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
+      <description>&lt;p&gt;This is one of the most common programming errors I see, and it's probably one of the least obvious. Sure, we want to protect our code from failure scenarios, but we need to be careful about it: there's such a thing as being too defensive in our coding!&lt;/p&gt;
+&lt;p&gt;To start, here's an example of good defensive coding:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-function"&gt;&lt;span class="hljs-keyword"&gt;function&lt;/span&gt; &lt;span class="hljs-title"&gt;getUserNameById&lt;/span&gt;(&lt;span class="hljs-params"&gt;userId, users&lt;/span&gt;) &lt;/span&gt;{
+  &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; user = users.find(&lt;span class="hljs-function"&gt;&lt;span class="hljs-params"&gt;user&lt;/span&gt; =&amp;gt;&lt;/span&gt; user.id === userId);
 
-  <span class="hljs-keyword">if</span> (user) { <span class="hljs-comment">// user can be undefined if there are no results</span>
-    <span class="hljs-comment">// last name may be null</span>
-    <span class="hljs-keyword">return</span> [user.firstName, user.lastName].filter(<span class="hljs-function"><span class="hljs-params">name</span> =&gt;</span> name).join(<span class="hljs-string">' '</span>);
+  &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (user) { &lt;span class="hljs-comment"&gt;// user can be undefined if there are no results&lt;/span&gt;
+    &lt;span class="hljs-comment"&gt;// last name may be null&lt;/span&gt;
+    &lt;span class="hljs-keyword"&gt;return&lt;/span&gt; [user.firstName, user.lastName].filter(&lt;span class="hljs-function"&gt;&lt;span class="hljs-params"&gt;name&lt;/span&gt; =&amp;gt;&lt;/span&gt; name).join(&lt;span class="hljs-string"&gt;' '&lt;/span&gt;);
   }
 }
-</code></pre>
-            <p>
-              In this example, our code is protected against the failure
-              scenarios of not finding a user, and dealing with a user who
-              doesn't have a last name. It avoids bugs caused by a simpler
-              approach such as:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
-  <span class="hljs-keyword">const</span> user = users.find(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example, our code is protected against the failure scenarios of not finding a user, and dealing with a user who doesn't have a last name. It avoids bugs caused by a simpler approach such as:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-function"&gt;&lt;span class="hljs-keyword"&gt;function&lt;/span&gt; &lt;span class="hljs-title"&gt;getUserNameById&lt;/span&gt;(&lt;span class="hljs-params"&gt;userId, users&lt;/span&gt;) &lt;/span&gt;{
+  &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; user = users.find(&lt;span class="hljs-function"&gt;&lt;span class="hljs-params"&gt;user&lt;/span&gt; =&amp;gt;&lt;/span&gt; user.id === userId);
 
-  <span class="hljs-comment">// fails if user wasn't found</span>
-  <span class="hljs-comment">// returns "firstName null" if last name is null</span>
-  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${user.firstName}</span> <span class="hljs-subst">${user.lastName}</span>`</span>;
+  &lt;span class="hljs-comment"&gt;// fails if user wasn't found&lt;/span&gt;
+  &lt;span class="hljs-comment"&gt;// returns "firstName null" if last name is null&lt;/span&gt;
+  &lt;span class="hljs-keyword"&gt;return&lt;/span&gt; &lt;span class="hljs-string"&gt;`&lt;span class="hljs-subst"&gt;${user.firstName}&lt;/span&gt; &lt;span class="hljs-subst"&gt;${user.lastName}&lt;/span&gt;`&lt;/span&gt;;
 }
-</code></pre>
-            <p>We write defensive code to avoid bugs like these.</p>
-            <p>
-              However, we can overdo it. Defensive code stops being useful when
-              it no longer protects us from real failure scenarios.
-            </p>
-            <p>Here's an example of defensive coding going too far:</p>
-            <pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserNameById</span>(<span class="hljs-params">userId, users</span>) </span>{
-  <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">const</span> filteredUsers = users.filter(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> user.id === userId);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We write defensive code to avoid bugs like these.&lt;/p&gt;
+&lt;p&gt;However, we can overdo it. Defensive code stops being useful when it no longer protects us from real failure scenarios.&lt;/p&gt;
+&lt;p&gt;Here's an example of defensive coding going too far:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-function"&gt;&lt;span class="hljs-keyword"&gt;function&lt;/span&gt; &lt;span class="hljs-title"&gt;getUserNameById&lt;/span&gt;(&lt;span class="hljs-params"&gt;userId, users&lt;/span&gt;) &lt;/span&gt;{
+  &lt;span class="hljs-keyword"&gt;try&lt;/span&gt; {
+    &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; filteredUsers = users.filter(&lt;span class="hljs-function"&gt;&lt;span class="hljs-params"&gt;user&lt;/span&gt; =&amp;gt;&lt;/span&gt; user.id === userId);
 
-    <span class="hljs-keyword">if</span> (filteredUsers) { <span class="hljs-comment">// this is always true</span>
-      <span class="hljs-keyword">const</span> user = filteredUsers[<span class="hljs-number">0</span>];
+    &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (filteredUsers) { &lt;span class="hljs-comment"&gt;// this is always true&lt;/span&gt;
+      &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; user = filteredUsers[&lt;span class="hljs-number"&gt;0&lt;/span&gt;];
 
-      <span class="hljs-comment">// after checking that user is set, the ?. is redundant</span>
-      <span class="hljs-comment">// there's no need to confirm the user id, that has already been done above</span>
-      <span class="hljs-keyword">if</span> (user &amp;&amp; user?.id === userId) {
-        <span class="hljs-comment">// ?. is redundant, user is always defined here</span>
-        <span class="hljs-keyword">return</span> [user?.firstName, user?.lastName].filter(<span class="hljs-function"><span class="hljs-params">name</span> =&gt;</span> name).join(<span class="hljs-string">' '</span>);
+      &lt;span class="hljs-comment"&gt;// after checking that user is set, the ?. is redundant&lt;/span&gt;
+      &lt;span class="hljs-comment"&gt;// there's no need to confirm the user id, that has already been done above&lt;/span&gt;
+      &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (user &amp;amp;&amp;amp; user?.id === userId) {
+        &lt;span class="hljs-comment"&gt;// ?. is redundant, user is always defined here&lt;/span&gt;
+        &lt;span class="hljs-keyword"&gt;return&lt;/span&gt; [user?.firstName, user?.lastName].filter(&lt;span class="hljs-function"&gt;&lt;span class="hljs-params"&gt;name&lt;/span&gt; =&amp;gt;&lt;/span&gt; name).join(&lt;span class="hljs-string"&gt;' '&lt;/span&gt;);
       }
     }
-  } <span class="hljs-keyword">catch</span> (error) {
-    <span class="hljs-comment">// the code above doesn't throw any error to handle here</span>
+  } &lt;span class="hljs-keyword"&gt;catch&lt;/span&gt; (error) {
+    &lt;span class="hljs-comment"&gt;// the code above doesn't throw any error to handle here&lt;/span&gt;
   }
 }
-</code></pre>
-            <p>In this example, the code is:</p>
-            <ul>
-              <li>
-                <p>
-                  Protecting against <code>.filter()</code> returning a nullish
-                  value, even though it always returns an array (which might be
-                  empty). This is unnecessary and confusing.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Using optional chaining (<code>?.</code>) to access
-                  <code>user</code> properties without throwing an error if
-                  <code>user</code> is not defined, even though it already
-                  checked that <code>user</code> is always is. This is
-                  redundant.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Checking if the selected user has the intended id, even though
-                  that's always true because it was filtered by that id. This is
-                  pointless.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Handling errors, even though no error is thrown. This is
-                  overkill.
-                </p>
-              </li>
-            </ul>
-            <p>
-              The problem with this kind of defensive coding isn't just that it
-              makes the code more complicated. There's something even worse
-              happening.
-            </p>
-            <p>
-              When we write code, we write it for other humans, not for
-              machines. Machines are happy with binary code, it's us imperfect
-              humans who prefer to go for higher levels of abstraction. The code
-              we write serves firstly to tell a story to the developers who will
-              maintain it, and only then to be compiled or interpreted for a
-              machine to run.
-            </p>
-            <p>
-              The story we tell with defensive coding is that there's danger,
-              and we're guarding against it. When we write
-              <code>if (user)</code>, we're signalling to other developers to be
-              cautious: <code>user</code> might not be defined, and assuming it
-              is could lead to problems.
-            </p>
-            <p>
-              This means that when we write <code>if (filteredUsers)</code>,
-              still drawing from the examples above, we're also telling a story
-              about the danger we're guarding against. But this time, there's no
-              actual danger: <code>filteredUsers</code> is always defined. The
-              story we're telling is a lie.
-            </p>
-            <p>
-              At best, this lie will be
-              <a href="https://ricardolopes.net/blog/no-surprises/"
-                >surprising</a
-              >
-              and confuse developers reading the code, which will throw them off
-              and hurt their productivity: "Huh, weird, why are we checking if
-              <code>filteredUsers</code> is set? Doesn't
-              <code>.filter()</code> always return an array?"
-            </p>
-            <p>
-              At worst, developers will believe this lie and think there's a
-              danger when there isn't. They might think
-              <code>.filter()</code> returns a nullish value when it doesn't
-              find records, even though that's not what it does! Or they might
-              think an empty array evaluates to <code>false</code>, while it
-              actually evaluates to <code>true</code> (a genuine mistake when
-              dealing with JavaScript).
-            </p>
-            <p>
-              When developers start believing incorrect things about the code,
-              these beliefs spread. If you're unsure whether a variable is set,
-              you end up adding unnecessary checks everywhere. If the code
-              throws an exception in a code branch that never runs, other
-              developers will see that exception and start handling it whenever
-              they call that code. This can also lead to them adding unit tests
-              with mocks that throw that exception, testing behaviour that
-              doesn't actually exist in production.
-            </p>
-            <p>
-              Ultimately, reacting to non-existent problems will harm developer
-              productivity, increase code complexity, and lengthen CI times due
-              to more code branches needing tests. It will also hurt performance
-              because of unnecessary checks and missed optimisation
-              opportunities.
-            </p>
-            <p>
-              We can push back against overly defensive coding by not blindly
-              believing the story the code tells. For example, we can always
-              verify what a piece of code actually does and remove anything
-              redundant. Another strategy is to ensure great test coverage,
-              making it easier to refactor with confidence, knowing we're just
-              removing unnecessary checks without changing behaviour. There are
-              even lint rules that can help, like eslint's
-              <a
-                target="_blank"
-                href="https://eslint.org/docs/latest/rules/no-useless-escape"
-                >no-useless-escape</a
-              >
-              or typescript-eslint's
-              <a
-                target="_blank"
-                href="https://typescript-eslint.io/rules/no-unnecessary-condition"
-                >no-unnecessary-condition</a
-              >.
-            </p>
-            <p>
-              It's important to defend against actual threats, but defending
-              against imaginary ones isn't just unimportant: it's actually
-              harmful. Be cautious of overly defensive coding, and always be on
-              the lookout for lies in the code.
-            </p>
-      </description>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example, the code is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Protecting against &lt;code&gt;.filter()&lt;/code&gt; returning a nullish value, even though it always returns an array (which might be empty). This is unnecessary and confusing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Using optional chaining (&lt;code&gt;?.&lt;/code&gt;) to access &lt;code&gt;user&lt;/code&gt; properties without throwing an error if &lt;code&gt;user&lt;/code&gt; is not defined, even though it already checked that &lt;code&gt;user&lt;/code&gt; is always is. This is redundant.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Checking if the selected user has the intended id, even though that's always true because it was filtered by that id. This is pointless.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Handling errors, even though no error is thrown. This is overkill.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The problem with this kind of defensive coding isn't just that it makes the code more complicated. There's something even worse happening.&lt;/p&gt;
+&lt;p&gt;When we write code, we write it for other humans, not for machines. Machines are happy with binary code, it's us imperfect humans who prefer to go for higher levels of abstraction. The code we write serves firstly to tell a story to the developers who will maintain it, and only then to be compiled or interpreted for a machine to run.&lt;/p&gt;
+&lt;p&gt;The story we tell with defensive coding is that there's danger, and we're guarding against it. When we write &lt;code&gt;if (user)&lt;/code&gt;, we're signalling to other developers to be cautious: &lt;code&gt;user&lt;/code&gt; might not be defined, and assuming it is could lead to problems.&lt;/p&gt;
+&lt;p&gt;This means that when we write &lt;code&gt;if (filteredUsers)&lt;/code&gt;, still drawing from the examples above, we're also telling a story about the danger we're guarding against. But this time, there's no actual danger: &lt;code&gt;filteredUsers&lt;/code&gt; is always defined. The story we're telling is a lie.&lt;/p&gt;
+&lt;p&gt;At best, this lie will be &lt;a target="_blank" href="https://ricardolopes.net/blog/no-surprises/"&gt;surprising&lt;/a&gt; and confuse developers reading the code, which will throw them off and hurt their productivity: "Huh, weird, why are we checking if &lt;code&gt;filteredUsers&lt;/code&gt; is set? Doesn't &lt;code&gt;.filter()&lt;/code&gt; always return an array?"&lt;/p&gt;
+&lt;p&gt;At worst, developers will believe this lie and think there's a danger when there isn't. They might think &lt;code&gt;.filter()&lt;/code&gt; returns a nullish value when it doesn't find records, even though that's not what it does! Or they might think an empty array evaluates to &lt;code&gt;false&lt;/code&gt;, while it actually evaluates to &lt;code&gt;true&lt;/code&gt; (a genuine mistake when dealing with JavaScript).&lt;/p&gt;
+&lt;p&gt;When developers start believing incorrect things about the code, these beliefs spread. If you're unsure whether a variable is set, you end up adding unnecessary checks everywhere. If the code throws an exception in a code branch that never runs, other developers will see that exception and start handling it whenever they call that code. This can also lead to them adding unit tests with mocks that throw that exception, testing behaviour that doesn't actually exist in production.&lt;/p&gt;
+&lt;p&gt;Ultimately, reacting to non-existent problems will harm developer productivity, increase code complexity, and lengthen CI times due to more code branches needing tests. It will also hurt performance because of unnecessary checks and missed optimisation opportunities.&lt;/p&gt;
+&lt;p&gt;We can push back against overly defensive coding by not blindly believing the story the code tells. For example, we can always verify what a piece of code actually does and remove anything redundant. Another strategy is to ensure great test coverage, making it easier to refactor with confidence, knowing we're just removing unnecessary checks without changing behaviour. There are even lint rules that can help, like eslint's &lt;a target="_blank" href="https://eslint.org/docs/latest/rules/no-useless-escape"&gt;no-useless-escape&lt;/a&gt; or typescript-eslint's &lt;a target="_blank" href="https://typescript-eslint.io/rules/no-unnecessary-condition"&gt;no-unnecessary-condition&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It's important to defend against actual threats, but defending against imaginary ones isn't just unimportant: it's actually harmful. Be cautious of overly defensive coding, and always be on the lookout for lies in the code.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/overly-defensive-coding/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/overly-defensive-coding/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
@@ -194,238 +80,74 @@
     </item>
     <item>
       <title>Styling Your RSS For a Better Web</title>
-      <description>
-            <p>
-              Before we had the walled gardens of social media feeds, there was
-              a wonderful time when sites published their feeds in an open
-              format (RSS) that we could subscribe to, free from
-              dopamine-inducing algorithms, creepy targeted ads, and privacy
-              violations. Most sites still publish an RSS feed, actually, but it
-              gets no visibility and is poorly supported by modern browsers
-              anyway.
-            </p>
-            <p>
-              I strongly believe we can create a better web for everyone if we
-              champion open standards and decentralisation over proprietary
-              formats and user-hostile monopolies. I'd love to see the return of
-              the RSS feed to challenge the current social media feeds, but it
-              doesn't look like an easy battle.
-            </p>
-            <p>
-              For starters, we can't get new users to start subscribing to RSS
-              feeds if they don't even know they exist in the first place. We
-              would need websites to announce that option for subscription, like
-              they do with social media handles and newsletters. But let's be
-              honest, that wouldn't be enough.
-            </p>
-            <p>
-              Even if websites started encouraging visitors to subscribe to
-              their RSS feeds, the user experience would still be terrible.
-              Clicking an RSS link today either opens a raw XML code file in the
-              browser or starts a download. This is an unacceptable experience
-              for new users, who will think something must be broken and will
-              eventually look for other alternatives.
-            </p>
-            <p>
-              Seriously, this is what browsers today show if you click one of
-              those “Subscribe with RSS” links:
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/unstyledrss.png"
-              />
-            </p>
-            <p>
-              This wasn't always the case. During the peak of RSS, before social
-              media took over, web browsers actually supported it well. You'd
-              see automatic subscribe buttons in the browser's UI, and opening
-              an RSS link would display a styled view where you could see the
-              latest posts and subscribe with your favourite reader.
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/firefoxrss.jpg"
-              />
-            </p>
-            <p>
-              Source:
-              <a
-                target="_blank"
-                href="https://www.flickr.com/photos/thickmints/282062844/"
-                >https://www.flickr.com/photos/thickmints/282062844/</a
-              >
-            </p>
-            <p>
-              There is a way we can get some of this usability back: by using a
-              technology that's been around for over 20 years,
-              <a target="_blank" href="https://www.w3.org/TR/xslt-30/">XSLT</a>.
-            </p>
-            <p>
-              An RSS feed is simply an XML file that follows a specific schema.
-              XSLT is a language for transforming XML files into other XML
-              files. We can use an XSLT file to transform an RSS feed (an XML
-              file) into an HTML page (also an XML file, if you don't think too
-              much about the deviations browsers accept these days), complete
-              with CSS and JavaScript. With that transformation, the browser can
-              show a user-friendly HTML page instead of raw XML when you open
-              the RSS feed, and you can still use that feed to subscribe with
-              your favourite reader.
-            </p>
-            <p>
-              Here's how this blog's RSS feed renders in the browser, thanks to
-              custom XSLT, at the time of writing:
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/styledrss.png"
-              />
-            </p>
-            <p>
-              Notice that it's still an XML file that works with any RSS reader,
-              but it displays as a regular web page in the browser. The design
-              isn't the best, but that's merely a design skills issue from yours
-              truly.
-            </p>
-            <p>
-              With a styled presentation like that (or hopefully a
-              better-looking one), we can finally improve the user experience of
-              subscribing with RSS. We can display the list of the most recent
-              posts, educate the visitor on how to go from this page to actually
-              being subscribed in an RSS reader of their choice, along with
-              anything else we can think of.
-            </p>
-            <p>Here's how you can do the same for your own RSS feed:</p>
-            <p>
-              First, you need to create the actual XSLT file that transforms
-              from the RSS schema into an HTML page. The file should have a
-              structure like this:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">xsl:stylesheet</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"3.0"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">xsl:output</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"html"</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"1.0"</span> <span class="hljs-attr">encoding</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">indent</span>=<span class="hljs-string">"yes"</span>/&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">xsl:template</span> <span class="hljs-attr">match</span>=<span class="hljs-string">"/"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+      <description>&lt;p&gt;Before we had the walled gardens of social media feeds, there was a wonderful time when sites published their feeds in an open format (RSS) that we could subscribe to, free from dopamine-inducing algorithms, creepy targeted ads, and privacy violations. Most sites still publish an RSS feed, actually, but it gets no visibility and is poorly supported by modern browsers anyway.&lt;/p&gt;
+&lt;p&gt;I strongly believe we can create a better web for everyone if we champion open standards and decentralisation over proprietary formats and user-hostile monopolies. I'd love to see the return of the RSS feed to challenge the current social media feeds, but it doesn't look like an easy battle.&lt;/p&gt;
+&lt;p&gt;For starters, we can't get new users to start subscribing to RSS feeds if they don't even know they exist in the first place. We would need websites to announce that option for subscription, like they do with social media handles and newsletters. But let's be honest, that wouldn't be enough.&lt;/p&gt;
+&lt;p&gt;Even if websites started encouraging visitors to subscribe to their RSS feeds, the user experience would still be terrible. Clicking an RSS link today either opens a raw XML code file in the browser or starts an XML file download. This is an unacceptable experience for new users, who will think something must be broken and will eventually look for other alternatives.&lt;/p&gt;
+&lt;p&gt;Seriously, this is what browsers today show if you click one of those “Subscribe with RSS” links:&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/579fd338-b535-40a0-97dd-f813e9716230.png" alt="Screenshot of an RSS feed displayed in a modern browser (Firefox), showing the raw XML code"&gt;&lt;/p&gt;
+&lt;p&gt;This wasn't always the case. During the peak of RSS, before social media took over, web browsers actually supported it well. You'd see automatic subscribe buttons in the browser's UI, and opening an RSS link would display a styled view where you could see the latest posts and subscribe with your favourite reader.&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/f597d2cb-688e-463b-aa69-362237739e4c.jpeg" alt="Screenshot of an old browser (Firefox) showing a styled view of an RSS feed"&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a target="_blank" href="https://www.flickr.com/photos/thickmints/282062844/"&gt;https://www.flickr.com/photos/thickmints/282062844/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There is a way we can get some of this usability back: by using a technology that's been around for over 20 years, &lt;a target="_blank" href="https://www.w3.org/TR/xslt-30/"&gt;XSLT&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;An RSS feed is simply an XML file that follows a specific schema. XSLT is a language for transforming XML files into other XML files. We can use an XSLT file to transform an RSS feed (an XML file) into an HTML page (also an XML file, if you don't think too much about the deviations browsers accept these days), complete with CSS and JavaScript. With that transformation, the browser can show a user-friendly HTML page instead of raw XML when you open the RSS feed, and you can still use that feed to subscribe with your favourite reader.&lt;/p&gt;
+&lt;p&gt;Here's how this blog's RSS feed renders in the browser, thanks to custom XSLT, at the time of writing:&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/b004e156-dad4-49ad-a227-8baa527c7bbf.png" alt="Screenshot of this blog's RSS feed displayed in a modern web browser (Firefox), styled as a regular web page thanks to XSLT"&gt;&lt;/p&gt;
+&lt;p&gt;Notice that it's still an XML file that works with any RSS reader, but it displays as a regular web page in the browser. The design isn't the best, but that's merely a design skills issue from yours truly.&lt;/p&gt;
+&lt;p&gt;With a styled presentation like that (or hopefully a better-looking one), we can finally improve the user experience of subscribing with RSS. We can display the list of the most recent posts, educate the visitor on how to go from this page to actually being subscribed in an RSS reader of their choice, along with anything else we can think of.&lt;/p&gt;
+&lt;p&gt;Here's how you can do the same for your own RSS feed:&lt;/p&gt;
+&lt;p&gt;First, you need to create the actual XSLT file that transforms from the RSS schema into an HTML page. The file should have a structure like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-xml"&gt;&lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;xsl:stylesheet&lt;/span&gt; &lt;span class="hljs-attr"&gt;version&lt;/span&gt;=&lt;span class="hljs-string"&gt;"3.0"&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;xsl:output&lt;/span&gt; &lt;span class="hljs-attr"&gt;method&lt;/span&gt;=&lt;span class="hljs-string"&gt;"html"&lt;/span&gt; &lt;span class="hljs-attr"&gt;version&lt;/span&gt;=&lt;span class="hljs-string"&gt;"1.0"&lt;/span&gt; &lt;span class="hljs-attr"&gt;encoding&lt;/span&gt;=&lt;span class="hljs-string"&gt;"UTF-8"&lt;/span&gt; &lt;span class="hljs-attr"&gt;indent&lt;/span&gt;=&lt;span class="hljs-string"&gt;"yes"&lt;/span&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;xsl:template&lt;/span&gt; &lt;span class="hljs-attr"&gt;match&lt;/span&gt;=&lt;span class="hljs-string"&gt;"/"&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;html&lt;/span&gt; &lt;span class="hljs-attr"&gt;lang&lt;/span&gt;=&lt;span class="hljs-string"&gt;"en"&lt;/span&gt;&amp;gt;&lt;/span&gt;
       ...
-    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">xsl:template</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">xsl:stylesheet</span>&gt;</span>
-</code></pre>
-            <p>
-              Inside the <code>xsl:template</code> tag, you can write any HTML
-              just as you would on any web page, starting, of course, with the
-              usual <code>html</code> tag. That includes, for instance, CSS
-              styles:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Content-Type"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"text/html; charset=utf-8"</span>/&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1, maximum-scale=1"</span>/&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
+    &lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;xsl:template&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;xsl:stylesheet&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Inside the &lt;code&gt;xsl:template&lt;/code&gt; tag, you can write any HTML just as you would on any web page, starting, of course, with the usual &lt;code&gt;html&lt;/code&gt; tag. That includes, for instance, CSS styles:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-xml"&gt;&lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;meta&lt;/span&gt; &lt;span class="hljs-attr"&gt;http-equiv&lt;/span&gt;=&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt; &lt;span class="hljs-attr"&gt;content&lt;/span&gt;=&lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;meta&lt;/span&gt; &lt;span class="hljs-attr"&gt;name&lt;/span&gt;=&lt;span class="hljs-string"&gt;"viewport"&lt;/span&gt; &lt;span class="hljs-attr"&gt;content&lt;/span&gt;=&lt;span class="hljs-string"&gt;"width=device-width, initial-scale=1, maximum-scale=1"&lt;/span&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;style&lt;/span&gt; &lt;span class="hljs-attr"&gt;type&lt;/span&gt;=&lt;span class="hljs-string"&gt;"text/css"&lt;/span&gt;&amp;gt;&lt;/span&gt;
     ...
-  <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  &lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;style&lt;/span&gt;&amp;gt;&lt;/span&gt;
   ...
-<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-</code></pre>
-            <p>
-              Then, you can use specific <code>xsl</code> tags to pull data from
-              the source XML file into the new template. For instance,
-              <code>&lt;xsl:value-of select="/rss/channel/title"/&gt;</code>
-              returns the value in the RSS's
-              <code>rss/channel/title</code> path, which would be the blog's
-              title. To show all blog post titles, you could use:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">xsl:for-each</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"/rss/channel/item"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">xsl:value-of</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"title"</span>/&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">xsl:for-each</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-</code></pre>
-            <p>
-              This example iterates through all <code>item</code> entries in the
-              RSS's <code>rss/channel</code> path and outputs the value of the
-              <code>title</code> tag in each of those <code>item</code>s.
-            </p>
-            <p>
-              This is just a quick glimpse of what we can do with XSLT. This
-              post isn't meant to be a full tutorial on the subject. For more
-              inspiration, you can check out this blog's own XSLT file at
-              <a target="_blank" href="https://ricardolopes.net/blog/rss.xsl"
-                >https://ricardolopes.net/blog/rss.xsl</a
-              >.
-            </p>
-            <p>
-              After you've created your template, you only need to add these two
-              lines at the top of your RSS file:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="hljs-meta">&lt;?xml-stylesheet href="&lt;link/to/your/xslt/file.xsl&gt;" type="text/xsl"?&gt;</span>
-</code></pre>
-            <p>
-              Here's an example of this blog's feed, which you can check by
-              clicking "view source" at
-              <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
-                >https://ricardolopes.net/blog/rss.xml</a
-              >:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="hljs-meta">&lt;?xml-stylesheet href="https://ricardolopes.net/blog/rss.xsl" type="text/xsl"?&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">rss</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"2.0"</span> <span class="hljs-attr">xmlns:atom</span>=<span class="hljs-string">"http://www.w3.org/2005/Atom"</span> <span class="hljs-attr">xmlns:dc</span>=<span class="hljs-string">"http://purl.org/dc/elements/1.1/"</span>&gt;</span>
+&lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;head&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, you can use specific &lt;code&gt;xsl&lt;/code&gt; tags to pull data from the source XML file into the new template. For instance, &lt;code&gt;&amp;lt;xsl:value-of select="/rss/channel/title"/&amp;gt;&lt;/code&gt; returns the value in the RSS's &lt;code&gt;rss/channel/title&lt;/code&gt; path, which would be the blog's title. To show all blog post titles, you could use:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-xml"&gt;&lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;xsl:for-each&lt;/span&gt; &lt;span class="hljs-attr"&gt;select&lt;/span&gt;=&lt;span class="hljs-string"&gt;"/rss/channel/item"&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;xsl:value-of&lt;/span&gt; &lt;span class="hljs-attr"&gt;select&lt;/span&gt;=&lt;span class="hljs-string"&gt;"title"&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;xsl:for-each&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This example iterates through all &lt;code&gt;item&lt;/code&gt; entries in the RSS's &lt;code&gt;rss/channel&lt;/code&gt; path and outputs the value of the &lt;code&gt;title&lt;/code&gt; tag in each of those &lt;code&gt;item&lt;/code&gt;s.&lt;/p&gt;
+&lt;p&gt;This is just a quick glimpse of what we can do with XSLT. This post isn't meant to be a full tutorial on the subject. For more inspiration, you can check out this blog's own XSLT file at &lt;a target="_blank" href="https://ricardolopes.net/blog/rss.xsl"&gt;https://ricardolopes.net/blog/rss.xsl&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After you've created your template, you only need to add these two lines at the top of your RSS file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-xml"&gt;&lt;span class="hljs-meta"&gt;&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;&lt;/span&gt;
+&lt;span class="hljs-meta"&gt;&amp;lt;?xml-stylesheet href="&amp;lt;link/to/your/xslt/file.xsl&amp;gt;" type="text/xsl"?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here's an example of this blog's feed, which you can check by clicking “view source” at &lt;a target="_blank" href="https://ricardolopes.net/blog/rss.xml"&gt;https://ricardolopes.net/blog/rss.xml&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-xml"&gt;&lt;span class="hljs-meta"&gt;&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;&lt;/span&gt;
+&lt;span class="hljs-meta"&gt;&amp;lt;?xml-stylesheet href="https://ricardolopes.net/blog/rss.xsl" type="text/xsl"?&amp;gt;&lt;/span&gt;
+&lt;span class="hljs-tag"&gt;&amp;lt;&lt;span class="hljs-name"&gt;rss&lt;/span&gt; &lt;span class="hljs-attr"&gt;version&lt;/span&gt;=&lt;span class="hljs-string"&gt;"2.0"&lt;/span&gt; &lt;span class="hljs-attr"&gt;xmlns:atom&lt;/span&gt;=&lt;span class="hljs-string"&gt;"http://www.w3.org/2005/Atom"&lt;/span&gt; &lt;span class="hljs-attr"&gt;xmlns:dc&lt;/span&gt;=&lt;span class="hljs-string"&gt;"http://purl.org/dc/elements/1.1/"&lt;/span&gt;&amp;gt;&lt;/span&gt;
   ...
-<span class="hljs-tag">&lt;/<span class="hljs-name">rss</span>&gt;</span>
-</code></pre>
-            <p>
-              The biggest drawback to this approach is, of course, that it will
-              only work if you have control over how your RSS feed is generated.
-              If it's provided by an external provider, chances are you can't
-              add the lines needed to get the XSLT to style it.
-            </p>
-            <p>
-              Shoutout to the original blog posts that inspired me to give this
-              a go and share what I've done:
-            </p>
-            <ul>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://brandonrozek.com/blog/pretty-rss-feeds/"
-                    >Pretty RSS Feeds</a
-                  >
-                  by
-                  <a target="_blank" href="https://brandonrozek.com/"
-                    >Brandon Rozek</a
-                  >, which was inspired by
-                </p>
-              </li>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl"
-                    >pretty-feed.xsl</a
-                  >
-                  by
-                  <a target="_blank" href="https://interconnected.org/"
-                    >Matt Webb</a
-                  >, which in turn was inspired by
-                </p>
-              </li>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://lepture.com/en/2019/rss-style-with-xsl"
-                    >How to style RSS feed</a
-                  >
-                  by <a target="_blank" href="https://lepture.com/">lepture</a>
-                </p>
-              </li>
-            </ul>
-            <p>
-              If you also want to support a more open web based on independent
-              sites and feeds instead of social media silos, consider making
-              this change to your RSS feeds or advocating for it elsewhere. It’s
-              not much, but it’s a start.
-            </p>
-      </description>
+&lt;span class="hljs-tag"&gt;&amp;lt;/&lt;span class="hljs-name"&gt;rss&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The biggest drawback to this approach is, of course, that it will only work if you have control over how your RSS feed is generated. If it's provided by an external provider, chances are you can't add the lines needed to get the XSLT to style it.&lt;/p&gt;
+&lt;p&gt;Shoutout to the original blog posts that inspired me to give this a go and share what I've done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a target="_blank" href="https://brandonrozek.com/blog/pretty-rss-feeds/"&gt;Pretty RSS Feeds&lt;/a&gt; by &lt;a target="_blank" href="https://brandonrozek.com/"&gt;Brandon Rozek&lt;/a&gt;, which was inspired by&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a target="_blank" href="https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl"&gt;pretty-feed.xsl&lt;/a&gt; by &lt;a target="_blank" href="https://interconnected.org/"&gt;Matt Webb&lt;/a&gt;, which in turn was inspired by&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a target="_blank" href="https://lepture.com/en/2019/rss-style-with-xsl"&gt;How to style RSS feed&lt;/a&gt; by &lt;a target="_blank" href="https://lepture.com/"&gt;lepture&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you also want to support a more open web based on independent sites and feeds instead of social media silos, consider making this change to your RSS feeds or advocating for it elsewhere. It’s not much, but it’s a start.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/styling-rss/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/styling-rss/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
@@ -433,430 +155,102 @@
     </item>
     <item>
       <title>Stop Trying to Fix Technical Debt</title>
-      <description>
-            <p>
-              I'm done trying to fix technical debt. When we ask leadership to
-              budget time for fixing tech debt that is holding us back, it's no
-              longer a surprise that the answer is almost always no. Of course
-              they prefer delivering value to users over obsessing about code
-              yet again.
-            </p>
-            <p>
-              That used to get me mad when I was starting out. How come there
-              was broken code slowing us down, and all leadership cared about
-              was shipping new features! We were losing more time dealing with
-              all the preventable data issues than the time it would have
-              actually taken to fix their underlying cause. That made absolutely
-              no sense!
-            </p>
-            <p>
-              What I didn't understand at the time was that advocating for
-              technical debt to be prioritised isn't leadership's job: it's
-              ours, as the codebase specialists. Just like when we hire someone
-              to fix our water pipes or car, we're not the ones asking for
-              additional maintenance tasks: that's the specialists' job when
-              they're doing their work and noticing what can be problematic for
-              the future.
-            </p>
-            <p>
-              Imagine your car mechanic told you that he found a mechanical debt
-              issue that needed to be fixed before it could cause more damage to
-              the car. That would sound like he's scamming you and taking
-              advantage of your lack of car mechanics knowledge to get a higher
-              pay. Imagine you asked him what's the problem exactly, and if we
-              can't just deal with it later, and he'd give you another vague
-              answer, like the problem being missing maintenance, that may cause
-              maintenance-related issues in the future. How happy would you be
-              accepting that extra cost after that interaction?
-            </p>
-            <p>Don't be that guy.</p>
-            <p>
-              The problem with technical debt is that it means too many things
-              at once. Critical architecture flaw? Tech debt. Big untested mess
-              full of hard to find bugs? Tech debt. Any code that I think I
-              could have written in a more elegant form? Tech debt.
-            </p>
-            <p>
-              Technical debt is an almost useless term, and we should abandon it
-              for good.
-            </p>
-            <p>
-              Instead, we should start describing the actual issues the code
-              faces, and what they mean for the business and for the users.
-              Which happens to be precisely what leadership wants to talk about.
-            </p>
-            <p>
-              Don't say that we need to tackle technical debt related to
-              deprecated dependencies. That means nothing for the business and
-              for the users. Instead, (depending on your context) you could say
-              that if protecting our users and our operations is a top priority,
-              then we must upgrade any dependency with reported vulnerabilities
-              ASAP, otherwise any attacker can exploit it. And ideally get
-              others up-to-date as well, to minimise development time in case we
-              need to release an urgent update to fix a possible new
-              vulnerability.
-            </p>
-            <p>
-              Don't say that we have technical debt around data integrity for
-              horizontally scaling the API. Again, there's nothing in there for
-              leadership to feel the need to prioritise it above its own
-              roadmap. Instead, you can say that the API has critical blockers
-              to scaling to meet our projected user activity growth, so the
-              company will miss its growth targets unless this is prioritised
-              and fixed in time.
-            </p>
-            <p>
-              Notice how neither of those alternatives even mention the term
-              technical debt. And how both mention specific business goals and
-              the real impact on them of not prioritising the work.
-            </p>
-            <p>
-              It's not leadership's job to advocate for fixing technical debt.
-              It's yours. Leadership's job is to bring actual value to users and
-              stakeholders. And that's what a company is about. So that's the
-              lens us developers also need to use to advocate for this type of
-              work. If the tech debt work doesn't meet that bar, let's be honest
-              with ourselves: maybe there really is more important work to deal
-              with first.
-            </p>
-            <p>
-              Stop trying to fix technical debt. Start fixing actual business
-              problems, which may incidentally be technical ones.
-            </p>
-      </description>
+      <description>&lt;p&gt;I'm done trying to fix technical debt. When we ask leadership to budget time for fixing tech debt that is holding us back, it's no longer a surprise that the answer is almost always no. Of course they prefer delivering value to users over obsessing about code yet again.&lt;/p&gt;
+&lt;p&gt;That used to get me mad when I was starting out. How come there was broken code slowing us down, and all leadership cared about was shipping new features! We were losing more time dealing with all the preventable data issues than the time it would have actually taken to fix their underlying cause. That made absolutely no sense!&lt;/p&gt;
+&lt;p&gt;What I didn't understand at the time was that advocating for technical debt to be prioritised isn't leadership's job: it's ours, as the codebase specialists. Just like when we hire someone to fix our water pipes or car, we're not the ones asking for additional maintenance tasks: that's the specialists' job when they're doing their work and noticing what can be problematic for the future.&lt;/p&gt;
+&lt;p&gt;Imagine your car mechanic told you that he found a mechanical debt issue that needed to be fixed before it could cause more damage to the car. That would sound like he's scamming you and taking advantage of your lack of car mechanics knowledge to get a higher pay. Imagine you asked him what's the problem exactly, and if we can't just deal with it later, and he'd give you another vague answer, like the problem being missing maintenance, that may cause maintenance-related issues in the future. How happy would you be accepting that extra cost after that interaction?&lt;/p&gt;
+&lt;p&gt;Don't be that guy.&lt;/p&gt;
+&lt;p&gt;The problem with technical debt is that it means too many things at once. Critical architecture flaw? Tech debt. Big untested mess full of hard to find bugs? Tech debt. Any code that I think I could have written in a more elegant form? Tech debt.&lt;/p&gt;
+&lt;p&gt;Technical debt is an almost useless term, and we should abandon it for good.&lt;/p&gt;
+&lt;p&gt;Instead, we should start describing the actual issues the code faces, and what they mean for the business and for the users. Which happens to be precisely what leadership wants to talk about.&lt;/p&gt;
+&lt;p&gt;Don't say that we need to tackle technical debt related to deprecated dependencies. That means nothing for the business and for the users. Instead, (depending on your context) you could say that if protecting our users and our operations is a top priority, then we must upgrade any dependency with reported vulnerabilities ASAP, otherwise any attacker can exploit it. And ideally get others up-to-date as well, to minimise development time in case we need to release an urgent update to fix a possible new vulnerability.&lt;/p&gt;
+&lt;p&gt;Don't say that we have technical debt around data integrity for horizontally scaling the API. Again, there's nothing in there for leadership to feel the need to prioritise it above its own roadmap. Instead, you can say that the API has critical blockers to scaling to meet our projected user activity growth, so the company will miss its growth targets unless this is prioritised and fixed in time.&lt;/p&gt;
+&lt;p&gt;Notice how neither of those alternatives even mention the term technical debt. And how both mention specific business goals and the real impact on them of not prioritising the work.&lt;/p&gt;
+&lt;p&gt;It's not leadership's job to advocate for fixing technical debt. It's yours. Leadership's job is to bring actual value to users and stakeholders. And that's what a company is about. So that's the lens us developers also need to use to advocate for this type of work. If the tech debt work doesn't meet that bar, let's be honest with ourselves: maybe there really is more important work to deal with first.&lt;/p&gt;
+&lt;p&gt;Stop trying to fix technical debt. Start fixing actual business problems, which may incidentally be technical ones.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/stop-trying-to-fix-technical-debt/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
-      <pubDate>Tue, 30 Apr 2024 22:22:22 GMT</pubDate>
+      <pubDate>Tue, 30 Apr 2024 22:16:39 GMT</pubDate>
     </item>
     <item>
       <title>Document Your Code Through Version Control</title>
-      <description>
-            <p>
-              A significant challenge with code maintainability is understanding
-              why the code is the way it is. This includes understanding the
-              trade-offs that were considered, why certain convoluted parts of
-              the codebase can't be simplified, and so on. That's what we use
-              documentation for.
-            </p>
-            <h2 id="heading-using-code-comments">Using code comments</h2>
-            <p>
-              The common approach to documenting all those code decisions is to
-              introduce code comments.
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-comment">// </span>
-<span class="hljs-comment">// Dear maintainer:</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Once you are done trying to 'optimize' this routine,</span>
-<span class="hljs-comment">// and have realized what a terrible mistake that was,</span>
-<span class="hljs-comment">// please increment the following counter as a warning</span>
-<span class="hljs-comment">// to the next guy:</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// total_hours_wasted_here = 42</span>
-<span class="hljs-comment">//</span>
-</code></pre>
-            <p>
-              Source:
-              <a
-                target="_blank"
-                href="https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129"
-                >https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129</a
-              >
-            </p>
-            <p>
-              However, code comments can quickly become outdated, are often
-              missing when we need them the most, and are perpetually taking up
-              space next to our code.
-            </p>
-            <h2 id="heading-using-git">Using git</h2>
-            <p>
-              Alternatively, we can use our project's own version control system
-              to better document it! Here's how it works:
-            </p>
-            <ol>
-              <li>
-                <p>
-                  Every line of code in your repo was introduced at some point
-                  in a commit, which you can find with <code>git blame</code>
-                </p>
-              </li>
-              <li>
-                <p>
-                  Every commit should be atomic, i.e. introducing a single
-                  (complete) change, and nothing more
-                </p>
-              </li>
-              <li>
-                <p>
-                  Each commit should have a descriptive commit message
-                  explaining its unique change, which should include any
-                  relevant context like trade-offs and explanations
-                </p>
-              </li>
-              <li>
-                <p>
-                  This means now every line of code is documented with helpful
-                  and relevant commit messages, along with historical context
-                  (git history from that commit)
-                </p>
-              </li>
-            </ol>
-            <p>
-              I was first introduced to this alternative approach to code
-              documentation by an exceptional mentor and former CTO
-              <a
-                target="_blank"
-                href="https://blog.mocoso.co.uk/talks/2015/01/12/telling-stories-through-your-commits/"
-                >Joel Chippindale</a
-              >. It was a revelation at the time. Now, every line had helpful,
-              up-to-date documentation that you could summon when needed, at the
-              cost of being a bit more thoughtful with your git history.
-            </p>
-            <p>
-              <img
-                loading="lazy"
-                src="./screenshot.png"
-                alt="Example of how descriptive commit messages help documenting code"
-              />
-            </p>
-            <p>
-              Source:
-              <a
-                target="_blank"
-                href="https://mislav.net/2014/02/hidden-documentation/"
-                >https://mislav.net/2014/02/hidden-documentation/</a
-              >
-            </p>
-            <p>
-              I found long, descriptive commit messages incredibly useful for
-              working with large projects. It was disappointing to later find
-              out that other companies weren't following this. I was so used to
-              <code>git blame</code>, <code>git bisect</code> and travelling
-              through git time for debugging that it felt like losing a
-              superpower.
-            </p>
-            <h2 id="heading-using-github">Using GitHub</h2>
-            <p>
-              However, now that the
-              <a
-                target="_blank"
-                href="https://docs.github.com/en/get-started/quickstart/github-flow"
-                >GitHub flow</a
-              >
-              is basically an industry standard, we can all replicate this
-              system!
-            </p>
-            <p>
-              Even if your team pays little attention to commit messages or uses
-              some one-liner rule like
-              <a target="_blank" href="https://www.conventionalcommits.org/"
-                >Conventional Commits</a
-              >, they're all still linked to a specific Pull Request.
-            </p>
-            <p>
-              When you approve and merge a PR on GitHub, it adds a new merge or
-              squashed commit on <code>main</code> with those changes. That
-              commit includes the PR id in its message. This means that now
-              every line of code belongs to a commit, which belongs to a merged
-              PR.
-            </p>
-            <p>
-              Commit messages may not be getting a lot of attention, but PR
-              descriptions are (or should)! We can use
-              <a
-                target="_blank"
-                href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository"
-                >predefined PR templates</a
-              >, include links to issue trackers or other context, and even add
-              rich media like architecture diagrams, performance benchmark
-              graphics, video walkthroughs of UI changes, and so on. And we also
-              get the full code review discussion, which often adds even more
-              context on many decisions.
-            </p>
-            <p>
-              So make sure you ship small PRs with atomic changes and add plenty
-              of context on those PR descriptions! Then, enjoy your brand new
-              debugging superpower by using <code>git blame</code> to find that
-              line's commit and the corresponding PR with full context.
-            </p>
-            <p>
-              To sum up, here's the adapted process, which now uses GitHub PR
-              descriptions instead of direct git commit messages:
-            </p>
-            <ol>
-              <li>
-                <p>
-                  Every line of code in your repo was introduced at some point
-                  in a commit, which you can find with <code>git blame</code>,
-                  which in turn was introduced in a PR, which you can find using
-                  the id in the commit message
-                </p>
-              </li>
-              <li>
-                <p>
-                  Every PR should be atomic, i.e. introducing a single
-                  (complete) change, and nothing more
-                </p>
-              </li>
-              <li>
-                <p>
-                  Each PR should have a helpful PR description explaining its
-                  unique change, which should include any relevant context like
-                  trade-offs and explanations (which, unlike with plain commit
-                  messages, can also have rich media and discussions)
-                </p>
-              </li>
-              <li>
-                <p>
-                  This means now every line of code is documented with helpful
-                  and relevant PR descriptions/discussions, along with
-                  historical context (git history from that PR's merge commit)
-                </p>
-              </li>
-            </ol>
-      </description>
+      <description>&lt;p&gt;A significant challenge with code maintainability is understanding why the code is the way it is. This includes understanding the trade-offs that were considered, why certain convoluted parts of the codebase can't be simplified, and so on. That's what we use documentation for.&lt;/p&gt;
+&lt;h2 id="heading-using-code-comments"&gt;Using code comments&lt;/h2&gt;
+&lt;p&gt;The common approach to documenting all those code decisions is to introduce code comments.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-comment"&gt;// &lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// Dear maintainer:&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// &lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// Once you are done trying to 'optimize' this routine,&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// and have realized what a terrible mistake that was,&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// please increment the following counter as a warning&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// to the next guy:&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// &lt;/span&gt;
+&lt;span class="hljs-comment"&gt;// total_hours_wasted_here = 42&lt;/span&gt;
+&lt;span class="hljs-comment"&gt;//&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Source: &lt;a target="_blank" href="https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129"&gt;https://stackoverflow.com/questions/184618/what-is-the-best-comment-in-source-code-you-have-ever-encountered/482129#482129&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;However, code comments can quickly become outdated, are often missing when we need them the most, and are perpetually taking up space next to our code.&lt;/p&gt;
+&lt;h2 id="heading-using-git"&gt;Using git&lt;/h2&gt;
+&lt;p&gt;Alternatively, we can use our project's own version control system to better document it! Here's how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Every line of code in your repo was introduced at some point in a commit, which you can find with &lt;code&gt;git blame&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Every commit should be atomic, i.e. introducing a single (complete) change, and nothing more&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Each commit should have a descriptive commit message explaining its unique change, which should include any relevant context like trade-offs and explanations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This means now every line of code is documented with helpful and relevant commit messages, along with historical context (git history from that commit)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I was first introduced to this alternative approach to code documentation by an exceptional mentor and former CTO &lt;a target="_blank" href="https://blog.mocoso.co.uk/talks/2015/01/12/telling-stories-through-your-commits/"&gt;Joel Chippindale&lt;/a&gt;. It was a revelation at the time. Now, every line had helpful, up-to-date documentation that you could summon when needed, at the cost of being a bit more thoughtful with your git history.&lt;/p&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/document-your-code-through-version-control/074f7f34-ff67-422d-b164-822444e6bd48.png" alt="Example of how descriptive commit messages help documenting code"&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a target="_blank" href="https://mislav.net/2014/02/hidden-documentation/"&gt;https://mislav.net/2014/02/hidden-documentation/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I found long, descriptive commit messages incredibly useful for working with large projects. It was disappointing to later find out that other companies weren't following this. I was so used to &lt;code&gt;git blame&lt;/code&gt;, &lt;code&gt;git bisect&lt;/code&gt; and travelling through git time for debugging that it felt like losing a superpower.&lt;/p&gt;
+&lt;h2 id="heading-using-github"&gt;Using GitHub&lt;/h2&gt;
+&lt;p&gt;However, now that the &lt;a target="_blank" href="https://docs.github.com/en/get-started/quickstart/github-flow"&gt;GitHub flow&lt;/a&gt; is basically an industry standard, we can all replicate this system!&lt;/p&gt;
+&lt;p&gt;Even if your team pays little attention to commit messages or uses some one-liner rule like &lt;a target="_blank" href="https://www.conventionalcommits.org/"&gt;Conventional Commits&lt;/a&gt;, they're all still linked to a specific Pull Request.&lt;/p&gt;
+&lt;p&gt;When you approve and merge a PR on GitHub, it adds a new merge or squashed commit on &lt;code&gt;main&lt;/code&gt; with those changes. That commit includes the PR id in its message. This means that now every line of code belongs to a commit, which belongs to a merged PR.&lt;/p&gt;
+&lt;p&gt;Commit messages may not be getting a lot of attention, but PR descriptions are (or should)! We can use &lt;a target="_blank" href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository"&gt;predefined PR templates&lt;/a&gt;, include links to issue trackers or other context, and even add rich media like architecture diagrams, performance benchmark graphics, video walkthroughs of UI changes, and so on. And we also get the full code review discussion, which often adds even more context on many decisions.&lt;/p&gt;
+&lt;p&gt;So make sure you ship small PRs with atomic changes and add plenty of context on those PR descriptions! Then, enjoy your brand new debugging superpower by using &lt;code&gt;git blame&lt;/code&gt; to find that line's commit and the corresponding PR with full context.&lt;/p&gt;
+&lt;p&gt;To sum up, here's the adapted process, which now uses GitHub PR descriptions instead of direct git commit messages:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Every line of code in your repo was introduced at some point in a commit, which you can find with &lt;code&gt;git blame&lt;/code&gt;, which in turn was introduced in a PR, which you can find using the id in the commit message&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Every PR should be atomic, i.e. introducing a single (complete) change, and nothing more&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Each PR should have a helpful PR description explaining its unique change, which should include any relevant context like trade-offs and explanations (which, unlike with plain commit messages, can also have rich media and discussions)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This means now every line of code is documented with helpful and relevant PR descriptions/discussions, along with historical context (git history from that PR's merge commit)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
       <link>https://ricardolopes.net/blog/document-your-code-through-version-control/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/document-your-code-through-version-control/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
-      <pubDate>Fri, 16 Mar 2024 00:31:23 GMT</pubDate>
+      <pubDate>Sat, 16 Mar 2024 00:19:11 GMT</pubDate>
     </item>
     <item>
       <title>I Changed My Mind About Remote Communication</title>
-      <description>
-            <p>
-              There's been a long debate about remote vs on-site work. Some say
-              remote is better because it cuts down on commuting and office
-              costs and widens the talent pool. Some say it's worse because you
-              miss the spontaneous hallway conversations, and maybe people
-              aren't even working that hard if they're left unsupervised at
-              home.
-            </p>
-            <p>
-              I believe remote work is better for most, though I admit it might
-              not be the best option for all. If close human connection is what
-              drives you at work, or if you're just starting out and still need
-              frequent mentoring and training, an on-site experience may be a
-              better fit for you.
-            </p>
-            <p>
-              Despite my thoughts on remote work, I mostly saw it as an
-              acceptable balance of trade-offs. You don't get the productivity
-              boost of direct in-person collaboration, but at least that's
-              offset by the productivity gains of no commute and no office
-              distractions. You don't get the serendipity of overhearing someone
-              mentioning something relevant to your work, but at least by hiring
-              globally instead of locally, you get access to potentially much
-              better talent.
-            </p>
-            <p>
-              One trade-off I believed was that face-to-face communication was
-              simply better, but at least remote allowed us to communicate
-              through geographies. Too bad we had to put up with Zoom fatigue,
-              technical issues, bad sound quality, “if you're talking, you're on
-              mute”.
-            </p>
-            <p>
-              What I've realised is that yes, calls can be worse than in-person
-              conversations, but the remote communication superpower lies
-              elsewhere: asynchronous communication.
-            </p>
-            <p>
-              Synchronous communication requires participants to engage
-              synchronised at the same time. That can be meetings, calls or live
-              chats, for instance. Honestly, I still believe on-site is a better
-              experience here.
-            </p>
-            <p>
-              Asynchronous communication doesn't require everyone to be in sync:
-              they're free to engage whenever and however works best for them.
-              That can be documentation, Pull Requests, recorded videos and so
-              on.
-            </p>
-            <p>
-              The first obvious reason why async communication is great is that
-              it frees people to participate at their own time. If you're busy
-              with your task, you can watch later. If you're on the school run,
-              you can add your update when you're back. If you're participating
-              in different projects with conflicting schedules, you can catch up
-              on everything.
-            </p>
-            <p>
-              This isn't just about letting people choose their time: even if
-              there was no schedule flexibility, this is great because it works
-              for people who couldn't show up. You don't miss the important
-              communication because you were out sick that day. You can even get
-              the latest communications from even before you've joined the team!
-              This would be impossible for in-person meetings and hallway
-              discussions.
-            </p>
-            <p>
-              Let's take standups as an example. Every morning, the team gathers
-              to report the status of each task and identify any blocker. I
-              found face-to-face standups to be better than calls, that just add
-              a layer of networking and technical issues. Calls were the
-              necessary evil to be able to do a standup with global top talent
-              instead of local talent only.
-            </p>
-            <p>
-              However, if we switch from sync to async communication we get
-              everyone posting their own update, no call needed. That's great
-              because you no longer lose the discussion when the schedule
-              doesn't suit you or when you're out that day. Perhaps it's not as
-              good at sparking deeper discussions to brainstorm issues or
-              identify blockers, but that's the trade-off. Or another advantage,
-              if you view those as tangents taking time from the standup's
-              purpose.
-            </p>
-            <p>
-              What I've just recently realised is that there's an even bigger
-              benefit of async communication: historical context. You're not
-              just getting the most recent communication, you're getting all
-              communications that ever happened, always available. Of course I
-              knew this happened, it just hadn't clicked yet how powerful that
-              could be.
-            </p>
-            <p>
-              Getting back to the standups example, you not only get to check
-              what anyone from any team reported that day, but you can also
-              check their updates through time. This is useful to understand the
-              progress of specific projects, to get a more objective view of how
-              your direct reports are performing, or even for yourself to
-              remember the noteworthy work you've been doing.
-            </p>
-            <p>
-              I used to think face-to-face chats were more natural and pleasant,
-              therefore better overall. But with these async communication
-              benefits, they just sound objectively worse now. Imagine the
-              wasted productivity from all the institutional knowledge lost from
-              in-person discussions that never got recorded. No one else got
-              access to those discussions, and even the participants weren't
-              able to review them later. This isn't a trade-off, this is a
-              disaster.
-            </p>
-            <p>
-              This doesn't mean all sync communication is bad. Sometimes it's
-              just easier to hop on a quick call to align on something when it's
-              not working through writing. As always, there's the right tool for
-              each job. It's just that we usually default to one tool, while
-              another turns out to be much better for most of those jobs.
-            </p>
-            <p>
-              To sum up, prefer async communication like writing over sync
-              communication like calling. It's inclusive to those who would have
-              missed the call, can be shared with people who don't attend those
-              calls, and can be persisted through time for future reference. I'm
-              now convinced that this is the most effective team communication
-              strategy.
-            </p>
-            <p>
-              Fun fact: this realisation was one of the triggers that got me to
-              <a target="_blank" href="https://ricardolopes.net/blog/about/"
-                >start blogging again</a
-              >. Instead of repeating the same points over and over again in
-              different discussions, I can publish them once, and make them
-              available to everyone, at any time. What a bargain!
-            </p>
-      </description>
+      <description>&lt;p&gt;There's been a long debate about remote vs on-site work. Some say remote is better because it cuts down on commuting and office costs and widens the talent pool. Some say it's worse because you miss the spontaneous hallway conversations, and maybe people aren't even working that hard if they're left unsupervised at home.&lt;/p&gt;
+&lt;p&gt;I believe remote work is better for most, though I admit it might not be the best option for all. If close human connection is what drives you at work, or if you're just starting out and still need frequent mentoring and training, an on-site experience may be a better fit for you.&lt;/p&gt;
+&lt;p&gt;Despite my thoughts on remote work, I mostly saw it as an acceptable balance of trade-offs. You don't get the productivity boost of direct in-person collaboration, but at least that's offset by the productivity gains of no commute and no office distractions. You don't get the serendipity of overhearing someone mentioning something relevant to your work, but at least by hiring globally instead of locally, you get access to potentially much better talent.&lt;/p&gt;
+&lt;p&gt;One trade-off I believed was that face-to-face communication was simply better, but at least remote allowed us to communicate through geographies. Too bad we had to put up with Zoom fatigue, technical issues, bad sound quality, “if you're talking, you're on mute”.&lt;/p&gt;
+&lt;p&gt;What I've realised is that yes, calls can be worse than in-person conversations, but the remote communication superpower lies elsewhere: asynchronous communication.&lt;/p&gt;
+&lt;p&gt;Synchronous communication requires participants to engage synchronised at the same time. That can be meetings, calls or live chats, for instance. Honestly, I still believe on-site is a better experience here.&lt;/p&gt;
+&lt;p&gt;Asynchronous communication doesn't require everyone to be in sync: they're free to engage whenever and however works best for them. That can be documentation, Pull Requests, recorded videos and so on.&lt;/p&gt;
+&lt;p&gt;The first obvious reason why async communication is great is that it frees people to participate at their own time. If you're busy with your task, you can watch later. If you're on the school run, you can add your update when you're back. If you're participating in different projects with conflicting schedules, you can catch up on everything.&lt;/p&gt;
+&lt;p&gt;This isn't just about letting people choose their time: even if there was no schedule flexibility, this is great because it works for people who couldn't show up. You don't miss the important communication because you were out sick that day. You can even get the latest communications from even before you've joined the team! This would be impossible for in-person meetings and hallway discussions.&lt;/p&gt;
+&lt;p&gt;Let's take standups as an example. Every morning, the team gathers to report the status of each task and identify any blocker. I found face-to-face standups to be better than calls, that just add a layer of networking and technical issues. Calls were the necessary evil to be able to do a standup with global top talent instead of local talent only.&lt;/p&gt;
+&lt;p&gt;However, if we switch from sync to async communication we get everyone posting their own update, no call needed. That's great because you no longer lose the discussion when the schedule doesn't suit you or when you're out that day. Perhaps it's not as good at sparking deeper discussions to brainstorm issues or identify blockers, but that's the trade-off. Or another advantage, if you view those as tangents taking time from the standup's purpose.&lt;/p&gt;
+&lt;p&gt;What I've just recently realised is that there's an even bigger benefit of async communication: historical context. You're not just getting the most recent communication, you're getting all communications that ever happened, always available. Of course I knew this happened, it just hadn't clicked yet how powerful that could be.&lt;/p&gt;
+&lt;p&gt;Getting back to the standups example, you not only get to check what anyone from any team reported that day, but you can also check their updates through time. This is useful to understand the progress of specific projects, to get a more objective view of how your direct reports are performing, or even for yourself to remember the noteworthy work you've been doing.&lt;/p&gt;
+&lt;p&gt;I used to think face-to-face chats were more natural and pleasant, therefore better overall. But with these async communication benefits, they just sound objectively worse now. Imagine the wasted productivity from all the institutional knowledge lost from in-person discussions that never got recorded. No one else got access to those discussions, and even the participants weren't able to review them later. This isn't a trade-off, this is a disaster.&lt;/p&gt;
+&lt;p&gt;This doesn't mean all sync communication is bad. Sometimes it's just easier to hop on a quick call to align on something when it's not working through writing. As always, there's the right tool for each job. It's just that we usually default to one tool, while another turns out to be much better for most of those jobs.&lt;/p&gt;
+&lt;p&gt;To sum up, prefer async communication like writing over sync communication like calling. It's inclusive to those who would have missed the call, can be shared with people who don't attend those calls, and can be persisted through time for future reference. I'm now convinced that this is the most effective team communication strategy.&lt;/p&gt;
+&lt;p&gt;Fun fact: this realisation was one of the triggers that got me to &lt;a target="_blank" href="https://ricardolopes.net/blog/about/"&gt;start blogging again&lt;/a&gt;. Instead of repeating the same points over and over again in different discussions, I can publish them once, and make them available to everyone, at any time. What a bargain!&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/remote-communication/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/remote-communication/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
@@ -864,414 +258,147 @@
     </item>
     <item>
       <title>No Surprises</title>
-      <description>
-            <p>
-              One of my principles for software development is “no surprises”.
-              Things should be exactly where we expect them to be, and look
-              exactly like what we expect then to look like. Code should do
-              exactly what we expect it to do.
-            </p>
-            <p>
-              When things are surprising, we have to spend more mental effort
-              trying to understand them. If we can't trust a codebase to have no
-              surprises, we're constantly on high alert.
-            </p>
-            <p>
-              When code has no surprises, there's a whole cognitive load that is
-              no longer needed. We can get into a focused flow state, knowing
-              that we can trust the code we see and don't need to second-guess
-              everything.
-            </p>
-            <p>
-              Here are some examples of how to apply this principle, in no
-              particular order.
-            </p>
-            <h2 id="heading-consistent-style">Consistent style</h2>
-            <p>Enforce a linter and autoformatter.</p>
-            <p>
-              I don't care which rules you choose. The important part is to have
-              consistent rules applied everywhere. This will make all code look
-              consistent and predictable, so that no one has to spend time or
-              effort with style decisions.
-            </p>
-            <p>
-              Don't make developers discuss style in pull requests. It has to be
-              a solved problem at that point.
-            </p>
-            <h2 id="heading-clear-project-structure">
-              Clear project structure
-            </h2>
-            <p>
-              If you've got a models directory, don't put models files anywhere
-              else.
-            </p>
-            <p>
-              If one endpoint calls a service that calls a model, don't have
-              another endpoint calling a manager that calls a repository that
-              calls the database directly.
-            </p>
-            <p>
-              When a developer is working on a new feature, they should never
-              need to spend time deciding what the structure should be like:
-              they should just need to follow the project convention.
-            </p>
-            <p>
-              Also: keep the project structure easy to understand and to apply
-              for new code.
-            </p>
-            <h2 id="heading-no-hidden-consequences">No hidden consequences</h2>
-            <p>
-              If you're calling a GET endpoint, you're not expecting it to
-              mutate data.
-            </p>
-            <p>
-              If you're calling a model method, you're not expecting calls to
-              external providers.
-            </p>
-            <p>
-              When these assumptions fail, it not only forces the developer to
-              spend more time hunting for those hidden consequences, but it's
-              also a common source of bugs.
-            </p>
-            <h2 id="heading-no-needlessly-defensive-code">
-              No needlessly defensive code
-            </h2>
-            <p>
-              If email is a required field for users, you don't need to protect
-              against a missing email in the rest of the codebase.
-            </p>
-            <p>
-              If an endpoint returns a list of resources, you don't need to
-              protect against a 404 when no resources exist: the response is a
-              200 with an empty list.
-            </p>
-            <p>
-              If a module requires a user to be an admin to reach it, you don't
-              need to repeat that check inside the module.
-            </p>
-            <p>
-              This sort of needlessly defensive code is protecting against
-              threats that don't exist, and is casting doubts onto developer's
-              minds (wait, email could be undefined at this point??).
-            </p>
-            <h2 id="heading-industry-conventions">Industry conventions</h2>
-            <p>
-              Write idiomatic code, use the framework's conventions, follow best
-              practices.
-            </p>
-            <p>
-              You don't need to blindly cargo cult what everyone else is doing,
-              or apply conventions that don't make sense for your specific
-              situation. But often it's useful to look for common patterns and
-              solutions that the industry has reached consensus on, which could
-              benefit you as well.
-            </p>
-            <p>
-              This allows you not only to benefit from the wisdom of the crowd,
-              but also to keep surprises low when switching between projects and
-              teams.
-            </p>
-            <h2 id="heading-the-right-abstraction">The right abstraction</h2>
-            <p>
-              The platform you're developing on provides a set of APIs and tools
-              you and everyone else can use.
-            </p>
-            <p>
-              <a
-                href="https://ricardolopes.net/blog/resist-exploding-complexity/"
-                >Unneeded custom abstractions and complexity</a
-              >
-              on top of that common interface will look surprising and require
-              more mental effort to understand and to look for unexpected
-              behaviours. Not to mention more surface area for maintenance work
-              and bugs.
-            </p>
-            <h2 id="heading-and-more">And more</h2>
-            <p>
-              I'm sure there are a lot more examples of this principle. I may
-              update this list in the future, if something else meaningful comes
-              up. But I hope its message is clear already.
-            </p>
-            <p>
-              Make your code as boring and as unsurprising as possible. The
-              mental load from dealing with surprises and uncertainty may not
-              seem much to you, at first, but it compounds, eventually turning a
-              project into a fragile unmaintainable mess that developers are too
-              afraid to touch.
-            </p>
-            <p>I hope none of this sounds too surprising :)</p>
-      </description>
+      <description>&lt;p&gt;One of my principles for software development is “no surprises”. Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do.&lt;/p&gt;
+&lt;p&gt;When things are surprising, we have to spend more mental effort trying to understand them. If we can't trust a codebase to have no surprises, we're constantly on high alert.&lt;/p&gt;
+&lt;p&gt;When code has no surprises, there's a whole cognitive load that is no longer needed. We can get into a focused flow state, knowing that we can trust the code we see and don't need to second-guess everything.&lt;/p&gt;
+&lt;p&gt;Here are some examples of how to apply this principle, in no particular order.&lt;/p&gt;
+&lt;h3 id="heading-consistent-style"&gt;Consistent style&lt;/h3&gt;
+&lt;p&gt;Enforce a linter and autoformatter.&lt;/p&gt;
+&lt;p&gt;I don't care which rules you choose. The important part is to have consistent rules applied everywhere. This will make all code look consistent and predictable, so that no one has to spend time or effort with style decisions.&lt;/p&gt;
+&lt;p&gt;Don't make developers discuss style in pull requests. It has to be a solved problem at that point.&lt;/p&gt;
+&lt;h3 id="heading-clear-project-structure"&gt;Clear project structure&lt;/h3&gt;
+&lt;p&gt;If you've got a models directory, don't put models files anywhere else.&lt;/p&gt;
+&lt;p&gt;If one endpoint calls a service that calls a model, don't have another endpoint calling a manager that calls a repository that calls the database directly.&lt;/p&gt;
+&lt;p&gt;When a developer is working on a new feature, they should never need to spend time deciding what the structure should be like: they should just need to follow the project convention.&lt;/p&gt;
+&lt;p&gt;Also: keep the project structure easy to understand and to apply for new code.&lt;/p&gt;
+&lt;h3 id="heading-no-hidden-consequences"&gt;No hidden consequences&lt;/h3&gt;
+&lt;p&gt;If you're calling a GET endpoint, you're not expecting it to mutate data.&lt;/p&gt;
+&lt;p&gt;If you're calling a model method, you're not expecting calls to external providers.&lt;/p&gt;
+&lt;p&gt;When these assumptions fail, it not only forces the developer to spend more time hunting for those hidden consequences, but it's also a common source of bugs.&lt;/p&gt;
+&lt;h3 id="heading-no-needlessly-defensive-code"&gt;No needlessly defensive code&lt;/h3&gt;
+&lt;p&gt;If email is a required field for users, you don't need to protect against a missing email in the rest of the codebase.&lt;/p&gt;
+&lt;p&gt;If an endpoint returns a list of resources, you don't need to protect against a 404 when no resources exist: the response is a 200 with an empty list.&lt;/p&gt;
+&lt;p&gt;If a module requires a user to be an admin to reach it, you don't need to repeat that check inside the module.&lt;/p&gt;
+&lt;p&gt;This sort of needlessly defensive code is protecting against threats that don't exist, and is casting doubts onto developer's minds (wait, email could be undefined at this point??).&lt;/p&gt;
+&lt;h3 id="heading-industry-conventions"&gt;Industry conventions&lt;/h3&gt;
+&lt;p&gt;Write idiomatic code, use the framework's conventions, follow best practices.&lt;/p&gt;
+&lt;p&gt;You don't need to blindly cargo cult what everyone else is doing, or apply conventions that don't make sense for your specific situation. But often it's useful to look for common patterns and solutions that the industry has reached consensus on, which could benefit you as well.&lt;/p&gt;
+&lt;p&gt;This allows you not only to benefit from the wisdom of the crowd, but also to keep surprises low when switching between projects and teams.&lt;/p&gt;
+&lt;h3 id="heading-the-right-abstraction"&gt;The right abstraction&lt;/h3&gt;
+&lt;p&gt;The platform you're developing on provides a set of APIs and tools you and everyone else can use.&lt;/p&gt;
+&lt;p&gt;&lt;a target="_blank" href="https://ricardolopes.net/blog/resist-exploding-complexity/"&gt;Unneeded custom abstractions and complexity&lt;/a&gt; on top of that common interface will look surprising and require more mental effort to understand and to look for unexpected behaviours. Not to mention more surface area for maintenance work and bugs.&lt;/p&gt;
+&lt;h3 id="heading-and-more"&gt;And more&lt;/h3&gt;
+&lt;p&gt;I'm sure there are a lot more examples of this principle. I may update this list in the future, if something else meaningful comes up. But I hope its message is clear already.&lt;/p&gt;
+&lt;p&gt;Make your code as boring and as unsurprising as possible. The mental load from dealing with surprises and uncertainty may not seem much to you, at first, but it compounds, eventually turning a project into a fragile unmaintainable mess that developers are too afraid to touch.&lt;/p&gt;
+&lt;p&gt;I hope none of this sounds too surprising :)&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/no-surprises/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/no-surprises/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
-      <pubDate>Fri, 19 Fev 2024 00:03:16 GMT</pubDate>
+      <pubDate>Mon, 19 Feb 2024 00:01:47 GMT</pubDate>
     </item>
     <item>
       <title>Being Uplifting</title>
-      <description>
-            <p>
-              When someone chooses a career, they go for the work they like the
-              most, within their abilities. I know I did when I followed
-              software development. And yet, you don't see many people
-              celebrating Mondays and lamenting the end of the week. Not even
-              close.
-            </p>
-            <p>
-              Somewhere along the way we all experience the office politics, the
-              bad management, the boring tasks, the lack of agency, and so on.
-            </p>
-            <p>We love the craft, but not necessarily the job.</p>
-            <p>
-              In all the teams I've worked with, I've never seen an ideal
-              scenario where nothing is wrong. And I don't think I will, ever.
-              And neither will you. The real world is always messy.
-            </p>
-            <p>
-              It's up to us to decide how we want to react to everything that is
-              wrong around us.
-            </p>
-            <blockquote>
-              <p>
-                "We have absolutely no control over what happens to us in life
-                but what we have paramount control over is how we respond to
-                those events."
-              </p>
-              <p>Viktor Frankl</p>
-            </blockquote>
-            <h2 id="heading-being-a-complainer">Being a complainer</h2>
-            <p>
-              Early in my career, I wouldn't shy away from the opportunity to
-              complain about everything that was wrong with the codebase and
-              with the company. Something was wrong, so someone had to complain
-              about it!
-            </p>
-            <p>
-              Asked to waste time fixing data inconsistencies rather than
-              addressing their root cause? What a prioritisation failure from
-              leadership! Long build times slowing down development? What a
-              terrible mess we've inherited from those who coded that in the
-              first place!
-            </p>
-            <p>
-              It truly felt like an important service to raise awareness of
-              issues that were holding the company's mission back.
-            </p>
-            <p>
-              Over time, I got more experience and respect from peers. I was
-              still an individual contributor, but was naturally doing more and
-              more mentoring work.
-            </p>
-            <p>
-              One day, I was mentoring two recently-joined junior developers who
-              were still learning how things worked. I was trying to be helpful
-              and authentic, so I made sure to highlight plenty of issues with
-              the codebase and with the organisation. It's useful to know the
-              pitfalls to look out for, after all. All in good spirits.
-            </p>
-            <p>
-              Later, I had a conversation with my team lead, who learned about
-              that session. That's where I had one of the biggest realisations
-              of my career.
-            </p>
-            <h2 id="heading-being-intentional">Being intentional</h2>
-            <p>
-              See, my intentions surely were pure, but I wasn't being the
-              helpful mentor I thought I was: I was just being a complainer. I
-              was just ranting about all the things I disliked.
-            </p>
-            <p>
-              As newly joined junior developers, they looked up to more
-              established senior developers to form their opinion about what
-              they've just signed up for. And if established senior developers
-              paint such a gloomy picture, that's what they assume as true.
-            </p>
-            <p>
-              This sounds obvious in hindsight, but sometimes we need the timely
-              reminder: if you've got a balanced view about something, but you
-              overly focus on the bad parts, then you're not sharing an accurate
-              representation of your views. Others can't read your mind, only
-              interpret your actions, so they'll believe your views are the
-              non-representative picture you've shared.
-            </p>
-            <p>
-              I realised that we shouldn't be complainers: instead, we should be
-              intentional, fair reporters of our full range of opinions. This is
-              especially important if there are people looking up to us and
-              valuing and trusting what we're saying!
-            </p>
-            <p>
-              This realisation was critical to set the stage for the next one.
-            </p>
-            <h2 id="heading-being-uplifting">Being uplifting</h2>
-            <p>
-              Not long after that episode, something else clicked for me. My
-              mood can easily be influenced by the environment around me. If
-              it's full of complainers, I'll be one, too. If morale is low, mine
-              will be as well.
-            </p>
-            <p>
-              After having contributed for so long to an environment of
-              complaining, I realised that actually, culture isn't set in stone.
-              It's malleable. The culture is set every day by the people who
-              show up. And you're one of them.
-            </p>
-            <p>
-              No matter how you rank within your company, you are an influencer
-              of its environment. We all are, whether we realise it or not. You
-              can choose to blend in with how others set it, or you can opt to
-              plant a different seed.
-            </p>
-            <blockquote>
-              <p>"Be the change you wish to see in the world."</p>
-              <p>Apparently miquoted to Gandhi</p>
-            </blockquote>
-            <p>
-              Influence the environment you want to be a part of. If you're a
-              complainer, you're enabling an environment of complainers. If you
-              want to be a part of an uplifting environment, it starts with you.
-            </p>
-            <p>Be an uplifter.</p>
-            <p>
-              When others complain, you can publicly celebrate your teammates’
-              successes. When others plot against each other, you can ignore the
-              noise and focus on beating the only one who matters: your past
-              self.
-            </p>
-            <p>
-              If the tasks are dull, use your spare time to explore and learn
-              new things, rather than using it to rant about how boring things
-              are. If your company offers a learning budget, make good use of
-              it!
-            </p>
-            <p>
-              Be intentional with the way you interact with others. Make them
-              feel valued and filled with energy, even on days when you don't
-              feel that energetic yourself. People remember how you made them
-              feel. And they act accordingly.
-            </p>
-            <p>
-              This isn't about dropping your authenticity and pretending to be
-              someone you're not, or sharing opinions that aren't what you truly
-              think. It's about realising that your actions have consequences,
-              and you can be intentional in surfacing your best self.
-            </p>
-            <p>
-              This is also not about toxic positivity. It's still important to
-              flag issues and to try to fix them. We shouldn't self-censor any
-              criticism, we should just be more strategical about when it's
-              actually useful to share it, and being constructive about it.
-            </p>
-            <p>
-              This is about lifting others up: showing excitement about things,
-              not ranting all the time for the sake of it, openly celebrating
-              success, being kind to team members, and so on.
-            </p>
-            <p>
-              And, when in doubt, you can slightly exaggerate these positive
-              behaviours. Communication is hard, especially if you're remote,
-              for instance, or when writing. So, slight exaggerations go a long
-              way in removing ambiguity or misunderstandings.
-            </p>
-            <p>
-              Is this mindset change a silver bullet against everything that is
-              wrong with a job? Of course not! And if you're in an awful
-              environment, your best option may be to look for something better.
-            </p>
-            <p>
-              But for your everyday job, I've seen this mindset shift improve
-              not just my day to day, but also the morale of the rest of the
-              team. And I'm just a recovering complainer, still with much to
-              improve here myself.
-            </p>
-            <p>
-              Start contributing to the culture you want to be a part of. Be
-              intentionally uplifting: share your full range of opinions, but
-              focus on abundant positivity towards your teammates and saving
-              rants for when they're actually useful.
-            </p>
-            <p>It starts with you.</p>
-      </description>
+      <description>&lt;p&gt;When someone chooses a career, they go for the work they like the most, within their abilities. I know I did when I followed software development. And yet, you don't see many people celebrating Mondays and lamenting the end of the week. Not even close.&lt;/p&gt;
+&lt;p&gt;Somewhere along the way we all experience the office politics, the bad management, the boring tasks, the lack of agency, and so on.&lt;/p&gt;
+&lt;p&gt;We love the craft, but not necessarily the job.&lt;/p&gt;
+&lt;p&gt;In all the teams I've worked with, I've never seen an ideal scenario where nothing is wrong. And I don't think I will, ever. And neither will you. The real world is always messy.&lt;/p&gt;
+&lt;p&gt;It's up to us to decide how we want to react to everything that is wrong around us.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"We have absolutely no control over what happens to us in life but what we have paramount control over is how we respond to those events."&lt;/p&gt;
+&lt;p&gt;Viktor Frankl&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="heading-being-a-complainer"&gt;Being a complainer&lt;/h2&gt;
+&lt;p&gt;Early in my career, I wouldn't shy away from the opportunity to complain about everything that was wrong with the codebase and with the company. Something was wrong, so someone had to complain about it!&lt;/p&gt;
+&lt;p&gt;Asked to waste time fixing data inconsistencies rather than addressing their root cause? What a prioritisation failure from leadership! Long build times slowing down development? What a terrible mess we've inherited from those who coded that in the first place!&lt;/p&gt;
+&lt;p&gt;It truly felt like an important service to raise awareness of issues that were holding the company's mission back.&lt;/p&gt;
+&lt;p&gt;Over time, I got more experience and respect from peers. I was still an individual contributor, but was naturally doing more and more mentoring work.&lt;/p&gt;
+&lt;p&gt;One day, I was mentoring two recently-joined junior developers who were still learning how things worked. I was trying to be helpful and authentic, so I made sure to highlight plenty of issues with the codebase and with the organisation. It's useful to know the pitfalls to look out for, after all. All in good spirits.&lt;/p&gt;
+&lt;p&gt;Later, I had a conversation with my team lead, who learned about that session. That's where I had one of the biggest realisations of my career.&lt;/p&gt;
+&lt;h2 id="heading-being-intentional"&gt;Being intentional&lt;/h2&gt;
+&lt;p&gt;See, my intentions surely were pure, but I wasn't being the helpful mentor I thought I was: I was just being a complainer. I was just ranting about all the things I disliked.&lt;/p&gt;
+&lt;p&gt;As newly joined junior developers, they looked up to more established senior developers to form their opinion about what they've just signed up for. And if established senior developers paint such a gloomy picture, that's what they assume as true.&lt;/p&gt;
+&lt;p&gt;This sounds obvious in hindsight, but sometimes we need the timely reminder: if you've got a balanced view about something, but you overly focus on the bad parts, then you're not sharing an accurate representation of your views. Others can't read your mind, only interpret your actions, so they'll believe your views are the non-representative picture you've shared.&lt;/p&gt;
+&lt;p&gt;I realised that we shouldn't be complainers: instead, we should be intentional, fair reporters of our full range of opinions. This is especially important if there are people looking up to us and valuing and trusting what we're saying!&lt;/p&gt;
+&lt;p&gt;This realisation was critical to set the stage for the next one.&lt;/p&gt;
+&lt;h2 id="heading-being-uplifting"&gt;Being uplifting&lt;/h2&gt;
+&lt;p&gt;Not long after that episode, something else clicked for me. My mood can easily be influenced by the environment around me. If it's full of complainers, I'll be one, too. If morale is low, mine will be as well.&lt;/p&gt;
+&lt;p&gt;After having contributed for so long to an environment of complaining, I realised that actually, culture isn't set in stone. It's malleable. The culture is set every day by the people who show up. And you're one of them.&lt;/p&gt;
+&lt;p&gt;No matter how you rank within your company, you are an influencer of its environment. We all are, whether we realise it or not. You can choose to blend in with how others set it, or you can opt to plant a different seed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Be the change you wish to see in the world."&lt;/p&gt;
+&lt;p&gt;Apparently miquoted to Gandhi&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Influence the environment you want to be a part of. If you're a complainer, you're enabling an environment of complainers. If you want to be a part of an uplifting environment, it starts with you.&lt;/p&gt;
+&lt;p&gt;Be an uplifter.&lt;/p&gt;
+&lt;p&gt;When others complain, you can publicly celebrate your teammates’ successes. When others plot against each other, you can ignore the noise and focus on beating the only one who matters: your past self.&lt;/p&gt;
+&lt;p&gt;If the tasks are dull, use your spare time to explore and learn new things, rather than using it to rant about how boring things are. If your company offers a learning budget, make good use of it!&lt;/p&gt;
+&lt;p&gt;Be intentional with the way you interact with others. Make them feel valued and filled with energy, even on days when you don't feel that energetic yourself. People remember how you made them feel. And they act accordingly.&lt;/p&gt;
+&lt;p&gt;This isn't about dropping your authenticity and pretending to be someone you're not, or sharing opinions that aren't what you truly think. It's about realising that your actions have consequences, and you can be intentional in surfacing your best self.&lt;/p&gt;
+&lt;p&gt;This is also not about toxic positivity. It's still important to flag issues and to try to fix them. We shouldn't self-censor any criticism, we should just be more strategical about when it's actually useful to share it, and being constructive about it.&lt;/p&gt;
+&lt;p&gt;This is about lifting others up: showing excitement about things, not ranting all the time for the sake of it, openly celebrating success, being kind to team members, and so on.&lt;/p&gt;
+&lt;p&gt;And, when in doubt, you can slightly exaggerate these positive behaviours. Communication is hard, especially if you're remote, for instance, or when writing. So, slight exaggerations go a long way in removing ambiguity or misunderstandings.&lt;/p&gt;
+&lt;p&gt;Is this mindset change a silver bullet against everything that is wrong with a job? Of course not! And if you're in an awful environment, your best option may be to look for something better.&lt;/p&gt;
+&lt;p&gt;But for your everyday job, I've seen this mindset shift improve not just my day to day, but also the morale of the rest of the team. And I'm just a recovering complainer, still with much to improve here myself.&lt;/p&gt;
+&lt;p&gt;Start contributing to the culture you want to be a part of. Be intentionally uplifting: share your full range of opinions, but focus on abundant positivity towards your teammates and saving rants for when they're actually useful.&lt;/p&gt;
+&lt;p&gt;It starts with you.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/being-uplifting/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/being-uplifting/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
-      <pubDate>Sat, 10 Feb 2024 01:21:50 GMT</pubDate>
+      <pubDate>Sat, 10 Feb 2024 01:21:23 GMT</pubDate>
     </item>
     <item>
       <title>Resist Exploding Complexity</title>
-      <description>
-            <p>
-              Building web applications seems to be getting more and more
-              complex. Abstractions upon abstractions, and fixes for problems
-              caused by fixes for other problems. But does it have to be this
-              way?
-            </p>
-            <p>
-              There's a place for complex frameworks and architectures, sure.
-              But for many projects, they may be an overkill.
-            </p>
-            <p>
-              Let's think through first principles and explore what the web
-              platforms offer by default to see how far we can go before
-              starting to explode complexity. This is a thought exercise to
-              challenge assumptions, not a prescription to blindly follow.
-            </p>
-            <p>
-              If we browse the
-              <a
-                target="_blank"
-                href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"
-                >Node.js documentation</a
-              >, we can get a simple working web server:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'node:http'</span>);
+      <description>&lt;p&gt;Building web applications seems to be getting more and more complex. Abstractions upon abstractions, and fixes for problems caused by fixes for other problems. But does it have to be this way?&lt;/p&gt;
+&lt;p&gt;There's a place for complex frameworks and architectures, sure. But for many projects, they may be an overkill.&lt;/p&gt;
+&lt;p&gt;Let's think through first principles and explore what the web platforms offer by default to see how far we can go before starting to explode complexity. This is a thought exercise to challenge assumptions, not a prescription to blindly follow.&lt;/p&gt;
+&lt;p&gt;If we browse the &lt;a target="_blank" href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"&gt;Node.js documentation&lt;/a&gt;, we can get a simple working web server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; http = &lt;span class="hljs-built_in"&gt;require&lt;/span&gt;(&lt;span class="hljs-string"&gt;'node:http'&lt;/span&gt;);
 
-<span class="hljs-keyword">const</span> hostname = <span class="hljs-string">'127.0.0.1'</span>;
-<span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; hostname = &lt;span class="hljs-string"&gt;'127.0.0.1'&lt;/span&gt;;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; port = &lt;span class="hljs-number"&gt;3000&lt;/span&gt;;
 
-<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">'Content-Type'</span>, <span class="hljs-string">'text/plain'</span>);
-  res.end(<span class="hljs-string">'Hello World\n'</span>);
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; server = http.createServer(&lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;'Content-Type'&lt;/span&gt;, &lt;span class="hljs-string"&gt;'text/plain'&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;'Hello World\n'&lt;/span&gt;);
 });
 
-server.listen(port, hostname, <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server running at http://<span class="hljs-subst">${hostname}</span>:<span class="hljs-subst">${port}</span>/`</span>);
+server.listen(port, hostname, &lt;span class="hljs-function"&gt;() =&amp;gt;&lt;/span&gt; {
+  &lt;span class="hljs-built_in"&gt;console&lt;/span&gt;.log(&lt;span class="hljs-string"&gt;`Server running at http://&lt;span class="hljs-subst"&gt;${hostname}&lt;/span&gt;:&lt;span class="hljs-subst"&gt;${port}&lt;/span&gt;/`&lt;/span&gt;);
 });
-</code></pre>
-            <p>We can test to see if it works:</p>
-            <pre><code class="lang-plaintext">$ node server.js
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can test to see if it works:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-plaintext"&gt;$ node server.js
 Server running at http://127.0.0.1:3000/
-</code></pre>
-            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="lang-plaintext"&gt;$ curl http://127.0.0.1:3000
 Hello World
-</code></pre>
-            <p>
-              We can adapt the server to use routes for specific endpoints. For
-              instance, it can reply to requests to <code>/</code>, and return
-              404 otherwise:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-comment">// GET /</span>
-<span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>);
-  res.end(<span class="hljs-string">"Hello World\n"</span>);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can adapt the server to use routes for specific endpoints. For instance, it can reply to requests to &lt;code&gt;/&lt;/code&gt;, and return 404 otherwise:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-comment"&gt;// GET /&lt;/span&gt;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; getIndex = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/plain"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;"Hello World\n"&lt;/span&gt;);
 };
 
-<span class="hljs-keyword">const</span> throwNotFound = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">404</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/plain"</span>);
-  res.end(<span class="hljs-string">"Not Found\n"</span>);
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; throwNotFound = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;404&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/plain"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;"Not Found\n"&lt;/span&gt;);
 };
 
-<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) {
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; server = http.createServer(&lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (req.method === &lt;span class="hljs-string"&gt;"GET"&lt;/span&gt; &amp;amp;&amp;amp; req.url === &lt;span class="hljs-string"&gt;"/"&lt;/span&gt;) {
     getIndex(req, res);
-  } <span class="hljs-keyword">else</span> {
+  } &lt;span class="hljs-keyword"&gt;else&lt;/span&gt; {
     throwNotFound(req, res);
   }
 });
-</code></pre>
-            <pre><code class="lang-plaintext">$ curl -i http://127.0.0.1:3000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="lang-plaintext"&gt;$ curl -i http://127.0.0.1:3000
 HTTP/1.1 200 OK
 Content-Type: text/plain
 ...
@@ -1284,227 +411,184 @@ Content-Type: text/plain
 ...
 
 Not Found
-</code></pre>
-            <p>
-              Great! We can also return HTML, to serve web pages to the browser:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
-  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello World&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;`</span>);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Great! We can also return HTML, to serve web pages to the browser:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; getIndex = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;`&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;`&lt;/span&gt;);
 };
-</code></pre>
-            <pre><code class="lang-plaintext">$ curl http://127.0.0.1:3000
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello World&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen1.png"
-              />
-            </p>
-            <p>We can also send dynamic data:</p>
-            <pre><code class="lang-javascript"><span class="hljs-comment">// Dynamic list of to-do items (non-persisted)</span>
-<span class="hljs-keyword">const</span> todos = [<span class="hljs-string">'accept user input'</span>];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="lang-plaintext"&gt;$ curl http://127.0.0.1:3000
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/resist-exploding-complexity/96f261b8-6397-4abc-a885-cd3dbf6d4c41.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;We can also send dynamic data:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-comment"&gt;// Dynamic list of to-do items (non-persisted)&lt;/span&gt;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; todos = [&lt;span class="hljs-string"&gt;'accept user input'&lt;/span&gt;];
 
-<span class="hljs-comment">// GET /</span>
-<span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
-  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;To-Do:&lt;/h1&gt;
-    &lt;ul&gt;
-<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
-    &lt;/ul&gt;
-  &lt;/body&gt;
-&lt;/html&gt;\n`</span>);
+&lt;span class="hljs-comment"&gt;// GET /&lt;/span&gt;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; getIndex = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;`&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;To-Do:&amp;lt;/h1&amp;gt;
+    &amp;lt;ul&amp;gt;
+&lt;span class="hljs-subst"&gt;${todos.map((todo) =&amp;gt; &lt;span class="hljs-string"&gt;`      &amp;lt;li&amp;gt;&lt;span class="hljs-subst"&gt;${todo}&lt;/span&gt;&amp;lt;/li&amp;gt;`&lt;/span&gt;).join(&lt;span class="hljs-string"&gt;"\n"&lt;/span&gt;)}&lt;/span&gt;
+    &amp;lt;/ul&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;\n`&lt;/span&gt;);
 };
-</code></pre>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen2.png"
-              />
-            </p>
-            <p>
-              And we can add a new endpoint to create new entries for that
-              dynamic data, once again just following the
-              <a
-                target="_blank"
-                href="https://nodejs.org/en/guides/anatomy-of-an-http-transaction/#request-body"
-                >official documentation</a
-              >:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> querystring = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node:querystring"</span>);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/resist-exploding-complexity/656b2b9c-3616-41e9-8355-e4d6edddd55c.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;And we can add a new endpoint to create new entries for that dynamic data, once again just following the &lt;a target="_blank" href="https://nodejs.org/en/guides/anatomy-of-an-http-transaction/#request-body"&gt;official documentation&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; querystring = &lt;span class="hljs-built_in"&gt;require&lt;/span&gt;(&lt;span class="hljs-string"&gt;"node:querystring"&lt;/span&gt;);
 
-<span class="hljs-comment">// POST /todos</span>
-<span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  <span class="hljs-keyword">let</span> body = [];
+&lt;span class="hljs-comment"&gt;// POST /todos&lt;/span&gt;
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; postTodo = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  &lt;span class="hljs-keyword"&gt;let&lt;/span&gt; body = [];
   req
-    .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+    .on(&lt;span class="hljs-string"&gt;"data"&lt;/span&gt;, &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;chunk&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
       body.push(chunk);
     })
-    .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> {
+    .on(&lt;span class="hljs-string"&gt;"end"&lt;/span&gt;, &lt;span class="hljs-function"&gt;() =&amp;gt;&lt;/span&gt; {
       body = Buffer.concat(body).toString();
-      <span class="hljs-keyword">const</span> parsedBody = querystring.parse(body);
-      <span class="hljs-keyword">if</span> (parsedBody.todo) {
+      &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; parsedBody = querystring.parse(body);
+      &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (parsedBody.todo) {
         todos.push(parsedBody.todo);
       }
-      res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">Location</span>: <span class="hljs-string">"/"</span> }).end();
+      res.writeHead(&lt;span class="hljs-number"&gt;301&lt;/span&gt;, { &lt;span class="hljs-attr"&gt;Location&lt;/span&gt;: &lt;span class="hljs-string"&gt;"/"&lt;/span&gt; }).end();
     });
 };
 
-<span class="hljs-keyword">const</span> server = http.createServer(<span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"GET"</span> &amp;&amp; req.url === <span class="hljs-string">"/"</span>) {
+&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; server = http.createServer(&lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (req.method === &lt;span class="hljs-string"&gt;"GET"&lt;/span&gt; &amp;amp;&amp;amp; req.url === &lt;span class="hljs-string"&gt;"/"&lt;/span&gt;) {
     getIndex(req, res);
-  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (req.method === <span class="hljs-string">"POST"</span> &amp;&amp; req.url === <span class="hljs-string">"/todos"</span>) {
+  } &lt;span class="hljs-keyword"&gt;else&lt;/span&gt; &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (req.method === &lt;span class="hljs-string"&gt;"POST"&lt;/span&gt; &amp;amp;&amp;amp; req.url === &lt;span class="hljs-string"&gt;"/todos"&lt;/span&gt;) {
     postTodo(req, res);
-  } <span class="hljs-keyword">else</span> {
+  } &lt;span class="hljs-keyword"&gt;else&lt;/span&gt; {
     throwNotFound(req, res);
   }
 });
-</code></pre>
-            <pre><code class="lang-plaintext">$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;To-Do:&lt;/h1&gt;
-    &lt;ul&gt;
-      &lt;li&gt;accept user input&lt;/li&gt;
-      &lt;li&gt;test new endpoint&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-            <p>
-              After that, we can add a form to allow adding new entries through
-              the browser:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
-  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;To-Do:&lt;/h1&gt;
-    &lt;form method="POST" action="/todos"&gt;
-      &lt;input type="text" name="todo" /&gt;
-      &lt;button type="submit"&gt;Add&lt;/button&gt;
-    &lt;/form&gt;
-    &lt;ul&gt;
-<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
-    &lt;/ul&gt;
-  &lt;/body&gt;
-&lt;/html&gt;\n`</span>);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="lang-plaintext"&gt;$ curl -L http://127.0.0.1:3000/todos -d "todo=test new endpoint"
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;To-Do:&amp;lt;/h1&amp;gt;
+    &amp;lt;ul&amp;gt;
+      &amp;lt;li&amp;gt;accept user input&amp;lt;/li&amp;gt;
+      &amp;lt;li&amp;gt;test new endpoint&amp;lt;/li&amp;gt;
+    &amp;lt;/ul&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After that, we can add a form to allow adding new entries through the browser:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; getIndex = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;`&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;To-Do:&amp;lt;/h1&amp;gt;
+    &amp;lt;form method="POST" action="/todos"&amp;gt;
+      &amp;lt;input type="text" name="todo" /&amp;gt;
+      &amp;lt;button type="submit"&amp;gt;Add&amp;lt;/button&amp;gt;
+    &amp;lt;/form&amp;gt;
+    &amp;lt;ul&amp;gt;
+&lt;span class="hljs-subst"&gt;${todos.map((todo) =&amp;gt; &lt;span class="hljs-string"&gt;`      &amp;lt;li&amp;gt;&lt;span class="hljs-subst"&gt;${todo}&lt;/span&gt;&amp;lt;/li&amp;gt;`&lt;/span&gt;).join(&lt;span class="hljs-string"&gt;"\n"&lt;/span&gt;)}&lt;/span&gt;
+    &amp;lt;/ul&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;\n`&lt;/span&gt;);
 };
-</code></pre>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen3.png"
-              />
-            </p>
-            <p>
-              This may be all good, but it's still only server-side interaction.
-              We want some JavaScript to make client-side interactions that make
-              this feel more like an SPA, without page refreshes. Let's add some
-              progressive enhancement.
-            </p>
-            <p>
-              The first step is to update the <code>POST /todos</code> endpoint
-              to accept JSON requests from client-side JavaScript, in addition
-              to the HTML form it already supported:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> postTodo = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  <span class="hljs-keyword">let</span> body = [];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/resist-exploding-complexity/de28ca68-02fa-42f1-9fb8-3552bcd584b4.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;This may be all good, but it's still only server-side interaction. We want some JavaScript to make client-side interactions that make this feel more like an SPA, without page refreshes. Let's add some progressive enhancement.&lt;/p&gt;
+&lt;p&gt;The first step is to update the &lt;code&gt;POST /todos&lt;/code&gt; endpoint to accept JSON requests from client-side JavaScript, in addition to the HTML form it already supported:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; postTodo = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  &lt;span class="hljs-keyword"&gt;let&lt;/span&gt; body = [];
   req
-    .on(<span class="hljs-string">"data"</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+    .on(&lt;span class="hljs-string"&gt;"data"&lt;/span&gt;, &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;chunk&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
       body.push(chunk);
     })
-    .on(<span class="hljs-string">"end"</span>, <span class="hljs-function">() =&gt;</span> {
+    .on(&lt;span class="hljs-string"&gt;"end"&lt;/span&gt;, &lt;span class="hljs-function"&gt;() =&amp;gt;&lt;/span&gt; {
       body = Buffer.concat(body).toString();
-      <span class="hljs-keyword">const</span> isJson = req.headers[<span class="hljs-string">"content-type"</span>] === <span class="hljs-string">"application/json"</span>;
-      <span class="hljs-keyword">const</span> parsedBody = isJson ? <span class="hljs-built_in">JSON</span>.parse(body) : querystring.parse(body);
-      <span class="hljs-keyword">if</span> (parsedBody.todo) {
+      &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; isJson = req.headers[&lt;span class="hljs-string"&gt;"content-type"&lt;/span&gt;] === &lt;span class="hljs-string"&gt;"application/json"&lt;/span&gt;;
+      &lt;span class="hljs-keyword"&gt;const&lt;/span&gt; parsedBody = isJson ? &lt;span class="hljs-built_in"&gt;JSON&lt;/span&gt;.parse(body) : querystring.parse(body);
+      &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (parsedBody.todo) {
         todos.push(parsedBody.todo);
       }
-      <span class="hljs-keyword">if</span> (isJson) {
-        <span class="hljs-comment">// Return 201 with HTML list if requested from client-side JS</span>
-        res.statusCode = <span class="hljs-number">201</span>;
-        res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
-        res.end(todos.map(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;\n`</span>).join(<span class="hljs-string">""</span>));
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// Return 301 with redirect to GET / if requested from HTML form</span>
-        res.writeHead(<span class="hljs-number">301</span>, { <span class="hljs-attr">location</span>: <span class="hljs-string">"/"</span> }).end();
+      &lt;span class="hljs-keyword"&gt;if&lt;/span&gt; (isJson) {
+        &lt;span class="hljs-comment"&gt;// Return 201 with HTML list if requested from client-side JS&lt;/span&gt;
+        res.statusCode = &lt;span class="hljs-number"&gt;201&lt;/span&gt;;
+        res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;);
+        res.end(todos.map(&lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;todo&lt;/span&gt;) =&amp;gt;&lt;/span&gt; &lt;span class="hljs-string"&gt;`      &amp;lt;li&amp;gt;&lt;span class="hljs-subst"&gt;${todo}&lt;/span&gt;&amp;lt;/li&amp;gt;\n`&lt;/span&gt;).join(&lt;span class="hljs-string"&gt;""&lt;/span&gt;));
+      } &lt;span class="hljs-keyword"&gt;else&lt;/span&gt; {
+        &lt;span class="hljs-comment"&gt;// Return 301 with redirect to GET / if requested from HTML form&lt;/span&gt;
+        res.writeHead(&lt;span class="hljs-number"&gt;301&lt;/span&gt;, { &lt;span class="hljs-attr"&gt;location&lt;/span&gt;: &lt;span class="hljs-string"&gt;"/"&lt;/span&gt; }).end();
       }
     });
 };
-</code></pre>
-            <p>
-              Notice that the endpoint is returning HTML instead of a JSON
-              object. Both are fine, but HTML responses at least minimise the
-              work required on the client.
-            </p>
-            <p>
-              With this new support, we can finally add some client-side
-              JavaScript to intercept the form request and use
-              <code>fetch()</code> instead, so that we can add a new entry and
-              update the list with no page refresh:
-            </p>
-            <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> getIndex = <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
-  res.statusCode = <span class="hljs-number">200</span>;
-  res.setHeader(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-string">"text/html; charset=utf-8"</span>);
-  res.end(<span class="hljs-string">`&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;My Simple Web Application&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;To-Do:&lt;/h1&gt;
-    &lt;form id="add-todo" method="POST" action="/todos" onsubmit="return postTodo();"&gt;
-      &lt;input type="text" name="todo" /&gt;
-      &lt;button type="submit"&gt;Add&lt;/button&gt;
-    &lt;/form&gt;
-    &lt;ul id="todos"&gt;
-<span class="hljs-subst">${todos.map((todo) =&gt; <span class="hljs-string">`      &lt;li&gt;<span class="hljs-subst">${todo}</span>&lt;/li&gt;`</span>).join(<span class="hljs-string">"\n"</span>)}</span>
-    &lt;/ul&gt;
-    &lt;script&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that the endpoint is returning HTML instead of a JSON object. Both are fine, but HTML responses at least minimise the work required on the client.&lt;/p&gt;
+&lt;p&gt;With this new support, we can finally add some client-side JavaScript to intercept the form request and use &lt;code&gt;fetch()&lt;/code&gt; instead, so that we can add a new entry and update the list with no page refresh:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;&lt;span class="hljs-keyword"&gt;const&lt;/span&gt; getIndex = &lt;span class="hljs-function"&gt;(&lt;span class="hljs-params"&gt;req, res&lt;/span&gt;) =&amp;gt;&lt;/span&gt; {
+  res.statusCode = &lt;span class="hljs-number"&gt;200&lt;/span&gt;;
+  res.setHeader(&lt;span class="hljs-string"&gt;"Content-Type"&lt;/span&gt;, &lt;span class="hljs-string"&gt;"text/html; charset=utf-8"&lt;/span&gt;);
+  res.end(&lt;span class="hljs-string"&gt;`&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang="en"&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset="UTF-8" /&amp;gt;
+    &amp;lt;title&amp;gt;My Simple Web Application&amp;lt;/title&amp;gt;
+    &amp;lt;meta name="viewport" content="width=device-width,initial-scale=1" /&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt;To-Do:&amp;lt;/h1&amp;gt;
+    &amp;lt;form id="add-todo" method="POST" action="/todos" onsubmit="return postTodo();"&amp;gt;
+      &amp;lt;input type="text" name="todo" /&amp;gt;
+      &amp;lt;button type="submit"&amp;gt;Add&amp;lt;/button&amp;gt;
+    &amp;lt;/form&amp;gt;
+    &amp;lt;ul id="todos"&amp;gt;
+&lt;span class="hljs-subst"&gt;${todos.map((todo) =&amp;gt; &lt;span class="hljs-string"&gt;`      &amp;lt;li&amp;gt;&lt;span class="hljs-subst"&gt;${todo}&lt;/span&gt;&amp;lt;/li&amp;gt;`&lt;/span&gt;).join(&lt;span class="hljs-string"&gt;"\n"&lt;/span&gt;)}&lt;/span&gt;
+    &amp;lt;/ul&amp;gt;
+    &amp;lt;script&amp;gt;
       function postTodo() {
         const todo = document.getElementById("add-todo").todo;
         const ul = document.getElementById("todos");
@@ -1514,65 +598,26 @@ Not Found
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ todo: todo.value })
         })
-        .then(response =&gt; response.text())
-        .then(html =&gt; {
+        .then(response =&amp;gt; response.text())
+        .then(html =&amp;gt; {
           ul.innerHTML = html;
           todo.value = "";
         });
 
         return false;
       }
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;\n`</span>);
+    &amp;lt;/script&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;\n`&lt;/span&gt;);
 };
-</code></pre>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/resist-exploding-complexity/screen4.png"
-              />
-            </p>
-            <p>
-              It works! It's now sending an
-              <code>application/json</code> request that receives a 201 instead
-              of an <code>application/x-www-form-urlencoded</code> with a 301
-              back to the main page.
-            </p>
-            <p>
-              We could go on. Next, we'd add editing, deleting, persistence,
-              styling, and so on. We could also do some much-needed refactoring,
-              such as extracting request body parsing and building HTML
-              responses. Or moving the client-side JavaScript into its own file
-              that is requested by the HTML page, to avoid that ugly JavaScript
-              inside a template string. But this post is getting long, and
-              hopefully I've already made my point by now.
-            </p>
-            <p>
-              The full web application so far is a single JavaScript file with
-              97 lines, including blank lines, comments and some duplicated code
-              that could probably be simplified. And that's enough to power a
-              web application (frontend and backend) with server-side and
-              progressively enhanced client-side data handling. No React, NextJS
-              or even a build step required. No <code>package.json</code> file
-              needed to install 184726 dependencies full of security and
-              deprecation warnings. No fear that in 6 months this will no longer
-              run because of breaking changes and incompatibilities.
-            </p>
-            <p>
-              Am I recommending you to follow this exact approach on your next
-              project? Absolutely not! My point isn't that this is the Right Way
-              and anything else is the Wrong Way. My point is that we can resist
-              the exploding complexity of code and abstractions if we don't need
-              them. There's a place for complex frameworks and architectures,
-              but we don't need to expose ourselves to that complexity
-              elsewhere. Or at least we don't need to start from that point.
-            </p>
-            <p>
-              Let's celebrate the powerful primitives our platforms already
-              provide us, and climb the exploding complexity ladder only when
-              those primitives are no longer sufficient.
-            </p>
-      </description>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading="lazy" src="https://ricardolopes.net/blog/resist-exploding-complexity/2883585a-30f0-426d-8da3-6fc8a2e45796.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;It works! It's now sending an &lt;code&gt;application/json&lt;/code&gt; request that receives a 201 instead of an &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt; with a 301 back to the main page.&lt;/p&gt;
+&lt;p&gt;We could go on. Next, we'd add editing, deleting, persistence, styling, and so on. We could also do some much-needed refactoring, such as extracting request body parsing and building HTML responses. Or moving the client-side JavaScript into its own file that is requested by the HTML page, to avoid that ugly JavaScript inside a template string. But this post is getting long, and hopefully I've already made my point by now.&lt;/p&gt;
+&lt;p&gt;The full web application so far is a single JavaScript file with 97 lines, including blank lines, comments and some duplicated code that could probably be simplified. And that's enough to power a web application (frontend and backend) with server-side and progressively enhanced client-side data handling. No React, NextJS or even a build step required. No &lt;code&gt;package.json&lt;/code&gt; file needed to install 184726 dependencies full of security and deprecation warnings. No fear that in 6 months this will no longer run because of breaking changes and incompatibilities.&lt;/p&gt;
+&lt;p&gt;Am I recommending you to follow this exact approach on your next project? Absolutely not! My point isn't that this is the Right Way and anything else is the Wrong Way. My point is that we can resist the exploding complexity of code and abstractions if we don't need them. There's a place for complex frameworks and architectures, but we don't need to expose ourselves to that complexity elsewhere. Or at least we don't need to start from that point.&lt;/p&gt;
+&lt;p&gt;Let's celebrate the powerful primitives our platforms already provide us, and climb the exploding complexity ladder only when those primitives are no longer sufficient.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/resist-exploding-complexity/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/resist-exploding-complexity/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
@@ -1580,13 +625,20 @@ Not Found
     </item>
     <item>
       <title>About This Blog</title>
-      <description>
-        <p>Hi, I'm Ricardo Lopes, a software engineer. Welcome to my blog! This is where I'm sharing a collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more. All views are my own and not of any employer.</p><p>My first goal with this blog is selfish: I want to write about those topics because writing helps clarify my thinking and crystallise what I've learnt. I've been learning so much since I started this journey over a decade ago, if I don't write things down, I risk forgetting important anecdotes and nuggets of wisdom.</p><p>But if that were my only goal, I wouldn't need to post anything in public.</p><p>I believe I wouldn't be where I am today in my career if it weren't for the exceptional mentors I had along the way. I've learnt a lot from them, and I'm a much better developer today than what I would have been otherwise.</p><p>Now that I've benefited from all those lessons, I believe it's my turn to pay it forward and to share what I've learnt with you.</p><p>I'm no guru preaching his gospel to his disciples. I don't claim to have all the answers, and I still view myself more as a student, not as a teacher. So this is more about sharing notes as peers of the things that resonated with me the most.</p><p>If you're curious and want to learn more, be sure to <a target="_blank" href="https://ricardolopes.net/blog/rss.xml">subscribe</a> and follow along. I hope to make it well worth your time!</p><p>You can also follow or DM me on <a target="_blank" href="https://x.com/ricardoplopes">X (formerly Twitter)</a> or <a target="_blank" href="https://www.linkedin.com/in/ricardopintolopes">LinkedIn</a>.</p>
-      </description>
+      <description>&lt;p&gt;Hi, I'm Ricardo Lopes, a tech lead and backend engineer. Welcome to my blog! This is where I'm sharing a collection of thoughts, experiments, wise advice from my mentors, notes on things I'm reading, and more. All views are my own and not of any employer.&lt;/p&gt;
+&lt;p&gt;My first goal with this blog is selfish: I want to write about those topics because writing helps clarify my thinking and crystallise what I've learnt. I've been learning so much since I started this journey over a decade ago, if I don't write things down, I risk forgetting important anecdotes and nuggets of wisdom.&lt;/p&gt;
+&lt;p&gt;But if that were my only goal, I wouldn't need to post anything in public.&lt;/p&gt;
+&lt;p&gt;I believe I wouldn't be where I am today in my career if it weren't for the exceptional mentors I had along the way. I've learnt a lot from them, and I'm a much better developer today than what I would have been otherwise.&lt;/p&gt;
+&lt;p&gt;Now that I've benefited from all those lessons, I believe it's my turn to pay it forward and to share what I've learnt with you.&lt;/p&gt;
+&lt;p&gt;I'm no guru preaching his gospel to his disciples. I don't claim to have all the answers, and I still view myself more as a student, not as a teacher. So this is more about sharing notes as peers of the things that resonated with me the most.&lt;/p&gt;
+&lt;p&gt;If you're curious and want to learn more, be sure to &lt;a target="_blank" href="https://ricardolopes.net/blog/rss.xml"&gt;subscribe&lt;/a&gt; and follow along. I hope to make it well worth your time!&lt;/p&gt;
+&lt;p&gt;You can also follow or DM me on &lt;a target="_blank" href="https://x.com/ricardoplopes"&gt;X (formerly Twitter)&lt;/a&gt; or &lt;a target="_blank" href="https://www.linkedin.com/in/ricardopintolopes"&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+</description>
       <link>https://ricardolopes.net/blog/about/</link>
       <guid isPermaLink="true">https://ricardolopes.net/blog/about/</guid>
       <dc:creator>Ricardo Lopes</dc:creator>
       <pubDate>Fri, 19 Jan 2024 00:39:14 GMT</pubDate>
     </item>
+    <lastBuildDate>Tue, 24 Sep 2024 23:52:35 GMT</lastBuildDate>
   </channel>
 </rss>

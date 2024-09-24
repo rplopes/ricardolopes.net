@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
     <title>No Surprises | Ricardo Lopes</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href="../rss.xml"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="../rss.xml">
 
-    <meta
-      name="description"
-      content="Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do."
-    />
-    <meta name="author" content="Ricardo Lopes" />
-    <link href="../../styles/modern-normalize.min.css" rel="stylesheet" />
-    <link href="../../styles/style.css" rel="stylesheet" />
-    <link href="../../styles/monkai.css" rel="stylesheet" />
-    <link rel="icon" href="../../favicon.ico" />
-    <link rel="canonical" href="https://ricardolopes.net/blog/no-surprises/" />
+    <meta name="description" content="Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do.">
+    <meta name="author" content="Ricardo Lopes">
+    <link href="../../styles/modern-normalize.min.css" rel="stylesheet">
+    <link href="../../styles/style.css" rel="stylesheet">
+    <link href="../../styles/monkai.css" rel="stylesheet">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://ricardolopes.net/blog/no-surprises/">
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ricardoplopes" />
-    <meta name="twitter:creator" content="@ricardoplopes" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ricardoplopes">
+    <meta name="twitter:creator" content="@ricardoplopes">
 
-    <meta property="og:site_name" content="Ricardo Lopes" />
-    <meta property="og:title" content="No Surprises" />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://ricardolopes.net/blog/no-surprises/"
-    />
-    <meta
-      property="og:description"
-      content="Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do."
-    />
-    <meta
-      property="og:image"
-      content="https://ricardolopes.net/blog/no-surprises/og.png"
-    />
+    <meta property="og:site_name" content="Ricardo Lopes">
+    <meta property="og:title" content="No Surprises">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ricardolopes.net/blog/no-surprises/">
+    <meta property="og:description" content="Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do.">
+    <meta property="og:image" content="https://ricardolopes.net/blog/no-surprises/undefined">
   </head>
   <body>
     <header>
@@ -51,171 +32,59 @@
     </header>
     <div id="content">
       <div id="main">
-        <section itemscope itemtype="http://schema.org/Article">
-          <meta itemprop="author" content="Ricardo Lopes" />
-          <link
-            itemprop="url"
-            href="https://ricardolopes.net/blog/no-surprises/"
-          />
+        <section itemscope="" itemtype="http://schema.org/Article">
+          <meta itemprop="author" content="Ricardo Lopes">
+          <link itemprop="url" href="https://ricardolopes.net/blog/no-surprises/">
           <h1 itemprop="headline">No Surprises</h1>
           <ul class="post-meta">
             <li>
-              <time itemprop="datePublished" datetime="2024-02-19">
-                19 Feb 2024
-              </time>
+              <time itemprop="datePublished" datetime="2024-02-19">Feb 19, 2024</time>
             </li>
             <li>4 min read</li>
           </ul>
-          <div itemprop="articleBody">
-            <p>
-              One of my principles for software development is “no surprises”.
-              Things should be exactly where we expect them to be, and look
-              exactly like what we expect then to look like. Code should do
-              exactly what we expect it to do.
-            </p>
-            <p>
-              When things are surprising, we have to spend more mental effort
-              trying to understand them. If we can't trust a codebase to have no
-              surprises, we're constantly on high alert.
-            </p>
-            <p>
-              When code has no surprises, there's a whole cognitive load that is
-              no longer needed. We can get into a focused flow state, knowing
-              that we can trust the code we see and don't need to second-guess
-              everything.
-            </p>
-            <p>
-              Here are some examples of how to apply this principle, in no
-              particular order.
-            </p>
-            <h2 id="heading-consistent-style">Consistent style</h2>
-            <p>Enforce a linter and autoformatter.</p>
-            <p>
-              I don't care which rules you choose. The important part is to have
-              consistent rules applied everywhere. This will make all code look
-              consistent and predictable, so that no one has to spend time or
-              effort with style decisions.
-            </p>
-            <p>
-              Don't make developers discuss style in pull requests. It has to be
-              a solved problem at that point.
-            </p>
-            <h2 id="heading-clear-project-structure">
-              Clear project structure
-            </h2>
-            <p>
-              If you've got a models directory, don't put models files anywhere
-              else.
-            </p>
-            <p>
-              If one endpoint calls a service that calls a model, don't have
-              another endpoint calling a manager that calls a repository that
-              calls the database directly.
-            </p>
-            <p>
-              When a developer is working on a new feature, they should never
-              need to spend time deciding what the structure should be like:
-              they should just need to follow the project convention.
-            </p>
-            <p>
-              Also: keep the project structure easy to understand and to apply
-              for new code.
-            </p>
-            <h2 id="heading-no-hidden-consequences">No hidden consequences</h2>
-            <p>
-              If you're calling a GET endpoint, you're not expecting it to
-              mutate data.
-            </p>
-            <p>
-              If you're calling a model method, you're not expecting calls to
-              external providers.
-            </p>
-            <p>
-              When these assumptions fail, it not only forces the developer to
-              spend more time hunting for those hidden consequences, but it's
-              also a common source of bugs.
-            </p>
-            <h2 id="heading-no-needlessly-defensive-code">
-              No needlessly defensive code
-            </h2>
-            <p>
-              If email is a required field for users, you don't need to protect
-              against a missing email in the rest of the codebase.
-            </p>
-            <p>
-              If an endpoint returns a list of resources, you don't need to
-              protect against a 404 when no resources exist: the response is a
-              200 with an empty list.
-            </p>
-            <p>
-              If a module requires a user to be an admin to reach it, you don't
-              need to repeat that check inside the module.
-            </p>
-            <p>
-              This sort of needlessly defensive code is protecting against
-              threats that don't exist, and is casting doubts onto developer's
-              minds (wait, email could be undefined at this point??).
-            </p>
-            <h2 id="heading-industry-conventions">Industry conventions</h2>
-            <p>
-              Write idiomatic code, use the framework's conventions, follow best
-              practices.
-            </p>
-            <p>
-              You don't need to blindly cargo cult what everyone else is doing,
-              or apply conventions that don't make sense for your specific
-              situation. But often it's useful to look for common patterns and
-              solutions that the industry has reached consensus on, which could
-              benefit you as well.
-            </p>
-            <p>
-              This allows you not only to benefit from the wisdom of the crowd,
-              but also to keep surprises low when switching between projects and
-              teams.
-            </p>
-            <h2 id="heading-the-right-abstraction">The right abstraction</h2>
-            <p>
-              The platform you're developing on provides a set of APIs and tools
-              you and everyone else can use.
-            </p>
-            <p>
-              <a
-                href="https://ricardolopes.net/blog/resist-exploding-complexity/"
-                >Unneeded custom abstractions and complexity</a
-              >
-              on top of that common interface will look surprising and require
-              more mental effort to understand and to look for unexpected
-              behaviours. Not to mention more surface area for maintenance work
-              and bugs.
-            </p>
-            <h2 id="heading-and-more">And more</h2>
-            <p>
-              I'm sure there are a lot more examples of this principle. I may
-              update this list in the future, if something else meaningful comes
-              up. But I hope its message is clear already.
-            </p>
-            <p>
-              Make your code as boring and as unsurprising as possible. The
-              mental load from dealing with surprises and uncertainty may not
-              seem much to you, at first, but it compounds, eventually turning a
-              project into a fragile unmaintainable mess that developers are too
-              afraid to touch.
-            </p>
-            <p>I hope none of this sounds too surprising :)</p>
-          </div>
+          <div itemprop="articleBody"><p>One of my principles for software development is “no surprises”. Things should be exactly where we expect them to be, and look exactly like what we expect them to look like. Code should do exactly what we expect it to do.</p>
+<p>When things are surprising, we have to spend more mental effort trying to understand them. If we can't trust a codebase to have no surprises, we're constantly on high alert.</p>
+<p>When code has no surprises, there's a whole cognitive load that is no longer needed. We can get into a focused flow state, knowing that we can trust the code we see and don't need to second-guess everything.</p>
+<p>Here are some examples of how to apply this principle, in no particular order.</p>
+<h3 id="heading-consistent-style">Consistent style</h3>
+<p>Enforce a linter and autoformatter.</p>
+<p>I don't care which rules you choose. The important part is to have consistent rules applied everywhere. This will make all code look consistent and predictable, so that no one has to spend time or effort with style decisions.</p>
+<p>Don't make developers discuss style in pull requests. It has to be a solved problem at that point.</p>
+<h3 id="heading-clear-project-structure">Clear project structure</h3>
+<p>If you've got a models directory, don't put models files anywhere else.</p>
+<p>If one endpoint calls a service that calls a model, don't have another endpoint calling a manager that calls a repository that calls the database directly.</p>
+<p>When a developer is working on a new feature, they should never need to spend time deciding what the structure should be like: they should just need to follow the project convention.</p>
+<p>Also: keep the project structure easy to understand and to apply for new code.</p>
+<h3 id="heading-no-hidden-consequences">No hidden consequences</h3>
+<p>If you're calling a GET endpoint, you're not expecting it to mutate data.</p>
+<p>If you're calling a model method, you're not expecting calls to external providers.</p>
+<p>When these assumptions fail, it not only forces the developer to spend more time hunting for those hidden consequences, but it's also a common source of bugs.</p>
+<h3 id="heading-no-needlessly-defensive-code">No needlessly defensive code</h3>
+<p>If email is a required field for users, you don't need to protect against a missing email in the rest of the codebase.</p>
+<p>If an endpoint returns a list of resources, you don't need to protect against a 404 when no resources exist: the response is a 200 with an empty list.</p>
+<p>If a module requires a user to be an admin to reach it, you don't need to repeat that check inside the module.</p>
+<p>This sort of needlessly defensive code is protecting against threats that don't exist, and is casting doubts onto developer's minds (wait, email could be undefined at this point??).</p>
+<h3 id="heading-industry-conventions">Industry conventions</h3>
+<p>Write idiomatic code, use the framework's conventions, follow best practices.</p>
+<p>You don't need to blindly cargo cult what everyone else is doing, or apply conventions that don't make sense for your specific situation. But often it's useful to look for common patterns and solutions that the industry has reached consensus on, which could benefit you as well.</p>
+<p>This allows you not only to benefit from the wisdom of the crowd, but also to keep surprises low when switching between projects and teams.</p>
+<h3 id="heading-the-right-abstraction">The right abstraction</h3>
+<p>The platform you're developing on provides a set of APIs and tools you and everyone else can use.</p>
+<p><a target="_blank" href="https://ricardolopes.net/blog/resist-exploding-complexity/">Unneeded custom abstractions and complexity</a> on top of that common interface will look surprising and require more mental effort to understand and to look for unexpected behaviours. Not to mention more surface area for maintenance work and bugs.</p>
+<h3 id="heading-and-more">And more</h3>
+<p>I'm sure there are a lot more examples of this principle. I may update this list in the future, if something else meaningful comes up. But I hope its message is clear already.</p>
+<p>Make your code as boring and as unsurprising as possible. The mental load from dealing with surprises and uncertainty may not seem much to you, at first, but it compounds, eventually turning a project into a fragile unmaintainable mess that developers are too afraid to touch.</p>
+<p>I hope none of this sounds too surprising :)</p>
+</div>
         </section>
         <section id="article-footer">
           <p>
             Want more posts? Subscribe to my
-            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
-              >RSS feed</a
-            >.
+            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml">RSS feed</a>.
           </p>
         </section>
       </div>
     </div>
     <footer>
-      <p>&#169; Ricardo Lopes</p>
-    </footer>
-  </body>
-</html>
+      <p>© Ricardo Lopes</p>
+    </footer></body></html>

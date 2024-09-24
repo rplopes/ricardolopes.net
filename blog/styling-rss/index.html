@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
     <title>Styling Your RSS For a Better Web | Ricardo Lopes</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href="../rss.xml"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="../rss.xml">
 
-    <meta
-      name="description"
-      content="You can improve RSS user experience by styling your RSS feeds with XSLT for a better, open web."
-    />
-    <meta name="author" content="Ricardo Lopes" />
-    <link href="../../styles/modern-normalize.min.css" rel="stylesheet" />
-    <link href="../../styles/style.css" rel="stylesheet" />
-    <link href="../../styles/monkai.css" rel="stylesheet" />
-    <link rel="icon" href="../../favicon.ico" />
-    <link rel="canonical" href="https://ricardolopes.net/blog/styling-rss/" />
+    <meta name="description" content="You can improve RSS user experience by styling your RSS feeds with XSLT for a better, open web">
+    <meta name="author" content="Ricardo Lopes">
+    <link href="../../styles/modern-normalize.min.css" rel="stylesheet">
+    <link href="../../styles/style.css" rel="stylesheet">
+    <link href="../../styles/monkai.css" rel="stylesheet">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://ricardolopes.net/blog/styling-rss/">
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ricardoplopes" />
-    <meta name="twitter:creator" content="@ricardoplopes" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ricardoplopes">
+    <meta name="twitter:creator" content="@ricardoplopes">
 
-    <meta property="og:site_name" content="Ricardo Lopes" />
-    <meta property="og:title" content="Styling Your RSS For a Better Web" />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://ricardolopes.net/blog/styling-rss/"
-    />
-    <meta
-      property="og:description"
-      content="You can improve RSS user experience by styling your RSS feeds with XSLT for a better, open web."
-    />
-    <meta
-      property="og:image"
-      content="https://ricardolopes.net/blog/styling-rss/og.png"
-    />
+    <meta property="og:site_name" content="Ricardo Lopes">
+    <meta property="og:title" content="Styling Your RSS For a Better Web">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ricardolopes.net/blog/styling-rss/">
+    <meta property="og:description" content="You can improve RSS user experience by styling your RSS feeds with XSLT for a better, open web">
+    <meta property="og:image" content="https://ricardolopes.net/blog/styling-rss/undefined">
   </head>
   <body>
     <header>
@@ -51,128 +32,34 @@
     </header>
     <div id="content">
       <div id="main">
-        <section itemscope itemtype="http://schema.org/Article">
-          <meta itemprop="author" content="Ricardo Lopes" />
-          <link
-            itemprop="url"
-            href="https://ricardolopes.net/blog/styling-rss/"
-          />
+        <section itemscope="" itemtype="http://schema.org/Article">
+          <meta itemprop="author" content="Ricardo Lopes">
+          <link itemprop="url" href="https://ricardolopes.net/blog/styling-rss/">
           <h1 itemprop="headline">Styling Your RSS For a Better Web</h1>
           <ul class="post-meta">
             <li>
-              <time itemprop="datePublished" datetime="2024-05-30">
-                30 May 2024
-              </time>
+              <time itemprop="datePublished" datetime="2024-05-30">May 30, 2024</time>
             </li>
             <li>5 min read</li>
           </ul>
-          <div itemprop="articleBody">
-            <p>
-              Before we had the walled gardens of social media feeds, there was
-              a wonderful time when sites published their feeds in an open
-              format (RSS) that we could subscribe to, free from
-              dopamine-inducing algorithms, creepy targeted ads, and privacy
-              violations. Most sites still publish an RSS feed, actually, but it
-              gets no visibility and is poorly supported by modern browsers
-              anyway.
-            </p>
-            <p>
-              I strongly believe we can create a better web for everyone if we
-              champion open standards and decentralisation over proprietary
-              formats and user-hostile monopolies. I'd love to see the return of
-              the RSS feed to challenge the current social media feeds, but it
-              doesn't look like an easy battle.
-            </p>
-            <p>
-              For starters, we can't get new users to start subscribing to RSS
-              feeds if they don't even know they exist in the first place. We
-              would need websites to announce that option for subscription, like
-              they do with social media handles and newsletters. But let's be
-              honest, that wouldn't be enough.
-            </p>
-            <p>
-              Even if websites started encouraging visitors to subscribe to
-              their RSS feeds, the user experience would still be terrible.
-              Clicking an RSS link today either opens a raw XML code file in the
-              browser or starts a download. This is an unacceptable experience
-              for new users, who will think something must be broken and will
-              eventually look for other alternatives.
-            </p>
-            <p>
-              Seriously, this is what browsers today show if you click one of
-              those “Subscribe with RSS” links:
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/unstyledrss.png"
-              />
-            </p>
-            <p>
-              This wasn't always the case. During the peak of RSS, before social
-              media took over, web browsers actually supported it well. You'd
-              see automatic subscribe buttons in the browser's UI, and opening
-              an RSS link would display a styled view where you could see the
-              latest posts and subscribe with your favourite reader.
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/firefoxrss.jpg"
-              />
-            </p>
-            <p>
-              Source:
-              <a
-                target="_blank"
-                href="https://www.flickr.com/photos/thickmints/282062844/"
-                >https://www.flickr.com/photos/thickmints/282062844/</a
-              >
-            </p>
-            <p>
-              There is a way we can get some of this usability back: by using a
-              technology that's been around for over 20 years,
-              <a target="_blank" href="https://www.w3.org/TR/xslt-30/">XSLT</a>.
-            </p>
-            <p>
-              An RSS feed is simply an XML file that follows a specific schema.
-              XSLT is a language for transforming XML files into other XML
-              files. We can use an XSLT file to transform an RSS feed (an XML
-              file) into an HTML page (also an XML file, if you don't think too
-              much about the deviations browsers accept these days), complete
-              with CSS and JavaScript. With that transformation, the browser can
-              show a user-friendly HTML page instead of raw XML when you open
-              the RSS feed, and you can still use that feed to subscribe with
-              your favourite reader.
-            </p>
-            <p>
-              Here's how this blog's RSS feed renders in the browser, thanks to
-              custom XSLT, at the time of writing:
-            </p>
-            <p>
-              <img
-                src="https://ricardolopes.net/blog/styling-rss/styledrss.png"
-              />
-            </p>
-            <p>
-              Notice that it's still an XML file that works with any RSS reader,
-              but it displays as a regular web page in the browser. The design
-              isn't the best, but that's merely a design skills issue from yours
-              truly.
-            </p>
-            <p>
-              With a styled presentation like that (or hopefully a
-              better-looking one), we can finally improve the user experience of
-              subscribing with RSS. We can display the list of the most recent
-              posts, educate the visitor on how to go from this page to actually
-              being subscribed in an RSS reader of their choice, along with
-              anything else we can think of.
-            </p>
-            <p>Here's how you can do the same for your own RSS feed:</p>
-            <p>
-              First, you need to create the actual XSLT file that transforms
-              from the RSS schema into an HTML page. The file should have a
-              structure like this:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">xsl:stylesheet</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"3.0"</span>&gt;</span>
+          <div itemprop="articleBody"><p>Before we had the walled gardens of social media feeds, there was a wonderful time when sites published their feeds in an open format (RSS) that we could subscribe to, free from dopamine-inducing algorithms, creepy targeted ads, and privacy violations. Most sites still publish an RSS feed, actually, but it gets no visibility and is poorly supported by modern browsers anyway.</p>
+<p>I strongly believe we can create a better web for everyone if we champion open standards and decentralisation over proprietary formats and user-hostile monopolies. I'd love to see the return of the RSS feed to challenge the current social media feeds, but it doesn't look like an easy battle.</p>
+<p>For starters, we can't get new users to start subscribing to RSS feeds if they don't even know they exist in the first place. We would need websites to announce that option for subscription, like they do with social media handles and newsletters. But let's be honest, that wouldn't be enough.</p>
+<p>Even if websites started encouraging visitors to subscribe to their RSS feeds, the user experience would still be terrible. Clicking an RSS link today either opens a raw XML code file in the browser or starts an XML file download. This is an unacceptable experience for new users, who will think something must be broken and will eventually look for other alternatives.</p>
+<p>Seriously, this is what browsers today show if you click one of those “Subscribe with RSS” links:</p>
+<p><img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/579fd338-b535-40a0-97dd-f813e9716230.png" alt="Screenshot of an RSS feed displayed in a modern browser (Firefox), showing the raw XML code"></p>
+<p>This wasn't always the case. During the peak of RSS, before social media took over, web browsers actually supported it well. You'd see automatic subscribe buttons in the browser's UI, and opening an RSS link would display a styled view where you could see the latest posts and subscribe with your favourite reader.</p>
+<p><img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/f597d2cb-688e-463b-aa69-362237739e4c.jpeg" alt="Screenshot of an old browser (Firefox) showing a styled view of an RSS feed"></p>
+<p>Source: <a target="_blank" href="https://www.flickr.com/photos/thickmints/282062844/">https://www.flickr.com/photos/thickmints/282062844/</a></p>
+<p>There is a way we can get some of this usability back: by using a technology that's been around for over 20 years, <a target="_blank" href="https://www.w3.org/TR/xslt-30/">XSLT</a>.</p>
+<p>An RSS feed is simply an XML file that follows a specific schema. XSLT is a language for transforming XML files into other XML files. We can use an XSLT file to transform an RSS feed (an XML file) into an HTML page (also an XML file, if you don't think too much about the deviations browsers accept these days), complete with CSS and JavaScript. With that transformation, the browser can show a user-friendly HTML page instead of raw XML when you open the RSS feed, and you can still use that feed to subscribe with your favourite reader.</p>
+<p>Here's how this blog's RSS feed renders in the browser, thanks to custom XSLT, at the time of writing:</p>
+<p><img loading="lazy" src="https://ricardolopes.net/blog/styling-rss/b004e156-dad4-49ad-a227-8baa527c7bbf.png" alt="Screenshot of this blog's RSS feed displayed in a modern web browser (Firefox), styled as a regular web page thanks to XSLT"></p>
+<p>Notice that it's still an XML file that works with any RSS reader, but it displays as a regular web page in the browser. The design isn't the best, but that's merely a design skills issue from yours truly.</p>
+<p>With a styled presentation like that (or hopefully a better-looking one), we can finally improve the user experience of subscribing with RSS. We can display the list of the most recent posts, educate the visitor on how to go from this page to actually being subscribed in an RSS reader of their choice, along with anything else we can think of.</p>
+<p>Here's how you can do the same for your own RSS feed:</p>
+<p>First, you need to create the actual XSLT file that transforms from the RSS schema into an HTML page. The file should have a structure like this:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">xsl:stylesheet</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"3.0"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">xsl:output</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"html"</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"1.0"</span> <span class="hljs-attr">encoding</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">indent</span>=<span class="hljs-string">"yes"</span>/&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">xsl:template</span> <span class="hljs-attr">match</span>=<span class="hljs-string">"/"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
@@ -181,13 +68,8 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">xsl:template</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">xsl:stylesheet</span>&gt;</span>
 </code></pre>
-            <p>
-              Inside the <code>xsl:template</code> tag, you can write any HTML
-              just as you would on any web page, starting, of course, with the
-              usual <code>html</code> tag. That includes, for instance, CSS
-              styles:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+<p>Inside the <code>xsl:template</code> tag, you can write any HTML just as you would on any web page, starting, of course, with the usual <code>html</code> tag. That includes, for instance, CSS styles:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"Content-Type"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"text/html; charset=utf-8"</span>/&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1, maximum-scale=1"</span>/&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/css"</span>&gt;</span>
@@ -196,121 +78,47 @@
   ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
 </code></pre>
-            <p>
-              Then, you can use specific <code>xsl</code> tags to pull data from
-              the source XML file into the new template. For instance,
-              <code>&lt;xsl:value-of select="/rss/channel/title"/&gt;</code>
-              returns the value in the RSS's
-              <code>rss/channel/title</code> path, which would be the blog's
-              title. To show all blog post titles, you could use:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+<p>Then, you can use specific <code>xsl</code> tags to pull data from the source XML file into the new template. For instance, <code>&lt;xsl:value-of select="/rss/channel/title"/&gt;</code> returns the value in the RSS's <code>rss/channel/title</code> path, which would be the blog's title. To show all blog post titles, you could use:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">xsl:for-each</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"/rss/channel/item"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">xsl:value-of</span> <span class="hljs-attr">select</span>=<span class="hljs-string">"title"</span>/&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">xsl:for-each</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 </code></pre>
-            <p>
-              This example iterates through all <code>item</code> entries in the
-              RSS's <code>rss/channel</code> path and outputs the value of the
-              <code>title</code> tag in each of those <code>item</code>s.
-            </p>
-            <p>
-              This is just a quick glimpse of what we can do with XSLT. This
-              post isn't meant to be a full tutorial on the subject. For more
-              inspiration, you can check out this blog's own XSLT file at
-              <a target="_blank" href="https://ricardolopes.net/blog/rss.xsl"
-                >https://ricardolopes.net/blog/rss.xsl</a
-              >.
-            </p>
-            <p>
-              After you've created your template, you only need to add these two
-              lines at the top of your RSS file:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<p>This example iterates through all <code>item</code> entries in the RSS's <code>rss/channel</code> path and outputs the value of the <code>title</code> tag in each of those <code>item</code>s.</p>
+<p>This is just a quick glimpse of what we can do with XSLT. This post isn't meant to be a full tutorial on the subject. For more inspiration, you can check out this blog's own XSLT file at <a target="_blank" href="https://ricardolopes.net/blog/rss.xsl">https://ricardolopes.net/blog/rss.xsl</a>.</p>
+<p>After you've created your template, you only need to add these two lines at the top of your RSS file:</p>
+<pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-meta">&lt;?xml-stylesheet href="&lt;link/to/your/xslt/file.xsl&gt;" type="text/xsl"?&gt;</span>
 </code></pre>
-            <p>
-              Here's an example of this blog's feed, which you can check by
-              clicking "view source" at
-              <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
-                >https://ricardolopes.net/blog/rss.xml</a
-              >:
-            </p>
-            <pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<p>Here's an example of this blog's feed, which you can check by clicking “view source” at <a target="_blank" href="https://ricardolopes.net/blog/rss.xml">https://ricardolopes.net/blog/rss.xml</a>:</p>
+<pre><code class="lang-xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="hljs-meta">&lt;?xml-stylesheet href="https://ricardolopes.net/blog/rss.xsl" type="text/xsl"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">rss</span> <span class="hljs-attr">version</span>=<span class="hljs-string">"2.0"</span> <span class="hljs-attr">xmlns:atom</span>=<span class="hljs-string">"http://www.w3.org/2005/Atom"</span> <span class="hljs-attr">xmlns:dc</span>=<span class="hljs-string">"http://purl.org/dc/elements/1.1/"</span>&gt;</span>
   ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">rss</span>&gt;</span>
 </code></pre>
-            <p>
-              The biggest drawback to this approach is, of course, that it will
-              only work if you have control over how your RSS feed is generated.
-              If it's provided by an external provider, chances are you can't
-              add the lines needed to get the XSLT to style it.
-            </p>
-            <p>
-              Shoutout to the original blog posts that inspired me to give this
-              a go and share what I've done:
-            </p>
-            <ul>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://brandonrozek.com/blog/pretty-rss-feeds/"
-                    >Pretty RSS Feeds</a
-                  >
-                  by
-                  <a target="_blank" href="https://brandonrozek.com/"
-                    >Brandon Rozek</a
-                  >, which was inspired by
-                </p>
-              </li>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl"
-                    >pretty-feed.xsl</a
-                  >
-                  by
-                  <a target="_blank" href="https://interconnected.org/"
-                    >Matt Webb</a
-                  >, which in turn was inspired by
-                </p>
-              </li>
-              <li>
-                <p>
-                  <a
-                    target="_blank"
-                    href="https://lepture.com/en/2019/rss-style-with-xsl"
-                    >How to style RSS feed</a
-                  >
-                  by <a target="_blank" href="https://lepture.com/">lepture</a>
-                </p>
-              </li>
-            </ul>
-            <p>
-              If you also want to support a more open web based on independent
-              sites and feeds instead of social media silos, consider making
-              this change to your RSS feeds or advocating for it elsewhere. It’s
-              not much, but it’s a start.
-            </p>
-          </div>
+<p>The biggest drawback to this approach is, of course, that it will only work if you have control over how your RSS feed is generated. If it's provided by an external provider, chances are you can't add the lines needed to get the XSLT to style it.</p>
+<p>Shoutout to the original blog posts that inspired me to give this a go and share what I've done:</p>
+<ul>
+<li><p><a target="_blank" href="https://brandonrozek.com/blog/pretty-rss-feeds/">Pretty RSS Feeds</a> by <a target="_blank" href="https://brandonrozek.com/">Brandon Rozek</a>, which was inspired by</p>
+</li>
+<li><p><a target="_blank" href="https://github.com/genmon/aboutfeeds/blob/main/tools/pretty-feed-v3.xsl">pretty-feed.xsl</a> by <a target="_blank" href="https://interconnected.org/">Matt Webb</a>, which in turn was inspired by</p>
+</li>
+<li><p><a target="_blank" href="https://lepture.com/en/2019/rss-style-with-xsl">How to style RSS feed</a> by <a target="_blank" href="https://lepture.com/">lepture</a></p>
+</li>
+</ul>
+<p>If you also want to support a more open web based on independent sites and feeds instead of social media silos, consider making this change to your RSS feeds or advocating for it elsewhere. It’s not much, but it’s a start.</p>
+</div>
         </section>
         <section id="article-footer">
           <p>
             Want more posts? Subscribe to my
-            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml"
-              >RSS feed</a
-            >.
+            <a target="_blank" href="https://ricardolopes.net/blog/rss.xml">RSS feed</a>.
           </p>
         </section>
       </div>
     </div>
     <footer>
-      <p>&#169; Ricardo Lopes</p>
-    </footer>
-  </body>
-</html>
+      <p>© Ricardo Lopes</p>
+    </footer></body></html>
